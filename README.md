@@ -1,5 +1,7 @@
 # Gemini Canvas OSINT (Obsidian Plugin)
 
+[🇷🇺 Читать на русском](README_RU.md)
+
 **Gemini Canvas OSINT** is an Obsidian plugin designed for visual OSINT investigations directly on Obsidian Canvas. It leverages autonomous AI agents and modern LLMs to build entity graphs, digital footprint maps, target dossiers, and relationship trees.
 
 ## Features
@@ -9,9 +11,20 @@
 - **Dual Engine Architecture**:
   - **Hermes ACP Mode**: Integrates with [Hermes Agent](https://hermes-agent.nousresearch.com) over Agent Client Protocol (ACP), enabling autonomous web searches, deep investigations, Python execution, and verified dossier compilation.
   - **Direct API Mode**: Direct REST integration supporting OpenAI-compatible endpoints, Google Gemini, OpenRouter, and custom LLM providers.
+- **Proxy & Anti-Blocking Subsystem**: Built-in methodology and routing support for SOCKS5H / HTTP proxies to bypass geo-restrictions, Cloudflare, and regional firewalls without DNS leaks.
 - **Interactive Sidebar & Ribbon**: Dedicated investigation chat view with live streaming, tool call visibility, and quick actions.
 - **Smart Updates & Deduplication**: Updates existing nodes as new facts emerge and eliminates outdated or duplicate hypotheses.
 - **Privacy-First**: Operates locally within your Obsidian vault. No telemetry or external tracking.
+
+## Proxy Subsystem & Anti-Blocking Routing
+
+A core component of real-world OSINT investigations is reliable access to target registries, international services, social media, and web archives that may enforce geo-blocking or anti-scraping filters (e.g. HTTP 403 Forbidden, Cloudflare challenge, Region Block):
+
+- **SOCKS5H Remote DNS Resolution**: The agent uses SOCKS5H (`socks5h://<host>:<port>`) routing for network tools and scrapers. Remote DNS resolution prevents DNS leakage, ISP-level interception, and poison cache issues.
+- **Multi-Tool Routing**: Network commands executed during investigations (`curl`, Python `requests`/`aiohttp`, `playwright`/`browser_exec`) automatically inherit proxy parameters when accessing geo-restricted sources.
+- **Local Bridge Isolation**: Internal communication between Obsidian and the agent bridge retains strict `NO_PROXY=127.0.0.1,localhost` protection to guarantee that local IPC / ACP daemon traffic is never routed through external proxies.
+
+To configure your proxy environment, ensure your local or upstream proxy (e.g. SOCKS5 on `127.0.0.1:2080`, `127.0.0.1:9050` (Tor), or HTTP proxy) is active, and set standard environment variables (`ALL_PROXY` / `HTTPS_PROXY`) or configure proxy options within your agent profile.
 
 ## Installation
 
