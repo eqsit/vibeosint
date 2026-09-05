@@ -22,18 +22,31 @@ function findHermesBinary() {
     const os = require("os");
     const path = require("path");
     const homeDir = os.homedir();
-    const candidates = [
+    const isWin = process.platform === "win32";
+
+    const candidates = isWin ? [
+      path.join(homeDir, ".hermes", "bin", "hermes.cmd"),
+      path.join(homeDir, ".hermes", "bin", "hermes.exe"),
+      path.join(homeDir, ".hermes", "hermes-agent", "venv", "Scripts", "hermes.exe"),
+      path.join(homeDir, ".hermes", "hermes-agent", "venv", "Scripts", "hermes.cmd"),
+      path.join(homeDir, ".local", "bin", "hermes.cmd"),
+      path.join(homeDir, ".local", "bin", "hermes.exe"),
+      path.join(homeDir, "AppData", "Local", "Programs", "Python", "Python312", "Scripts", "hermes.exe"),
+      path.join(homeDir, "AppData", "Local", "Programs", "Python", "Python311", "Scripts", "hermes.exe"),
+      path.join(homeDir, "AppData", "Roaming", "npm", "hermes.cmd")
+    ] : [
       path.join(homeDir, ".local", "bin", "hermes"),
       path.join(homeDir, ".hermes", "hermes-agent", "venv", "bin", "hermes"),
       path.join(homeDir, ".hermes", "bin", "hermes"),
       "/usr/local/bin/hermes",
       "/usr/bin/hermes"
     ];
+
     for (const c of candidates) {
       if (fs.existsSync(c)) return c;
     }
   } catch (e) {}
-  return "hermes";
+  return process.platform === "win32" ? "hermes.cmd" : "hermes";
 }
 
 /**
@@ -61,8 +74,25 @@ class HermesAcpClient {
     const os = require("os");
     const path = require("path");
     const homeDir = os.homedir();
+    const isWin = process.platform === "win32";
+
+    const extraDirs = isWin ? [
+      path.join(homeDir, ".hermes", "bin"),
+      path.join(homeDir, ".hermes", "hermes-agent", "venv", "Scripts"),
+      path.join(homeDir, ".local", "bin")
+    ] : [
+      path.join(homeDir, ".local", "bin"),
+      path.join(homeDir, ".hermes", "bin"),
+      path.join(homeDir, ".hermes", "hermes-agent", "venv", "bin"),
+      "/usr/local/bin",
+      "/usr/bin",
+      "/bin"
+    ];
+
+    const envPath = extraDirs.join(path.delimiter) + path.delimiter + (process.env.PATH || "");
+
     const env = Object.assign({}, process.env, {
-      PATH: `${path.join(homeDir, ".local", "bin")}:${path.join(homeDir, ".hermes", "bin")}:${path.join(homeDir, ".hermes", "hermes-agent", "venv", "bin")}:/usr/local/bin:/usr/bin:/bin:${process.env.PATH || ""}`,
+      PATH: envPath,
       HERMES_APPROVALS_MODE: "off",
       HERMES_YOLO: "1",
       HERMES_ACCEPT_HOOKS: "1",
@@ -73,11 +103,16 @@ class HermesAcpClient {
     try {
       this.proc = spawn(hermesBin, ["-p", "obsidian", "acp", "--accept-hooks"], {
         cwd: this.vaultPath,
-        env: env
+        env: env,
+        shell: isWin
       });
 
       const fs = require("fs");
-      const logFile = path.join(homeDir, ".hermes", "logs", "acp-bridge.log");
+      const logsDir = path.join(homeDir, ".hermes", "logs");
+      if (!fs.existsSync(logsDir)) {
+        try { fs.mkdirSync(logsDir, { recursive: true }); } catch (e) {}
+      }
+      const logFile = path.join(logsDir, "acp-bridge.log");
       const logStream = fs.createWriteStream(logFile, { flags: "a" });
       this.proc.stderr.pipe(logStream);
     } catch (spawnErr) {
