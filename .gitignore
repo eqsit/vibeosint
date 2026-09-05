@@ -1,0 +1,23 @@
+# Obsidian plugin local state and private user data
+data.json
+chats.json
+
+# Node & dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment and secrets
+.env
+.env.*
+*.key
+*.pem
+
+# Logs and cache
+*.log
+.cache/
+
+# OS artifacts
+.DS_Store
+Thumbs.db

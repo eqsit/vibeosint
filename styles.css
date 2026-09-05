@@ -1,0 +1,608 @@
+/* OSINT Canvas Minimalist Styles */
+
+.osint-chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  background-color: var(--background-primary);
+  color: var(--text-normal);
+  font-size: 13px;
+  overflow: hidden;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+.osint-messages-area,
+.osint-msg-row,
+.osint-bubble,
+.osint-markdown-content,
+.osint-tool-box,
+.osint-tool-details,
+.osint-tool-item,
+.osint-markdown-content pre,
+.osint-markdown-content code {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+}
+
+/* Header */
+.osint-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.osint-chat-title {
+  font-weight: 500;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-normal);
+}
+
+.osint-chat-title svg {
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+}
+
+.osint-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.osint-model-select {
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  font-size: 11px;
+  padding: 2px 6px;
+  cursor: pointer;
+  outline: none;
+  max-width: 140px;
+  font-family: inherit;
+}
+
+.osint-model-select:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+}
+
+.osint-icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--text-muted);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: all 0.12s ease;
+}
+
+.osint-icon-btn:hover {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+/* Horizontal Canvas Tabs Strip */
+.osint-canvas-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--background-modifier-border);
+  scrollbar-width: none;
+}
+
+.osint-canvas-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.osint-canvas-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+  background: var(--background-secondary);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  transition: all 0.12s ease;
+  user-select: none;
+}
+
+.osint-canvas-tab:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+}
+
+.osint-canvas-tab.active {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+  border-color: var(--interactive-accent);
+  font-weight: 500;
+}
+
+.osint-canvas-tab.osint-tab-add {
+  padding: 3px 6px;
+  color: var(--text-faint);
+}
+
+.osint-canvas-tab.osint-tab-add:hover {
+  color: var(--interactive-accent);
+}
+
+.osint-tab-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-faint);
+  display: inline-block;
+}
+
+.osint-tab-dot.active {
+  background: var(--interactive-accent);
+}
+
+.osint-tab-dot.running {
+  background: var(--color-green);
+  box-shadow: 0 0 5px var(--color-green);
+  animation: osintPulse 1.2s infinite;
+}
+
+@keyframes osintPulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+/* Canvas Header Banner inside chat stream */
+.osint-canvas-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  background: var(--background-secondary-alt);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+}
+
+.osint-banner-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.osint-banner-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.osint-banner-title-row svg {
+  width: 14px;
+  height: 14px;
+  color: var(--interactive-accent);
+}
+
+.osint-banner-name {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-normal);
+}
+
+.osint-banner-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.osint-banner-btn {
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  white-space: nowrap;
+}
+
+.osint-banner-btn:hover {
+  color: var(--text-normal);
+  border-color: var(--interactive-accent);
+}
+
+.osint-quickstart-btn {
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: opacity 0.12s ease;
+}
+
+.osint-quickstart-btn:hover {
+  opacity: 0.9;
+}
+
+/* Status row */
+.osint-file-status {
+  font-size: 11px;
+  padding: 4px 8px;
+  margin: 6px 0;
+  background: var(--background-secondary);
+  border-radius: 4px;
+  border: 1px solid var(--background-modifier-border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.osint-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.osint-status-dot.active {
+  background-color: var(--color-green);
+}
+
+.osint-status-dot.inactive {
+  background-color: var(--color-yellow);
+}
+
+/* Message List */
+.osint-messages-area {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 0;
+  margin-bottom: 6px;
+}
+
+.osint-msg-row {
+  display: flex;
+  width: 100%;
+}
+
+.osint-msg-row.user {
+  justify-content: flex-end;
+}
+
+.osint-msg-row.assistant {
+  justify-content: flex-start;
+}
+
+.osint-bubble {
+  max-width: 95%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  word-break: break-word;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.osint-bubble.user {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  font-size: 12.5px;
+  max-width: 85%;
+}
+
+.osint-bubble.assistant {
+  background: var(--background-secondary);
+  color: var(--text-normal);
+  border: 1px solid var(--background-modifier-border);
+  position: relative;
+  width: 100%;
+}
+
+.osint-copy-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  padding: 2px 5px;
+  color: var(--text-faint);
+  cursor: pointer;
+  transition: all 0.12s ease;
+  z-index: 5;
+}
+
+.osint-copy-btn:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+}
+
+.osint-bubble.typing-bubble {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.osint-bubble.error-bubble {
+  border-color: var(--color-red);
+  background-color: rgba(var(--color-red-rgb), 0.08);
+  color: var(--color-red);
+  font-size: 12px;
+}
+
+.osint-welcome-text {
+  background-color: var(--background-secondary);
+  border-left: 2px solid var(--text-muted);
+  padding: 8px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* Tools activity - Minimalist details & summary */
+.osint-tool-details {
+  background-color: var(--background-secondary-alt);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  padding: 4px 8px;
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+
+.osint-tool-summary {
+  cursor: pointer;
+  color: var(--text-muted);
+  font-weight: 500;
+  outline: none;
+  user-select: none;
+}
+
+.osint-tool-summary:hover {
+  color: var(--text-normal);
+}
+
+.osint-tool-box {
+  background-color: var(--background-secondary-alt);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  padding: 6px 8px;
+  margin-bottom: 8px;
+}
+
+.osint-tool-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.osint-tool-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: var(--font-monospace);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.osint-tool-item {
+  line-height: 1.35;
+  word-break: break-all;
+}
+
+.osint-tool-item.muted {
+  color: var(--text-faint);
+  font-family: var(--font-default);
+}
+
+/* Markdown typography inside cards */
+.osint-markdown-content {
+  color: var(--text-normal);
+}
+
+.osint-markdown-content p {
+  margin: 4px 0;
+}
+
+.osint-markdown-content ul {
+  padding-left: 16px;
+  margin: 4px 0;
+}
+
+.osint-markdown-content li {
+  margin-bottom: 2px;
+}
+
+.osint-markdown-content code {
+  background: var(--background-modifier-hover);
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 11px;
+}
+
+/* Badges & Pivots */
+.osint-cards-badge {
+  display: inline-block;
+  background: var(--background-modifier-hover);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-family: var(--font-monospace);
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-top: 6px;
+  border: 1px solid var(--background-modifier-border);
+}
+
+.osint-pivots-box {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--background-modifier-border);
+}
+
+.osint-pivots-title {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.osint-pivots-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.osint-pivot-pill {
+  background: var(--background-secondary-alt);
+  border: 1px solid var(--background-modifier-border);
+  color: var(--text-normal);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.12s ease;
+  white-space: nowrap;
+}
+
+.osint-pivot-pill:hover {
+  border-color: var(--text-muted);
+  background: var(--background-modifier-hover);
+}
+
+/* Input Area */
+.osint-input-area {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top: 1px solid var(--background-modifier-border);
+  padding-top: 6px;
+}
+
+.osint-quick-bar {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.osint-pill {
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.12s ease;
+}
+
+.osint-pill:hover {
+  color: var(--text-normal);
+  border-color: var(--text-muted);
+}
+
+.osint-textarea-box {
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.osint-textarea {
+  flex: 1;
+  min-height: 42px;
+  max-height: 120px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--background-modifier-border);
+  background: var(--background-secondary);
+  color: var(--text-normal);
+  font-family: inherit;
+  font-size: 13px;
+  resize: none;
+  box-sizing: border-box;
+}
+
+.osint-textarea:focus {
+  border-color: var(--interactive-accent);
+  outline: none;
+}
+
+.osint-send-btn {
+  background-color: var(--interactive-accent);
+  color: var(--text-on-accent);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.12s ease;
+}
+
+.osint-send-btn:hover {
+  opacity: 0.9;
+}
+
+.osint-send-btn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.osint-stop-btn {
+  background: #c53030;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 10px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.osint-stop-btn:hover {
+  background: #e53e3e;
+}
+
+.osint-spinner {
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--text-muted);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: osintSpin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes osintSpin {
+  to { transform: rotate(360deg); }
+}
