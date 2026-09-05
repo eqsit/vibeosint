@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "minAppVersion": "1.4.0",
   "description": "AI-powered OSINT investigations on Obsidian Canvas using Gemini 3.8 Flash API. Automatically builds target dossiers, entity graphs, digital footprint maps, and dork vectors.",
-  "author": "arch-bin",
-  "authorUrl": "https://github.com/arch-bin",
+  "author": "eqsit",
+  "authorUrl": "https://github.com/eqsit",
   "isDesktopOnly": true
 }
