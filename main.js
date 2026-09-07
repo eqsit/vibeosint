@@ -137,6 +137,41 @@ function formatAcpHistory(history) {
     + JSON.stringify(selected) + "\n[ТЕКУЩИЙ ЗАПРОС]\n";
 }
 
+// Прокси задаётся только для локального ACP: удалённый Hermes ходит в сеть с сервера,
+// и локальный адрес вида 127.0.0.1:2080 там не существует.
+function normalizeAcpProxy(value) {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  const withScheme = /^[a-z0-9+.-]+:\/\//i.test(raw) ? raw : `socks5h://${raw}`;
+  let url;
+  try { url = new URL(withScheme); }
+  catch (_) { throw new Error("Прокси: укажите host:port или scheme://host:port, например socks5h://127.0.0.1:2080."); }
+  if (!["socks5:", "socks5h:", "socks4:", "http:", "https:"].includes(url.protocol)) {
+    throw new Error("Прокси: поддерживаются схемы socks5h, socks5, socks4, http, https.");
+  }
+  if (!url.hostname || !url.port) throw new Error("Прокси: укажите хост и порт, например socks5h://127.0.0.1:2080.");
+  return url.origin === "null" ? `${url.protocol}//${url.host}` : url.origin;
+}
+
+function isAcpProxyEnabled(settings) {
+  return (settings.acpTransport || "local") === "local" && !!String(settings.acpProxy || "").trim();
+}
+
+function buildProxyContract(settings) {
+  if (!isAcpProxyEnabled(settings)) return "";
+  let proxy;
+  try { proxy = normalizeAcpProxy(settings.acpProxy); }
+  catch (_) { return ""; }
+  return `
+МАРШРУТИЗАЦИЯ ЧЕРЕЗ ПРОКСИ:
+- Для этого расследования доступен прокси \`${proxy}\`. Он поднят на той же машине, где запущен ты.
+- При геоблоке, 403 Forbidden, RegionError, Connection Reset или блокировке Cloudflare повторяй запрос через этот прокси, а не объявляй источник недоступным.
+- curl: \`curl --proxy ${proxy} ...\`. Python requests: \`proxies={"http": "${proxy}", "https": "${proxy}"}\`. Для скриптов и браузера можно выставить \`ALL_PROXY=${proxy}\` в окружении вызова.
+- Схема socks5h передаёт DNS-резолв на сторону прокси — это предотвращает утечку DNS. Не подменяй её на socks5, если не уверен.
+- Локальные адреса (127.0.0.1, localhost) запрашивай напрямую, в обход прокси.
+`;
+}
+
 function encodeCanvasSnapshot(raw) {
   if (typeof raw !== "string" || !raw) return "";
   try { return zlib.deflateSync(Buffer.from(raw, "utf8")).toString("base64"); }
@@ -621,7 +656,8 @@ const DEFAULT_SETTINGS = {
   acpSshPort: "",
   acpSshKey: "",
   acpSshCommand: "ssh",
-  acpAutoApprove: false
+  acpProxy: "",
+  acpAutoApprove: true
 };
 
 /**
@@ -2931,6 +2967,7 @@ class OsintChatView extends ItemView {
 Цель: "${text}"
 ${canvasContextMsg}
 ${buildResearchExecutionContract(text, this.plugin.isDeepMode(canvasKey))}
+${buildProxyContract(this.plugin.settings)}
 
 Холст находится в Obsidian у клиента и может быть недоступен на машине агента. Используй переданный контекст холста и возвращай изменения JSON-блоками. Не пытайся открыть или записать локальный файл .canvas через терминал.
 
@@ -3278,9 +3315,12 @@ class OsintSettingTab extends PluginSettingTab {
         ? "Обязательный существующий абсолютный путь НА СЕРВЕРЕ. Vault туда копировать не требуется."
         : "Абсолютный путь рабочей папки агента; пусто — папка vault. Для своей команды это путь, передаваемый агенту в session/new.", "/home/user");
       field("acpEnv", "Переменные окружения (JSON)", "Необязательно. Для SSH передаются только эти переменные, окружение вашего компьютера на сервер не копируется. Значения хранятся в настройках плагина открытым текстом.", "{}", true);
+      if (this.plugin.settings.acpTransport === "local") {
+        field("acpProxy", "SOCKS5-прокси (необязательно)", "Прокси на этой же машине для обхода геоблоков и Cloudflare. Адрес передаётся Hermes в промпте, чтобы агент повторял через него заблокированные запросы. Пусто — прокси не упоминается. Схема по умолчанию socks5h (DNS резолвит прокси, без утечки).", "socks5h://127.0.0.1:2080");
+      }
       field("acpModel", "Модель Hermes (необязательно)", "Пусто — модель из конфигурации Hermes. Можно указать ID модели, который принимает ваш агент.");
       new Setting(containerEl).setName("Автоматически разрешать инструменты")
-        .setDesc("Без запроса в Obsidian подтверждать предлагаемые агентом разрешения. По умолчанию выключено.")
+        .setDesc("Без запроса в Obsidian подтверждать предлагаемые агентом разрешения. По умолчанию включено; выключите, чтобы подтверждать каждое действие вручную.")
         .addToggle(toggle => toggle.setValue(!!this.plugin.settings.acpAutoApprove).onChange(async value => {
           this.plugin.settings.acpAutoApprove = value;
           await this.plugin.saveSettings();
@@ -3292,9 +3332,11 @@ class OsintSettingTab extends PluginSettingTab {
           try {
             if (this.plugin.activeTasks.size) throw new Error("Сначала остановите или завершите активные запросы.");
             buildAcpLaunch(this.plugin.settings, this.plugin.vaultPath);
+            const proxy = isAcpProxyEnabled(this.plugin.settings) ? normalizeAcpProxy(this.plugin.settings.acpProxy) : "";
             this.plugin.configureAcpClient();
             await this.plugin.acpClient.getSession("__connection_check__");
-            new Notice(`ACP подключён: ${this.plugin.acpClient.agentInfo?.name || "агент"}. Модель: ${this.plugin.acpClient.currentModel || "из настроек Hermes"}`, 8000);
+            new Notice(`ACP подключён: ${this.plugin.acpClient.agentInfo?.name || "агент"}. Модель: ${this.plugin.acpClient.currentModel || "из настроек Hermes"}`
+              + (proxy ? `. Прокси в промпте: ${proxy}` : ""), 8000);
           } catch (error) { new Notice(`Ошибка ACP: ${error.message}`, 12000); }
           finally { button.setDisabled(false); }
         }));
