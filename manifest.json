@@ -1,10 +1,10 @@
 {
-  "id": "gemini-canvas-osint",
-  "name": "Gemini Canvas OSINT",
-  "version": "1.0.0",
+  "id": "vibeosint",
+  "name": "VibeOSINT · External ACP",
+  "version": "1.2.1",
   "minAppVersion": "1.4.0",
-  "description": "AI-powered OSINT investigations on Obsidian Canvas using Gemini 3.8 Flash API. Automatically builds target dossiers, entity graphs, digital footprint maps, and dork vectors.",
-  "author": "eqsit",
+  "description": "Obsidian Canvas with local or remote Hermes ACP over SSH and custom ACP stdio commands.",
+  "author": "eqsit & sevennnoff",
   "authorUrl": "https://github.com/eqsit",
   "isDesktopOnly": true
 }

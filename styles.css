@@ -58,6 +58,8 @@
 }
 
 .osint-model-select {
+  height: 24px;
+  box-sizing: border-box;
   background: var(--background-secondary);
   color: var(--text-muted);
   border: 1px solid var(--background-modifier-border);
@@ -75,7 +77,41 @@
   background: var(--background-modifier-hover);
 }
 
+.osint-deep-toggle {
+  height: 24px;
+  min-height: 24px;
+  box-sizing: border-box;
+  padding: 2px 7px;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 5px;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.osint-deep-toggle:hover {
+  color: var(--text-normal);
+  border-color: var(--text-muted);
+}
+
+.osint-deep-toggle.active {
+  color: var(--text-on-accent);
+  background: var(--interactive-accent);
+  border-color: var(--interactive-accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--interactive-accent) 35%, transparent);
+}
+
 .osint-icon-btn {
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -84,6 +120,7 @@
   border-radius: 4px;
   display: flex;
   align-items: center;
+  justify-content: center;
   transition: all 0.12s ease;
 }
 
@@ -138,6 +175,7 @@
 .osint-canvas-tab.osint-tab-add {
   padding: 3px 6px;
   color: var(--text-faint);
+  flex: 0 0 auto;
 }
 
 .osint-canvas-tab.osint-tab-add:hover {
@@ -289,6 +327,107 @@
   justify-content: flex-end;
 }
 
+.osint-user-message-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 85%;
+  min-width: 0;
+}
+
+.osint-user-message-stack > .osint-bubble.user {
+  max-width: 100%;
+}
+
+.osint-user-message-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+  min-height: 24px;
+  padding-top: 2px;
+  color: var(--text-muted);
+}
+
+.osint-user-message-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  padding: 3px;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.osint-user-message-btn:hover:not(:disabled) {
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+}
+
+.osint-user-message-btn:disabled {
+  opacity: 0.3;
+}
+
+.osint-branch-counter {
+  min-width: 28px;
+  text-align: center;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.osint-queued-label {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.osint-user-message-stack.editing {
+  width: min(520px, 95%);
+  max-width: 95%;
+}
+
+.osint-user-message-stack.editing > .osint-bubble.user {
+  width: 100%;
+  background: var(--background-secondary);
+  color: var(--text-normal);
+  border: 1px solid var(--interactive-accent);
+}
+
+.osint-user-message-editor {
+  display: block;
+  width: 100%;
+  min-height: 82px;
+  resize: vertical;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text-normal);
+  font: inherit;
+  line-height: 1.45;
+}
+
+.osint-user-message-editor:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.osint-user-edit-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.osint-user-edit-actions button {
+  height: 28px;
+  padding: 3px 9px;
+  font-size: 11px;
+}
+
 .osint-msg-row.assistant {
   justify-content: flex-start;
 }
@@ -315,6 +454,8 @@
   border: 1px solid var(--background-modifier-border);
   position: relative;
   width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .osint-copy-btn {
@@ -459,6 +600,9 @@
   margin-top: 8px;
   padding-top: 6px;
   border-top: 1px dashed var(--background-modifier-border);
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .osint-pivots-title {
@@ -474,6 +618,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .osint-pivot-pill {
@@ -485,6 +631,45 @@
   font-size: 11px;
   cursor: pointer;
   transition: all 0.12s ease;
+  white-space: nowrap;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.osint-sources-details {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--background-modifier-border);
+  min-width: 0;
+}
+
+.osint-sources-summary {
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  user-select: none;
+}
+
+.osint-sources-list {
+  margin: 6px 0 0;
+  padding-left: 20px;
+  font-size: 11px;
+  min-width: 0;
+}
+
+.osint-sources-list li {
+  margin: 3px 0;
+  min-width: 0;
+}
+
+.osint-sources-list a {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 

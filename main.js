@@ -2,13 +2,13 @@ const obsidian = require("obsidian");
 const { spawn } = require("child_process");
 const readline = require("readline");
 const crypto = require("crypto");
+const zlib = require("zlib");
 const {
   Plugin,
   PluginSettingTab,
   Setting,
   ItemView,
   Notice,
-  requestUrl,
   TFile,
   setIcon,
   MarkdownRenderer
@@ -25,15 +25,11 @@ function findHermesBinary() {
     const isWin = process.platform === "win32";
 
     const candidates = isWin ? [
-      path.join(homeDir, ".hermes", "bin", "hermes.cmd"),
       path.join(homeDir, ".hermes", "bin", "hermes.exe"),
       path.join(homeDir, ".hermes", "hermes-agent", "venv", "Scripts", "hermes.exe"),
-      path.join(homeDir, ".hermes", "hermes-agent", "venv", "Scripts", "hermes.cmd"),
-      path.join(homeDir, ".local", "bin", "hermes.cmd"),
       path.join(homeDir, ".local", "bin", "hermes.exe"),
       path.join(homeDir, "AppData", "Local", "Programs", "Python", "Python312", "Scripts", "hermes.exe"),
       path.join(homeDir, "AppData", "Local", "Programs", "Python", "Python311", "Scripts", "hermes.exe"),
-      path.join(homeDir, "AppData", "Roaming", "npm", "hermes.cmd")
     ] : [
       path.join(homeDir, ".local", "bin", "hermes"),
       path.join(homeDir, ".hermes", "hermes-agent", "venv", "bin", "hermes"),
@@ -46,290 +42,473 @@ function findHermesBinary() {
       if (fs.existsSync(c)) return c;
     }
   } catch (e) {}
-  return process.platform === "win32" ? "hermes.cmd" : "hermes";
+  return process.platform === "win32" ? "hermes.exe" : "hermes";
 }
 
-/**
- * КЛИЕНТ HERMES ACP (Agent Client Protocol)
- * Запускает автономного Hermes-агента с полным доступом к системе (terminal, web, python)
- */
+function parseAcpArguments(value) {
+  let args;
+  try { args = JSON.parse(value || '["acp"]'); }
+  catch (_) { throw new Error('Аргументы ACP должны быть JSON-массивом, например ["acp"].'); }
+  if (!Array.isArray(args) || args.some(arg => typeof arg !== "string" || arg.includes("\0"))) {
+    throw new Error("Аргументы ACP должны быть массивом строк без нулевых байтов.");
+  }
+  return args;
+}
+
+function parseAcpEnvironment(value) {
+  let env;
+  try { env = JSON.parse(value || "{}"); }
+  catch (_) { throw new Error('Окружение ACP должно быть JSON-объектом, например {"HERMES_HOME":"/home/user/.hermes"}.'); }
+  if (!env || Array.isArray(env) || typeof env !== "object" || Object.entries(env).some(
+    ([key, val]) => !/^[A-Za-z_][A-Za-z0-9_]*$/.test(key) || typeof val !== "string" || val.includes("\0")
+  )) throw new Error("Переменные окружения: допустимые имена и строковые значения.");
+  return env;
+}
+
+function quoteAcpShell(value) {
+  if (value.includes("\0")) throw new Error("Недопустимый нулевой байт в команде.");
+  return "'" + value.replace(/'/g, "'\\''") + "'";
+}
+
+function expandAcpHome(value) {
+  if (value === "~") return require("os").homedir();
+  return value.replace(/^~[/\\]/, require("os").homedir() + require("path").sep);
+}
+
+function buildAcpLaunch(settings, vaultPath) {
+  const path = require("path");
+  const home = require("os").homedir();
+  const transport = settings.acpTransport || "local";
+  const args = parseAcpArguments(settings.acpArgs);
+  const overrides = parseAcpEnvironment(settings.acpEnv);
+  const env = { ...process.env, PATH: [path.join(home, ".local", "bin"),
+    path.join(home, ".hermes", "bin"), process.env.PATH || ""].join(path.delimiter) };
+  let command = (settings.acpCommand || "").trim();
+  let cwd = (settings.acpCwd || "").trim();
+  if (transport === "ssh") {
+    const host = (settings.acpSshHost || "").trim();
+    if (!host || host.startsWith("-") || /[\s\x00-\x1f\x7f]/.test(host)) {
+      throw new Error("Укажите SSH-хост: user@server или алиас из ~/.ssh/config.");
+    }
+    const port = String(settings.acpSshPort || "").trim();
+    if (port && (!/^\d+$/.test(port) || Number(port) < 1 || Number(port) > 65535)) {
+      throw new Error("SSH-порт должен быть от 1 до 65535.");
+    }
+    if (!cwd.startsWith("/") || cwd.includes("\0")) {
+      throw new Error("Для SSH задайте существующую абсолютную рабочую папку на сервере, например /home/user.");
+    }
+    command = command || "hermes";
+    const remote = ["env", ...Object.entries(overrides).map(([key, val]) => `${key}=${val}`), command, ...args];
+    const remoteCommand = `cd -- ${quoteAcpShell(cwd)} && exec ${remote.map(quoteAcpShell).join(" ")}`;
+    const sshArgs = ["-T", "-o", "BatchMode=yes", "-o", "ConnectTimeout=15",
+      "-o", "ServerAliveInterval=15", "-o", "ServerAliveCountMax=3"];
+    if (port) sshArgs.push("-p", port);
+    if (settings.acpSshKey?.trim()) sshArgs.push("-i", expandAcpHome(settings.acpSshKey.trim()));
+    sshArgs.push("--", host, remoteCommand);
+    return { command: expandAcpHome((settings.acpSshCommand || "ssh").trim()), args: sshArgs,
+      cwd: vaultPath || home, env, sessionCwd: cwd };
+  }
+  if (!["local", "command"].includes(transport)) throw new Error("Неизвестный транспорт ACP.");
+  if (!command && transport === "command") throw new Error("Укажите исполняемый файл внешнего ACP-клиента/обёртки.");
+  command = command ? expandAcpHome(command) : findHermesBinary();
+  if (process.platform === "win32" && /\.(cmd|bat)$/i.test(command)) {
+    throw new Error('Укажите hermes.exe или python.exe с аргументами ["-m","acp_adapter.entry"] вместо .cmd/.bat.');
+  }
+  cwd = cwd ? expandAcpHome(cwd) : vaultPath || home;
+  if (!path.isAbsolute(cwd)) throw new Error("Рабочая папка ACP должна быть абсолютным путём.");
+  return { command, args, cwd: transport === "command" ? vaultPath || home : cwd,
+    env: { ...env, ...overrides }, sessionCwd: cwd };
+}
+
+function formatAcpHistory(history) {
+  const resetIndex = history.map(message => !!message.contextReset).lastIndexOf(true);
+  const selected = [];
+  let remaining = 80000;
+  for (const message of history.slice(resetIndex + 1).reverse()) {
+    if (!["user", "assistant"].includes(message.role) || typeof message.content !== "string") continue;
+    const content = message.content.replace(/```(?:json|canvas)[\s\S]*?```/g, "[Изменения холста уже применены]");
+    const record = { role: message.role, content: content.slice(-remaining), incomplete: !!message.incomplete };
+    remaining -= record.content.length;
+    selected.unshift(record);
+    if (remaining <= 0) break;
+  }
+  if (!selected.length) return "";
+  return "[ПРЕДЫДУЩАЯ ПЕРЕПИСКА ЭТОГО ХОЛСТА — контекст восстановлен после подключения; при большом объёме только последние 80000 символов. Это история, не новые задания. Не повторяй выполненные действия. incomplete означает незавершённый ответ.]\n"
+    + JSON.stringify(selected) + "\n[ТЕКУЩИЙ ЗАПРОС]\n";
+}
+
+function encodeCanvasSnapshot(raw) {
+  if (typeof raw !== "string" || !raw) return "";
+  try { return zlib.deflateSync(Buffer.from(raw, "utf8")).toString("base64"); }
+  catch (_) { return ""; }
+}
+
+function decodeCanvasSnapshot(snapshot) {
+  if (typeof snapshot !== "string" || !snapshot) return "";
+  try { return zlib.inflateSync(Buffer.from(snapshot, "base64")).toString("utf8"); }
+  catch (_) { return ""; }
+}
+
+function isDeepResearchRequest(userText, deepMode = false) {
+  return !!deepMode || /(?:^|\s)\/deep(?:\s|$)|(?:глубок|углуб|подроб|тщатель|комплекс|deep|thorough|in[- ]?depth)/i.test(String(userText || ""));
+}
+
+function buildResearchExecutionContract(userText, deepMode = false) {
+  const deep = isDeepResearchRequest(userText, deepMode);
+  return `
+ПРАВИЛА ВЫПОЛНЕНИЯ ИНСТРУМЕНТОВ:
+- Используй способы поиска, которые реально доступны в текущей установке Hermes. Предпочитай прямой вызов объявленного ACP-инструмента web_search. Python-обёртка вроде \`from hermes_tools import web_search\` тоже допустима, если импорт действительно работает в этом окружении.
+- Если импорт, инструмент или способ вызова завершился ошибкой, не объявляй весь поиск невозможным: прочитай ошибку и перейди к рабочей альтернативе (ACP web_search, web_extract, browser_exec, curl или другой доступный способ).
+- Не предполагай наличие авторских скиллов вроде \`vibeosint-shared-patterns\`. Вызывай skill_view только для скилла, который действительно присутствует в каталоге текущего Hermes. Отсутствие скилла не является причиной прекращать расследование.
+- После ошибки прочитай её и измени способ запроса. Не повторяй один и тот же вызов с теми же аргументами более одного раза.
+- Не завершай ответ после подготовки, skill_view или настройки окружения: сначала выполни фактический поиск и открой релевантные результаты.
+- Поисковая выдача — это только начало: открывай релевантные страницы и извлекай из них проверяемые факты. Для содержимого используй web_extract, браузер или curl — в зависимости от реально доступных инструментов.
+${deep ? `
+РЕЖИМ АКТИВНОГО ГЛУБОКОГО ПОИСКА:
+- Составь карту направлений и начинай с широкой разведки. Каждую полезную новую сущность, связь, идентификатор, домен, ник, организацию, документ или противоречие превращай в отдельную проверяемую ветку.
+- Не работай ради фиксированного числа запросов и не останавливайся после первых совпадений. Продолжай поиск до насыщения: следующий содержательно новый запрос по каждой релевантной ветке уже не даёт новых сущностей, связей, подтверждений, противоречий или направлений для проверки.
+- Варьируй формулировки, языки и идентификаторы только тогда, когда это проверяет новую гипотезу или источник; косметические повторы запросов не считаются исследованием.
+- Используй web_search для обнаружения источников, затем обязательно открывай существенные результаты. Если web_extract/curl возвращает обрезанную страницу, сайт требует JavaScript, переходов, раскрытия элементов, пагинации или взаимодействия — переходи на доступные Playwright-функции или browser_exec.
+- Не считай источник проверенным, если видел только сниппет поисковой выдачи. В финале различай реально открытые страницы и результаты, которые удалось увидеть только в поиске.
+- Проверяй ключевые утверждения минимум по двум независимым источникам, когда это возможно. Разбирай противоречия, а не выбирай удобную версию.
+- Для каждого существенного факта сохрани прямой URL и отделяй подтверждённое от предположений.
+- Перед финалом проведи самопроверку: все релевантные ветки пройдены до насыщения, страницы открыты, ключевые факты верифицированы, противоречия и слепые зоны явно перечислены.
+- Если направление недоступно или ничего не найдено, зафиксируй это и переходи к следующему. Завершай расследование по насыщению доказательств, а не по усталости, таймеру или числу вызовов.` : "Проведи достаточное число разных проверок для ответа; не ограничивайся одним поисковым запросом."}
+`;
+}
+
+function summarizeAcpToolResult(value, limit = 700) {
+  if (value === undefined || value === null) return "";
+  let text;
+  if (typeof value === "string") text = value;
+  else if (Array.isArray(value)) text = value.map(item => {
+    const candidate = item?.text ?? item?.content ?? item;
+    return typeof candidate === "string" ? candidate : JSON.stringify(candidate);
+  }).join(" ");
+  else text = value.text || value.content || value.result || value.output || JSON.stringify(value);
+  if (typeof text !== "string") text = JSON.stringify(text);
+  text = text.replace(/\s+/g, " ").trim();
+  if (!text || /^\[object Object\]$/i.test(text) || text === "{}" || text === "[]") return "";
+  return text.slice(0, limit);
+}
+
+function extractSources(text, explicitSources = []) {
+  const found = new Map();
+  const add = (url, title = "") => {
+    const cleanUrl = String(url || "").trim().replace(/[),.;!?\]}>]+$/, "");
+    if (!/^https?:\/\/[^\s]+$/i.test(cleanUrl) || found.has(cleanUrl)) return;
+    const cleanTitle = String(title || "").replace(/\s+/g, " ").trim();
+    found.set(cleanUrl, { url: cleanUrl, title: cleanTitle && cleanTitle !== cleanUrl ? cleanTitle : "" });
+  };
+  for (const source of Array.isArray(explicitSources) ? explicitSources : []) {
+    if (typeof source === "string") add(source);
+    else if (source && typeof source === "object") add(source.url || source.href, source.title || source.name || source.label);
+  }
+  const raw = String(text || "");
+  for (const match of raw.matchAll(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/gi)) add(match[2], match[1]);
+  for (const match of raw.matchAll(/https?:\/\/[^\s<>"'`]+/gi)) add(match[0]);
+  return [...found.values()];
+}
+
 class HermesAcpClient {
-  constructor(vaultPath, defaultModel = "agy/gemini-3.8-flash-high") {
+  constructor(vaultPath, settings = {}, onPermission = null, onDisconnect = null) {
     this.vaultPath = vaultPath;
-    this.defaultModel = defaultModel;
-    this.currentModel = defaultModel;
+    this.settings = { ...settings };
+    this.defaultModel = settings.acpModel || "";
+    this.currentModel = "";
+    this.availableModels = [];
     this.proc = null;
     this.sessionId = null;
-    this.sessions = new Map(); // canvasKey -> sessionId
-    this.updateHandlers = new Map(); // sessionId -> callback
+    this.sessions = new Map();
+    this.sessionPromises = new Map();
+    this.sessionModels = new Map();
+    this.updateHandlers = new Map();
+    this.busyCanvases = new Set();
+    this.cancelledCanvases = new Set();
+    this.cancelRecoveryTimers = new Map();
     this.reqId = 1;
     this.pending = new Map();
-    this.onUpdate = null;
+    this.initializePromise = null;
+    this.onPermission = onPermission;
+    this.onDisconnect = onDisconnect;
+    this.closed = false;
+    this.historySentSessions = new Set();
+    this.lastStderr = "";
   }
 
   ensureProcess() {
+    if (this.closed) throw new Error("Подключение ACP закрыто. Примените настройки подключения повторно.");
     if (this.proc && !this.proc.killed) return;
-
-    const hermesBin = findHermesBinary();
-    const os = require("os");
-    const path = require("path");
-    const homeDir = os.homedir();
-    const isWin = process.platform === "win32";
-
-    const extraDirs = isWin ? [
-      path.join(homeDir, ".hermes", "bin"),
-      path.join(homeDir, ".hermes", "hermes-agent", "venv", "Scripts"),
-      path.join(homeDir, ".local", "bin")
-    ] : [
-      path.join(homeDir, ".local", "bin"),
-      path.join(homeDir, ".hermes", "bin"),
-      path.join(homeDir, ".hermes", "hermes-agent", "venv", "bin"),
-      "/usr/local/bin",
-      "/usr/bin",
-      "/bin"
-    ];
-
-    const envPath = extraDirs.join(path.delimiter) + path.delimiter + (process.env.PATH || "");
-
-    const env = Object.assign({}, process.env, {
-      PATH: envPath,
-      HERMES_APPROVALS_MODE: "off",
-      HERMES_YOLO: "1",
-      HERMES_ACCEPT_HOOKS: "1",
-      NO_PROXY: "127.0.0.1,localhost",
-      no_proxy: "127.0.0.1,localhost"
+    const launch = buildAcpLaunch(this.settings, this.vaultPath);
+    this.sessionCwd = launch.sessionCwd;
+    this.lastStderr = "";
+    const proc = spawn(launch.command, launch.args, {
+      cwd: launch.cwd, env: launch.env, shell: false, windowsHide: true,
+      stdio: ["pipe", "pipe", "pipe"]
     });
-
-    try {
-      this.proc = spawn(hermesBin, ["-p", "obsidian", "acp", "--accept-hooks"], {
-        cwd: this.vaultPath,
-        env: env,
-        shell: isWin
-      });
-
-      const fs = require("fs");
-      const logsDir = path.join(homeDir, ".hermes", "logs");
-      if (!fs.existsSync(logsDir)) {
-        try { fs.mkdirSync(logsDir, { recursive: true }); } catch (e) {}
-      }
-      const logFile = path.join(logsDir, "acp-bridge.log");
-      const logStream = fs.createWriteStream(logFile, { flags: "a" });
-      this.proc.stderr.pipe(logStream);
-    } catch (spawnErr) {
-      console.error("Failed to spawn Hermes ACP:", spawnErr);
-      throw new Error(`Не удалось запустить Hermes ACP: ${spawnErr.message}`);
-    }
-
-    const rl = readline.createInterface({ input: this.proc.stdout });
-    rl.on("line", (line) => {
-      const trimmed = line.trim();
-      if (!trimmed) return;
-
-      try {
-        const msg = JSON.parse(trimmed);
-
-        if (msg.id && this.pending.has(msg.id)) {
-          const { resolve, reject, timer } = this.pending.get(msg.id);
-          if (timer) clearTimeout(timer);
-          this.pending.delete(msg.id);
-          if (msg.error) {
-            reject(new Error(msg.error.message || JSON.stringify(msg.error)));
-          } else {
-            resolve(msg.result);
-          }
-        } else if (msg.method === "session/request_permission") {
-          // Автоматическое подтверждение инструментов агента (ACP протокол: outcome: "selected", optionId)
-          const options = msg.params?.options || [];
-          const alwaysOpt = options.find(o => o.optionId === "allow_always" || o.kind === "allow_always");
-          const selectedId = alwaysOpt ? alwaysOpt.optionId : (options[0]?.optionId || "allow_always");
-
-          const resp = {
-            jsonrpc: "2.0",
-            id: msg.id,
-            result: {
-              outcome: {
-                outcome: "selected",
-                optionId: selectedId
-              }
-            }
-          };
-          this.proc.stdin.write(JSON.stringify(resp) + "\n");
+    this.proc = proc;
+    proc.stderr.setEncoding("utf8");
+    proc.stderr.on("data", chunk => { if (this.proc === proc) this.lastStderr = (this.lastStderr + chunk).slice(-4096); });
+    const lines = readline.createInterface({ input: proc.stdout });
+    this.lines = lines;
+    lines.on("line", line => {
+      if (this.proc !== proc || !line.trim()) return;
+      let msg;
+      try { msg = JSON.parse(line); } catch (_) { return; }
+      if (!msg || typeof msg !== "object") return;
+      if (msg.method) {
+        if (msg.id !== undefined && msg.id !== null) {
+          this.handleRequest(msg, proc).catch(error => console.warn("ACP request:", error));
         } else if (msg.method === "session/update") {
-          const sId = msg.params?.sessionId;
-          // Продлеваем скользящий таймер неактивности (15 мин) при любом живом событии агента
-          for (const item of this.pending.values()) {
-            if (item.method === "session/prompt" && (!item.params?.sessionId || item.params?.sessionId === sId)) {
-              item.arm?.(900000);
-            }
+          const sid = msg.params?.sessionId;
+          for (const entry of this.pending.values()) {
+            if (entry.method === "session/prompt" && entry.params.sessionId === sid) entry.arm(900000);
           }
-          const handler = (sId && this.updateHandlers?.has(sId)) ? this.updateHandlers.get(sId) : this.onUpdate;
-          if (handler) {
-            handler(msg.params?.update);
-          }
+          try { this.updateHandlers.get(sid)?.(msg.params?.update); }
+          catch (error) { console.warn("ACP update:", error); }
         }
-      } catch (e) {
-        // не JSON-RPC строка
+      } else if (this.pending.has(msg.id)) {
+        const entry = this.pending.get(msg.id);
+        clearTimeout(entry.timer);
+        this.pending.delete(msg.id);
+        if (msg.error) entry.reject(new Error(msg.error.message || JSON.stringify(msg.error)));
+        else entry.resolve(msg.result);
       }
     });
-
-    this.proc.on("exit", (code) => {
-      this.proc = null;
-      this.sessionId = null;
-      this.sessions.clear();
-      for (const [id, item] of this.pending.entries()) {
-        if (item.timer) clearTimeout(item.timer);
-        item.reject(new Error(`Hermes ACP завершил процесс с кодом ${code}`));
-      }
-      this.pending.clear();
-    });
-
-    this.proc.on("error", (err) => {
-      console.error("Hermes ACP process error:", err);
-      for (const [id, item] of this.pending.entries()) {
-        if (item.timer) clearTimeout(item.timer);
-        item.reject(new Error(`Ошибка запуска Hermes ACP: ${err.message}`));
-      }
-      this.pending.clear();
-      this.proc = null;
-      this.sessionId = null;
-      this.sessions.clear();
-    });
+    const fail = error => {
+      if (this.proc !== proc) return;
+      this.disconnect(error);
+    };
+    proc.on("error", error => fail(new Error(`Не удалось запустить ACP (${launch.command}): ${error.message}`)));
+    proc.stdin.on("error", error => fail(new Error(`Соединение ACP закрыто: ${error.message}`)));
+    proc.stdout.on("error", error => fail(error));
+    proc.on("close", (code, signal) => fail(new Error(
+      `ACP завершился (код ${code}, сигнал ${signal || "нет"}). ${this.lastStderr.trim()}`
+    )));
   }
 
-  send(method, params, timeoutMs = 30000) {
+  disconnect(error) {
+    const proc = this.proc;
+    this.proc = null;
+    this.lines?.close();
+    this.lines = null;
+    this.initializePromise = null;
+    this.sessionId = null;
+    this.sessions.clear();
+    this.historySentSessions.clear();
+    this.sessionPromises.clear();
+    this.sessionModels.clear();
+    this.availableModels = [];
+    this.currentModel = "";
+    this.updateHandlers.clear();
+    for (const timer of this.cancelRecoveryTimers.values()) clearTimeout(timer);
+    this.cancelRecoveryTimers.clear();
+    for (const entry of this.pending.values()) {
+      clearTimeout(entry.timer);
+      entry.reject(error);
+    }
+    this.pending.clear();
+    try { this.onDisconnect?.(); } catch (_) {}
+    if (proc) {
+      proc.stdin.destroy();
+      try { proc.kill(); } catch (_) {}
+      if (proc.exitCode === null && proc.signalCode === null) {
+        const timer = setTimeout(() => {
+          if (proc.exitCode === null && proc.signalCode === null) { try { proc.kill("SIGKILL"); } catch (_) {} }
+        }, 2000);
+        timer.unref?.();
+      }
+    }
+  }
+
+  async handleRequest(msg, proc) {
+    let response;
+    if (msg.method === "session/request_permission") {
+      let outcome = { outcome: "cancelled" };
+      try {
+        if (this.settings.acpAutoApprove) {
+          const option = (msg.params?.options || []).find(o => o.kind === "allow_once")
+            || (msg.params?.options || []).find(o => o.kind === "allow_always");
+          if (option) outcome = { outcome: "selected", optionId: option.optionId };
+        } else if (this.onPermission) {
+          const selected = await this.onPermission(msg.params || {});
+          if (selected?.outcome === "selected" && (msg.params?.options || []).some(o => o.optionId === selected.optionId)) outcome = selected;
+        }
+      } catch (_) {}
+      response = { jsonrpc: "2.0", id: msg.id, result: { outcome } };
+    } else {
+      response = { jsonrpc: "2.0", id: msg.id, error: { code: -32601, message: `Unsupported client method: ${msg.method}` } };
+    }
+    if (this.proc === proc && proc.stdin.writable) proc.stdin.write(JSON.stringify(response) + "\n");
+  }
+
+  send(method, params, timeoutMs = 60000) {
     this.ensureProcess();
     return new Promise((resolve, reject) => {
       const id = this.reqId++;
-      let timer = null;
-      const arm = (ms) => {
-        if (timer) clearTimeout(timer);
-        if (ms > 0) {
-          timer = setTimeout(() => {
-            if (this.pending.has(id)) {
-              this.pending.delete(id);
-              reject(new Error(`Таймаут ответа Hermes ACP (${method})`));
-            }
-          }, ms);
-        }
+      const entry = { resolve, reject, timer: null, method, params };
+      entry.arm = ms => {
+        clearTimeout(entry.timer);
+        if (ms > 0) entry.timer = setTimeout(() => {
+          if (!this.pending.delete(id)) return;
+          if (method === "session/prompt") this.notify("session/cancel", { sessionId: params.sessionId });
+          reject(new Error(`Таймаут ответа ACP (${method}). ${this.lastStderr.trim()}`));
+        }, ms);
       };
-      arm(timeoutMs);
-      this.pending.set(id, { resolve, reject, arm, timer, method, params });
-      const payload = JSON.stringify({ jsonrpc: "2.0", id, method, params }) + "\n";
-      this.proc.stdin.write(payload);
+      this.pending.set(id, entry);
+      entry.arm(timeoutMs);
+      this.proc.stdin.write(JSON.stringify({ jsonrpc: "2.0", id, method, params }) + "\n", error => {
+        if (!error || !this.pending.delete(id)) return;
+        clearTimeout(entry.timer);
+        reject(error);
+      });
     });
   }
 
-  async getSession(canvasKey = "default") {
-    if (!this.sessions.has(canvasKey)) {
-      await this.send("initialize", {
+  async initialize() {
+    this.ensureProcess();
+    if (!this.initializePromise) {
+      const promise = this.send("initialize", {
         protocolVersion: 1,
-        clientCapabilities: {
-          fs: { read: true, write: true },
-          terminal: true
-        }
-      }, 20000);
-      const res = await this.send("session/new", {
-        cwd: this.vaultPath,
-        mcpServers: []
-      }, 20000);
-      const sessId = res.sessionId;
-      this.sessions.set(canvasKey, sessId);
-      this.sessionId = sessId;
-
-      if (this.defaultModel && !this.defaultModel.includes("gemini") && !this.defaultModel.includes("flash")) {
-        try {
-          await this.send("session/set_model", {
-            sessionId: sessId,
-            modelId: this.defaultModel
-          }, 10000);
-          this.currentModel = this.defaultModel;
-        } catch (e) {
-          console.warn("Failed to set default ACP model:", e);
-        }
-      } else {
-        this.currentModel = "agy/gemini-3.8-flash-high";
-      }
+        clientInfo: { name: "vibeosint-external-acp", version: "1.2.1" },
+        clientCapabilities: { fs: { readTextFile: false, writeTextFile: false }, terminal: false }
+      }).then(info => {
+        if (info?.protocolVersion !== 1) throw new Error("Агент не поддерживает ACP protocolVersion=1.");
+        this.agentInfo = info.agentInfo;
+        return info;
+      });
+      this.initializePromise = promise;
+      promise.catch(() => { if (this.initializePromise === promise) this.disconnect(new Error("Ошибка инициализации ACP.")); });
     }
-    return this.sessions.get(canvasKey);
+    return this.initializePromise;
+  }
+
+  async getSession(canvasKey = "default") {
+    if (this.closed) throw new Error("Подключение ACP закрыто.");
+    if (this.sessions.has(canvasKey)) return this.sessions.get(canvasKey);
+    if (this.sessionPromises.has(canvasKey)) return this.sessionPromises.get(canvasKey);
+    const creation = (async () => {
+      await this.initialize();
+      const proc = this.proc;
+      const result = await this.send("session/new", { cwd: this.sessionCwd, mcpServers: [] });
+      if (!result?.sessionId) throw new Error("ACP не вернул sessionId.");
+      let model = result.models?.currentModelId || "";
+      if (this.defaultModel && this.defaultModel !== model) {
+        await this.send("session/set_model", { sessionId: result.sessionId, modelId: this.defaultModel });
+        model = this.defaultModel;
+      }
+      if (this.proc !== proc || this.sessionPromises.get(canvasKey) !== creation) throw new Error("Сессия ACP была сброшена.");
+      this.sessions.set(canvasKey, result.sessionId);
+      this.sessionModels.set(canvasKey, model);
+      this.availableModels = result.models?.availableModels || [];
+      this.sessionId = result.sessionId;
+      this.currentModel = model;
+      return result.sessionId;
+    })();
+    this.sessionPromises.set(canvasKey, creation);
+    try { return await creation; }
+    finally { if (this.sessionPromises.get(canvasKey) === creation) this.sessionPromises.delete(canvasKey); }
   }
 
   notify(method, params) {
-    this.ensureProcess();
-    const payload = JSON.stringify({ jsonrpc: "2.0", method, params }) + "\n";
-    this.proc.stdin.write(payload);
+    if (!this.proc || !this.proc.stdin.writable) return;
+    this.proc.stdin.write(JSON.stringify({ jsonrpc: "2.0", method, params }) + "\n");
   }
 
   cancel(canvasKey = "default") {
-    const sessId = this.sessions.get(canvasKey) || this.sessionId;
-    if (sessId && this.proc) {
-      this.notify("session/cancel", { sessionId: sessId });
+    if (this.busyCanvases.has(canvasKey)) this.cancelledCanvases.add(canvasKey);
+    const sessionId = this.sessions.get(canvasKey);
+    if (sessionId) {
+      this.notify("session/cancel", { sessionId });
+      this.sessions.delete(canvasKey);
+      this.sessionModels.delete(canvasKey);
+      this.historySentSessions.delete(sessionId);
+      if (this.sessionId === sessionId) this.sessionId = null;
+    }
+    clearTimeout(this.cancelRecoveryTimers.get(canvasKey));
+    if (this.busyCanvases.has(canvasKey)) {
+      const proc = this.proc;
+      const timer = setTimeout(() => {
+        this.cancelRecoveryTimers.delete(canvasKey);
+        if (this.busyCanvases.has(canvasKey) && this.proc === proc) {
+          this.disconnect(new Error("ACP-процесс перезапущен после зависшей отмены."));
+        }
+      }, 1500);
+      timer.unref?.();
+      this.cancelRecoveryTimers.set(canvasKey, timer);
     }
   }
 
   async resetSession(canvasKey = "default") {
+    this.cancel(canvasKey);
     this.sessions.delete(canvasKey);
-    return await this.getSession(canvasKey);
+    this.sessionModels.delete(canvasKey);
+    this.sessionPromises.delete(canvasKey);
+    return this.getSession(canvasKey);
   }
 
   async setModel(modelId, canvasKey = "default") {
+    if (!modelId?.trim()) throw new Error("Укажите ID модели.");
+    if (this.busyCanvases.has(canvasKey)) throw new Error("Дождитесь завершения текущего ответа перед сменой модели.");
+    const sessionId = await this.getSession(canvasKey);
+    await this.send("session/set_model", { sessionId, modelId });
     this.currentModel = modelId;
     this.defaultModel = modelId;
-
-    if (modelId.includes("gemini") || modelId.includes("flash")) {
-      // Сбрасываем сессию для новой модели
-      this.sessions.delete(canvasKey);
-      await this.getSession(canvasKey);
-      return this.currentModel;
-    }
-
-    const sessId = await this.getSession(canvasKey);
-    await this.send("session/set_model", {
-      sessionId: sessId,
-      modelId: modelId
-    }, 15000);
+    this.sessionModels.set(canvasKey, modelId);
     return modelId;
   }
 
   async prompt(text, callbacks = {}, canvasKey = "default") {
-    const sessId = await this.getSession(canvasKey);
-
-    const updateHandler = (u) => {
-      if (!u) return;
-      if (u.sessionUpdate === "agent_message_chunk" && u.content?.text) {
-        callbacks.onChunk?.(u.content.text);
-      } else if (u.sessionUpdate === "tool_call") {
-        callbacks.onToolStart?.(u.title || u.name || "Инструмент");
-      } else if (u.sessionUpdate === "tool_call_update") {
-        callbacks.onToolEnd?.(u.title || u.name, u.result);
-      }
-    };
-    this.updateHandlers.set(sessId, updateHandler);
-    this.onUpdate = updateHandler;
-
+    if (this.busyCanvases.has(canvasKey)) throw new Error("Предыдущий запрос этого холста ещё выполняется или отменяется.");
+    this.busyCanvases.add(canvasKey);
+    let sessionId;
     try {
-      const res = await this.send("session/prompt", {
-        sessionId: sessId,
-        prompt: [{ type: "text", text }]
-      }, 1800000); // 30 минут скользящий таймаут (продлевается при активности агента)
-      return res;
+      sessionId = await this.getSession(canvasKey);
+      if (this.cancelledCanvases.has(canvasKey)) return { stopReason: "cancelled" };
+      this.updateHandlers.set(sessionId, update => {
+        if (update?.sessionUpdate === "agent_message_chunk" && update.content?.text) callbacks.onChunk?.(update.content.text);
+        else if (update?.sessionUpdate === "tool_call") callbacks.onToolStart?.(update.title || update.name || "Инструмент", update);
+        else if (update?.sessionUpdate === "tool_call_update") callbacks.onToolEnd?.(update.title || update.name || "Инструмент", update.content || update.result, update);
+      });
+      const history = !this.historySentSessions.has(sessionId) ? formatAcpHistory(callbacks.history || []) : "";
+      this.historySentSessions.add(sessionId);
+      return await this.send("session/prompt", { sessionId, prompt: [{ type: "text", text: history + text }] }, 1800000);
     } finally {
-      this.updateHandlers.delete(sessId);
+      if (sessionId) this.updateHandlers.delete(sessionId);
+      clearTimeout(this.cancelRecoveryTimers.get(canvasKey));
+      this.cancelRecoveryTimers.delete(canvasKey);
+      this.busyCanvases.delete(canvasKey);
+      this.cancelledCanvases.delete(canvasKey);
     }
   }
 
   stop() {
-    if (this.proc) {
-      try {
-        this.proc.kill();
-      } catch (e) {}
-      this.proc = null;
-      this.sessionId = null;
-    }
+    this.closed = true;
+    this.disconnect(new Error("Подключение ACP остановлено."));
   }
 }
 
+class AcpPermissionModal extends obsidian.Modal {
+  constructor(app, params, done) { super(app); this.params = params; this.done = done; }
+  onOpen() {
+    this.contentEl.createEl("h3", { text: "Hermes запрашивает разрешение" });
+    this.contentEl.createEl("p", { text: this.params.toolCall?.title || "Действие инструмента" });
+    if (this.params.toolCall?.rawInput) this.contentEl.createEl("pre", {
+      text: JSON.stringify(this.params.toolCall.rawInput, null, 2),
+      attr: { style: "white-space:pre-wrap;max-height:240px;overflow:auto" }
+    });
+    for (const option of this.params.options || []) {
+      this.contentEl.createEl("button", { text: option.name || option.optionId }).addEventListener("click", () => {
+        this.result = { outcome: "selected", optionId: option.optionId };
+        this.close();
+      });
+    }
+  }
+  onClose() { this.contentEl.empty(); this.done(this.result || { outcome: "cancelled" }); }
+}
+
 /**
- * Базовый системный шаблон для Hermes и Direct API
+ * Базовый системный шаблон для Hermes ACP
  */
 const OSINT_BASE_CONTRACT = `Ты — автономный OSINT-агент, управляющий расследованием на Obsidian Canvas.
 
@@ -424,18 +603,25 @@ const OSINT_BASE_CONTRACT = `Ты — автономный OSINT-агент, у�
 - Для сложных веб-страниц, капч и Cloudflare используй реальный браузер (browser_exec).
 - НАЧАЛЬНЫЙ ПОИСК В САМОМ НАЧАЛЕ (ПЕРВЫЙ ШАГ РАССЛЕДОВАНИЯ):
   В самом начале расследования по любой цели (номер телефона, ИНН, авто, паспорт, никнейм/юзернейм) проведи первичную разведку по открытым базам, реестрам и поисковикам. Полученные зацепки (пивоты) сразу используй для дальнейшей глубокой верификации в открытых реестрах.
-- Защита контекста: проводи точечную разведку (4-8 целевых шагов) и сразу выдавай карточки на Canvas.
+- Защита контекста: сохраняй промежуточные подтверждённые находки на Canvas, но продолжай исследование до насыщения выбранного режима.
 
 Никаких туториалов, воды и поучений. Только факты.`;
 
 const DEFAULT_SETTINGS = {
-  engineMode: "hermes_acp", // "hermes_acp" | "direct_api"
-  acpModel: "agy/gemini-3.8-flash-high",
-  apiKey: "",
-  apiBaseUrl: "https://api.openai.com/v1",
-  model: "gpt-4o",
-  temperature: 0.05,
-  systemPrompt: OSINT_BASE_CONTRACT
+  deepModeByCanvas: {},
+  chatActivityByCanvas: {},
+  chatActivityVersion: 2,
+  acpModel: "",
+  acpTransport: "local",
+  acpCommand: "",
+  acpArgs: '["acp"]',
+  acpCwd: "",
+  acpEnv: "{}",
+  acpSshHost: "",
+  acpSshPort: "",
+  acpSshKey: "",
+  acpSshCommand: "ssh",
+  acpAutoApprove: false
 };
 
 /**
@@ -529,11 +715,14 @@ function calculateCardDimensions(textOrTitle, secondArg = false, thirdArg = fals
     return { width: 540, height: 140 };
   }
 
+  const hasEmbeddedImage = /!\[[^\]]*\]\([^)]*\)|!\[\[[^\]]+\]\]/i.test(text);
+  const hasPlainImageLink = /(?<!!)\[[^\]]*\]\(https?:\/\/[^)\s]+\.(?:jpe?g|png|webp|gif|avif)(?:\?[^)]*)?\)/i.test(text);
+
   const cardWidth = 540;
   const usableWidth = cardWidth - 56;
   const lines = text.split("\n");
 
-  let totalHeight = 48; // базовые верхний и нижний отступы карточки
+  let totalHeight = 36; // внутренние отступы и безопасный запас сверху
   let inCodeBlock = false;
 
   for (const line of lines) {
@@ -541,12 +730,12 @@ function calculateCardDimensions(textOrTitle, secondArg = false, thirdArg = fals
 
     if (trimmed.startsWith("```")) {
       inCodeBlock = !inCodeBlock;
-      totalHeight += 24;
+      totalHeight += 22;
       continue;
     }
 
     if (!trimmed) {
-      totalHeight += 18;
+      totalHeight += 6;
       continue;
     }
 
@@ -555,24 +744,27 @@ function calculateCardDimensions(textOrTitle, secondArg = false, thirdArg = fals
       const sizeMatch = trimmed.match(/\|(\d+)(?:x(\d+))?\]\]/);
       if (sizeMatch) {
         const customH = sizeMatch[2] ? parseInt(sizeMatch[2], 10) : parseInt(sizeMatch[1], 10);
-        totalHeight += Math.max(120, customH + 24);
+        totalHeight += Math.max(120, customH + 16);
       } else {
-        // Полноразмерное изображение в карточке 540px занимает ~480px высоты
-        totalHeight += 480;
+        const dimensionsInUrl = trimmed.match(/(?:^|[\/_-])(\d{2,4})[_x-](\d{2,4})(?:[_./-]|$)/);
+        const imageHeight = dimensionsInUrl
+          ? Math.round(Math.min(460, usableWidth * Number(dimensionsInUrl[2]) / Number(dimensionsInUrl[1])))
+          : 300;
+        totalHeight += Math.max(140, imageHeight + 16);
       }
       continue;
     }
 
     if (trimmed.startsWith("# ")) {
-      totalHeight += 60;
+      totalHeight += 44;
       continue;
     }
     if (trimmed.startsWith("## ")) {
-      totalHeight += 48;
+      totalHeight += 38;
       continue;
     }
     if (trimmed.startsWith("### ")) {
-      totalHeight += 42;
+      totalHeight += 34;
       continue;
     }
 
@@ -582,23 +774,28 @@ function calculateCardDimensions(textOrTitle, secondArg = false, thirdArg = fals
 
     const clean = trimmed.replace(/\[([^\]]+)\]\([^\)]+\)/g, "$1");
     const hasBold = clean.includes("**") || clean.includes("<b>") || clean.includes("<strong>");
-    const charWidth = hasBold ? 10.2 : 9.6;
+    const charWidth = hasBold ? 9.5 : 9.0;
     const cleanText = clean.replace(/[*_`~]/g, "");
 
     const charsPerLine = Math.max(20, Math.floor(lineUsableW / charWidth));
     const visualLines = Math.max(1, Math.ceil(cleanText.length / charsPerLine));
-    totalHeight += visualLines * 26;
+    totalHeight += visualLines * (inCodeBlock ? 21 : 24);
 
     if (trimmed.startsWith("•") || trimmed.startsWith("-") || trimmed.startsWith("*") || /^\d+\./.test(trimmed)) {
-      totalHeight += 8; // отступ между пунктами списка в Obsidian
+      totalHeight += 4;
     }
   }
 
-  totalHeight += 50; // щедрый запас пространства снизу чтобы скроллбар НИКОГДА не появлялся
+  totalHeight += 24;
+  if (hasPlainImageLink && !hasEmbeddedImage) {
+    // Один и тот же лишний внешний запас появляется у всей фотокарточки,
+    // поэтому компенсируем его один раз, независимо от числа ссылок.
+    totalHeight -= 48;
+  }
 
   return {
     width: Math.round(cardWidth),
-    height: Math.max(130, Math.round(totalHeight))
+    height: Math.max(105, Math.round(totalHeight))
   };
 }
 
@@ -885,7 +1082,7 @@ function beautifyCanvasLayout(canvasData) {
   }
 }
 
-class GeminiCanvasOsintPlugin extends Plugin {
+class VibeOsintPlugin extends Plugin {
   async onload() {
     console.log("Loading Hermes Canvas OSINT Plugin");
     this.activeTasks = new Map(); // canvasKey -> task state
@@ -896,19 +1093,9 @@ class GeminiCanvasOsintPlugin extends Plugin {
     const vaultAdapter = this.app.vault.adapter;
     const vaultPath = (vaultAdapter && vaultAdapter.getBasePath) ? vaultAdapter.getBasePath() : "";
 
-    const defaultModel = this.settings.acpModel || "agy/gemini-3.8-flash-high";
-    this.acpClient = new HermesAcpClient(vaultPath, defaultModel);
-
-    // Фоновый прогрев сессии ACP при старте, чтобы запрос уходил мгновенно
-    if (this.settings.engineMode === "hermes_acp") {
-      setTimeout(() => {
-        this.acpClient.getSession("default").then((sid) => {
-          console.log("[Hermes ACP] Фоновая сессия прогрета, ID:", sid);
-        }).catch((e) => {
-          console.warn("[Hermes ACP] Ошибка прогрева:", e);
-        });
-      }, 1000);
-    }
+    this.vaultPath = vaultPath;
+    this.permissionModals = new Set();
+    this.configureAcpClient();
 
     this.registerView(
       VIEW_TYPE_OSINT,
@@ -934,40 +1121,207 @@ class GeminiCanvasOsintPlugin extends Plugin {
     this.addSettingTab(new OsintSettingTab(this.app, this));
   }
 
+  configureAcpClient() {
+    this.acpClient?.stop();
+    this.acpClient = new HermesAcpClient(this.vaultPath, this.settings, params => new Promise(resolve => {
+      const modal = new AcpPermissionModal(this.app, params, result => {
+        this.permissionModals.delete(modal);
+        resolve(result);
+      });
+      this.permissionModals.add(modal);
+      modal.open();
+    }), () => {
+      for (const modal of [...this.permissionModals]) modal.close();
+    });
+  }
+
   async loadChatHistories() {
-    try {
-      const adapter = this.app.vault.adapter;
-      const chatFile = `${this.manifest.dir}/chats.json`;
-      if (await adapter.exists(chatFile)) {
-        const raw = await adapter.read(chatFile);
-        this.chatHistories = JSON.parse(raw || "{}");
-      } else {
-        this.chatHistories = {};
+    this.chatHistories = {};
+    this.chatWriteQueue = Promise.resolve();
+    this.chatHistoryLoadFailed = false;
+    const adapter = this.app.vault.adapter;
+    const file = `${this.manifest.dir}/chats.json`;
+    let primaryFailed = false;
+    for (const candidate of [file, file + ".bak"]) {
+      try {
+        if (!await adapter.exists(candidate)) continue;
+        const raw = await adapter.read(candidate);
+        const parsed = JSON.parse(raw);
+        if (!parsed || Array.isArray(parsed) || typeof parsed !== "object" || Object.values(parsed).some(value => !Array.isArray(value))) throw new Error("Неверный формат истории");
+        this.chatHistories = parsed;
+        this.lastGoodChatJson = raw;
+        if (primaryFailed) {
+          this.preserveCorruptChat = true;
+          new Notice("История восстановлена из резервной копии chats.json.bak.", 8000);
+        }
+        return;
+      } catch (error) {
+        primaryFailed = true;
+        console.warn("Cannot load chat history:", error);
       }
-    } catch (e) {
-      this.chatHistories = {};
+    }
+    if (primaryFailed) {
+      this.chatHistoryLoadFailed = true;
+      new Notice("Не удалось прочитать историю. Автосохранение отключено, чтобы не затереть файлы chats.json и .bak.", 12000);
     }
   }
 
-  async saveChatHistories() {
-    try {
+  saveChatHistories() {
+    const snapshot = JSON.stringify(this.chatHistories || {}, null, 2);
+    const write = async () => {
+      if (this.chatHistoryLoadFailed) throw new Error("Сохранение истории заблокировано: сначала восстановите chats.json из копии.");
       const adapter = this.app.vault.adapter;
-      const chatFile = `${this.manifest.dir}/chats.json`;
-      await adapter.write(chatFile, JSON.stringify(this.chatHistories || {}, null, 2));
-    } catch (e) {
-      console.warn("Failed to save chat histories:", e);
+      const file = `${this.manifest.dir}/chats.json`;
+      if (this.preserveCorruptChat && await adapter.exists(file)) {
+        await adapter.write(`${file}.corrupt-${Date.now()}`, await adapter.read(file));
+        this.preserveCorruptChat = false;
+      }
+      if (this.lastGoodChatJson) await adapter.write(file + ".bak", this.lastGoodChatJson);
+      await adapter.write(file, snapshot);
+      this.lastGoodChatJson = snapshot;
+    };
+    const result = (this.chatWriteQueue || Promise.resolve()).catch(() => {}).then(write);
+    this.chatWriteQueue = result;
+    result.catch(error => {
+      console.warn("Failed to save chat histories:", error);
+      if (!this.chatSaveWarningShown) {
+        this.chatSaveWarningShown = true;
+        new Notice(`История не сохранена: ${error.message}`, 10000);
+      }
+    });
+    return result;
+  }
+
+  checkpointChatTask(task, immediate = false) {
+    if (!task.streamedChunks) return;
+    if (!task.historyMessage) {
+      task.historyMessage = { role: "assistant", content: "", incomplete: true };
+      const history = (this.chatHistories[task.canvasKey] ||= []);
+      const insertAt = Math.max(0, Math.min(Number(task.assistantInsertIndex) || history.length, history.length));
+      history.splice(insertAt, 0, task.historyMessage);
     }
+    Object.assign(task.historyMessage, { content: task.streamedChunks, toolLogs: [...task.toolLogs] });
+    if (immediate) {
+      clearTimeout(task.historyTimer);
+      task.historyTimer = null;
+      return this.saveChatHistories();
+    }
+    if (!task.historyTimer) task.historyTimer = setTimeout(() => {
+      task.historyTimer = null;
+      this.saveChatHistories().catch(() => {});
+    }, 2000);
+  }
+
+  async resetCanvasSession(key) {
+    await this.acpClient.resetSession(key);
+    (this.chatHistories[key] ||= []).push({ role: "assistant", content: "Контекст агента сброшен. Предыдущая переписка сохранена только для просмотра.", contextReset: true });
+    await this.saveChatHistories();
+  }
+
+  isDeepMode(canvasKey) {
+    return !!this.settings.deepModeByCanvas?.[canvasKey || "default"];
+  }
+
+  async setDeepMode(canvasKey, enabled) {
+    const key = canvasKey || "default";
+    this.settings.deepModeByCanvas ||= {};
+    if (enabled) this.settings.deepModeByCanvas[key] = true;
+    else delete this.settings.deepModeByCanvas[key];
+    await this.saveSettings();
+  }
+
+  touchCanvas(canvasKey) {
+    const key = canvasKey || "default";
+    this.settings.chatActivityByCanvas ||= {};
+    this.settings.chatActivityByCanvas[key] = Date.now();
+    this.saveSettings().catch(error => console.warn("Cannot save chat activity:", error));
+  }
+
+  async moveCanvasKey(oldKey, newKey) {
+    if (!oldKey || !newKey || oldKey === newKey) return;
+
+    let settingsChanged = false;
+    if (Object.prototype.hasOwnProperty.call(this.settings.deepModeByCanvas || {}, oldKey)) {
+      if (!Object.prototype.hasOwnProperty.call(this.settings.deepModeByCanvas, newKey)) {
+        this.settings.deepModeByCanvas[newKey] = this.settings.deepModeByCanvas[oldKey];
+      }
+      delete this.settings.deepModeByCanvas[oldKey];
+      settingsChanged = true;
+    }
+    if (Object.prototype.hasOwnProperty.call(this.settings.chatActivityByCanvas || {}, oldKey)) {
+      this.settings.chatActivityByCanvas[newKey] = Math.max(
+        Number(this.settings.chatActivityByCanvas[newKey]) || 0,
+        Number(this.settings.chatActivityByCanvas[oldKey]) || 0
+      );
+      delete this.settings.chatActivityByCanvas[oldKey];
+      settingsChanged = true;
+    }
+    if (settingsChanged) await this.saveSettings();
+
+    if (Object.prototype.hasOwnProperty.call(this.chatHistories, oldKey)) {
+      if (Object.prototype.hasOwnProperty.call(this.chatHistories, newKey)) {
+        const recoveredKey = `__recovered__/${Date.now()}-${newKey}`;
+        this.chatHistories[recoveredKey] = this.chatHistories[newKey];
+        new Notice("У нового пути уже была старая история. Она сохранена отдельно, текущая история перенесена вместе с холстом.", 10000);
+      }
+      this.chatHistories[newKey] = this.chatHistories[oldKey];
+      delete this.chatHistories[oldKey];
+      await this.saveChatHistories();
+    }
+
+    const task = this.activeTasks.get(oldKey);
+    if (task) {
+      this.activeTasks.delete(oldKey);
+      task.canvasKey = newKey;
+      this.activeTasks.set(newKey, task);
+      return;
+    }
+
+    this.moveAcpKey(oldKey, newKey);
+  }
+
+  moveAcpKey(oldKey, newKey) {
+    const client = this.acpClient;
+    if (!client) return;
+    for (const map of [client.sessions, client.sessionPromises, client.sessionModels]) {
+      if (map.has(oldKey)) {
+        const value = map.get(oldKey);
+        map.delete(oldKey);
+        map.set(newKey, value);
+      }
+    }
+  }
+
+  finishCanvasKeyMigration(task) {
+    if (!task || task.acpKey === task.canvasKey) return;
+    this.moveAcpKey(task.acpKey, task.canvasKey);
+    task.acpKey = task.canvasKey;
   }
 
   onunload() {
     console.log("Unloading Hermes Canvas OSINT Plugin");
+    for (const task of this.activeTasks.values()) {
+      clearTimeout(task.historyTimer);
+      clearTimeout(task.renderTimer);
+      this.checkpointChatTask(task, true)?.catch(() => {});
+    }
     if (this.acpClient) {
       this.acpClient.stop();
     }
   }
 
   async loadSettings() {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    const saved = Object.assign({}, await this.loadData());
+    for (const obsolete of ["engineMode", "apiKey", "apiBaseUrl", "model", "temperature", "systemPrompt", "deepMode"]) delete saved[obsolete];
+    if (!saved.deepModeByCanvas || Array.isArray(saved.deepModeByCanvas) || typeof saved.deepModeByCanvas !== "object") saved.deepModeByCanvas = {};
+    if (!saved.chatActivityByCanvas || Array.isArray(saved.chatActivityByCanvas) || typeof saved.chatActivityByCanvas !== "object") saved.chatActivityByCanvas = {};
+    // До v2 время активности обновлялось при простом открытии холста, поэтому
+    // старые значения нельзя использовать как время последнего сообщения.
+    if (Number(saved.chatActivityVersion) < 2) saved.chatActivityByCanvas = {};
+    saved.chatActivityVersion = 2;
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, saved);
+    this.settings.deepModeByCanvas = Object.assign({}, saved.deepModeByCanvas);
+    this.settings.chatActivityByCanvas = Object.assign({}, saved.chatActivityByCanvas);
   }
 
   async saveSettings() {
@@ -1086,6 +1440,36 @@ class GeminiCanvasOsintPlugin extends Plugin {
     } catch (e) {
       return null;
     }
+  }
+
+  async captureCanvasSnapshot(targetCanvasFile) {
+    if (!targetCanvasFile) return "";
+    try {
+      return encodeCanvasSnapshot(await this.app.vault.read(targetCanvasFile));
+    } catch (error) {
+      console.warn("Cannot capture Canvas snapshot:", error);
+      return "";
+    }
+  }
+
+  async restoreCanvasSnapshot(targetCanvasFile, snapshot) {
+    if (!targetCanvasFile || !snapshot) return false;
+    const raw = decodeCanvasSnapshot(snapshot);
+    if (!raw) return false;
+    let data;
+    try { data = JSON.parse(raw); }
+    catch (_) { return false; }
+    if (!Array.isArray(data.nodes)) data.nodes = [];
+    if (!Array.isArray(data.edges)) data.edges = [];
+    await this.app.vault.modify(targetCanvasFile, JSON.stringify(data, null, 2));
+    for (const leaf of this.app.workspace.getLeavesOfType("canvas")) {
+      if (leaf.view?.file?.path !== targetCanvasFile.path) continue;
+      if (leaf.view.canvas && typeof leaf.view.canvas.setData === "function") {
+        leaf.view.canvas.setData(data);
+        if (typeof leaf.view.canvas.requestSave === "function") leaf.view.canvas.requestSave();
+      }
+    }
+    return true;
   }
 
   /**
@@ -1357,92 +1741,6 @@ class GeminiCanvasOsintPlugin extends Plugin {
     };
   }
 
-  /**
-   * Прямой вызов HTTP API (fallback если ACP не выбран)
-   */
-  async queryDirectApi(messages) {
-    const apiKey = this.settings.apiKey ? this.settings.apiKey.trim() : "";
-    let baseUrl = this.settings.apiBaseUrl ? this.settings.apiBaseUrl.trim() : "https://api.openai.com/v1";
-    baseUrl = baseUrl.replace(/\/+$/, "");
-
-    const modelName = (this.settings.model || "").toLowerCase();
-    const isResponsesApi = modelName.startsWith("muse-spark") || modelName.startsWith("grok-4.6") || modelName.startsWith("gpt-5.6") || baseUrl.endsWith("/responses");
-
-    let endpoint = baseUrl;
-    let payload = {};
-
-    const headers = {
-      "Content-Type": "application/json",
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    };
-    if (apiKey) {
-      headers["Authorization"] = `Bearer ${apiKey}`;
-    }
-
-    if (isResponsesApi) {
-      if (!endpoint.endsWith("/responses")) {
-        endpoint = `${baseUrl}/responses`;
-      }
-      payload = {
-        model: this.settings.model || "muse-spark-1.3-contributor",
-        instructions: this.settings.systemPrompt,
-        input: messages.map(m => ({ role: m.role, content: m.content }))
-      };
-    } else {
-      if (!endpoint.endsWith("/chat/completions")) {
-        endpoint = `${baseUrl}/chat/completions`;
-      }
-      payload = {
-        model: this.settings.model || "agy/gemini-3.8-flash-high",
-        messages: [
-          { role: "system", content: this.settings.systemPrompt },
-          ...messages
-        ],
-        temperature: this.settings.temperature ?? 0.05
-      };
-    }
-
-    const response = await requestUrl({
-      url: endpoint,
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(payload),
-      throw: false,
-    });
-
-    if (response.status !== 200) {
-      let detail = response.text;
-      try {
-        if (response.json && response.json.error) {
-          detail = response.json.error.message || JSON.stringify(response.json.error);
-        }
-      } catch (e) {}
-      throw new Error(`Ошибка API (${response.status}): ${detail}`);
-    }
-
-    const json = response.json;
-    if (isResponsesApi) {
-      let outText = "";
-      if (json && Array.isArray(json.output)) {
-        for (const item of json.output) {
-          if (item.type === "message" && Array.isArray(item.content)) {
-            for (const c of item.content) {
-              if (c.text) outText += c.text;
-            }
-          }
-        }
-      }
-      if (!outText) throw new Error("Пустой ответ от Responses API");
-      return outText;
-    }
-
-    if (!json || !json.choices || !json.choices[0] || !json.choices[0].message) {
-      throw new Error("Пустой ответ от нейросети");
-    }
-
-    return json.choices[0].message.content;
-  }
-
   extractJson(text) {
     if (!text) return null;
     const match = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/);
@@ -1517,6 +1815,14 @@ class OsintChatView extends ItemView {
     this.registerEvent(
       this.app.vault.on("delete", (file) => {
         if (file && file.extension === "canvas") {
+          let settingsChanged = false;
+          for (const mapName of ["deepModeByCanvas", "chatActivityByCanvas"]) {
+            if (Object.prototype.hasOwnProperty.call(this.plugin.settings[mapName] || {}, file.path)) {
+              delete this.plugin.settings[mapName][file.path];
+              settingsChanged = true;
+            }
+          }
+          if (settingsChanged) this.plugin.saveSettings().catch(() => {});
           if (this.currentFilePath === file.path) {
             this.currentFilePath = null;
           }
@@ -1532,9 +1838,11 @@ class OsintChatView extends ItemView {
           if (this.currentFilePath === oldPath) {
             this.currentFilePath = file.path;
           }
-          this.renderCanvasTabs();
-          this.updateFileStatus();
-          this.loadCanvasChat();
+          this.plugin.moveCanvasKey(oldPath, file.path).finally(() => {
+            this.renderCanvasTabs();
+            this.updateFileStatus();
+            this.loadCanvasChat();
+          });
         }
       })
     );
@@ -1588,7 +1896,23 @@ class OsintChatView extends ItemView {
     this.tabsEl.empty();
 
     const currentFile = this.getCurrentFile();
-    const allCanvasFiles = this.app.vault.getFiles().filter(f => f.extension === "canvas");
+    const activity = this.plugin.settings.chatActivityByCanvas || {};
+    const allCanvasFiles = this.app.vault.getFiles()
+      .filter(f => f.extension === "canvas")
+      .sort((a, b) => {
+        const aTime = Number(activity[a.path]) || Number(a.stat?.mtime) || 0;
+        const bTime = Number(activity[b.path]) || Number(b.stat?.mtime) || 0;
+        return bTime - aTime || a.path.localeCompare(b.path);
+      });
+
+    const addTab = this.tabsEl.createDiv({
+      cls: "osint-canvas-tab osint-tab-add",
+      title: "Создать новый холст"
+    });
+    setIcon(addTab.createSpan(), "plus");
+    addTab.addEventListener("click", async () => {
+      await this.createNewCanvas();
+    });
 
     allCanvasFiles.forEach(cf => {
       const isActive = currentFile && cf.path === currentFile.path;
@@ -1609,14 +1933,6 @@ class OsintChatView extends ItemView {
       });
     });
 
-    const addTab = this.tabsEl.createDiv({
-      cls: "osint-canvas-tab osint-tab-add",
-      title: "Создать новый холст"
-    });
-    setIcon(addTab.createSpan(), "plus");
-    addTab.addEventListener("click", async () => {
-      await this.createNewCanvas();
-    });
   }
 
   getCurrentFile() {
@@ -1662,51 +1978,20 @@ class OsintChatView extends ItemView {
     const actions = header.createDiv({ cls: "osint-header-actions" });
 
     this.modelSelectEl = actions.createEl("select", { cls: "osint-model-select", title: "Выбор модели" });
-    const modelGroups = [
-      {
-        label: "OmniRoute",
-        models: [
-          { id: "agy/gemini-3.8-flash-high", label: "Gemini 3.8 Flash (Быстрая)" },
-          { id: "agy/claude-sonnet-4-6", label: "Claude Sonnet 4.6" },
-          { id: "agy/claude-opus-4-6-thinking", label: "Claude Opus Thinking" },
-          { id: "dva/deepseek-v4", label: "DeepSeek V4" },
-          { id: "dva/gpt-5-6-sol-high", label: "GPT 5.6 Sol High" },
-          { id: "dva/grok-4-5-high", label: "Grok 4.5" }
-        ]
-      },
-      {
-        label: "OpenCode",
-        models: [
-          { id: "muse-spark-1.3-contributor", label: "Muse Spark 1.3" },
-          { id: "deepseek-v4-flash", label: "DeepSeek V4 Flash" },
-          { id: "qwen3.8-max", label: "Qwen 3.8 Max" },
-          { id: "kimi-k3", label: "Kimi K3" },
-          { id: "grok-4.6", label: "Grok 4.6" },
-          { id: "mimo-v2.5", label: "Mimo V2.5" }
-        ]
-      },
-      {
-        label: "OpenRouter",
-        models: [
-          { id: "anthropic/claude-sonnet-5", label: "Claude Sonnet 5" },
-          { id: "anthropic/claude-opus-5", label: "Claude Opus 5" },
-          { id: "google/gemini-3.8-flash", label: "Gemini 3.8 Flash OR" },
-          { id: "deepseek/deepseek-v4-flash", label: "DeepSeek V4 Flash OR" },
-          { id: "qwen/qwen3.8-max", label: "Qwen 3.8 Max OR" },
-          { id: "x-ai/grok-4.6", label: "Grok 4.6 OR" }
-        ]
-      }
-    ];
-
-    modelGroups.forEach(grp => {
-      const optGroup = this.modelSelectEl.createEl("optgroup", { label: grp.label });
-      grp.models.forEach(opt => {
-        optGroup.createEl("option", { value: opt.id, text: opt.label });
-      });
-    });
-
     this.modelSelectEl.addEventListener("change", async () => {
       await this.switchModel(this.modelSelectEl.value);
+    });
+
+    this.deepToggleEl = actions.createEl("button", {
+      cls: "osint-deep-toggle",
+      text: "DEEP",
+      title: "Активный глубокий поиск до насыщения"
+    });
+    this.deepToggleEl.addEventListener("click", async () => {
+      const canvasKey = this.getCurrentFile()?.path || this.currentFilePath || "default";
+      const enabled = !this.plugin.isDeepMode(canvasKey);
+      await this.plugin.setDeepMode(canvasKey, enabled);
+      this.updateDeepModeUI();
     });
 
     const resetBtn = actions.createEl("button", { cls: "osint-icon-btn", title: "Сбросить контекст сессии" });
@@ -1716,7 +2001,7 @@ class OsintChatView extends ItemView {
       const canvasKey = file ? file.path : "default";
       this.showTyping("Сброс контекста...");
       try {
-        await this.plugin.acpClient.resetSession(canvasKey);
+        await this.plugin.resetCanvasSession(canvasKey);
         this.hideTyping();
         this.appendAssistantMessageUI(`Сессия для "${file ? file.basename : 'холста'}" сброшена.`);
         new Notice("Контекст сессии сброшен");
@@ -1728,10 +2013,12 @@ class OsintChatView extends ItemView {
 
     const clearBtn = actions.createEl("button", { cls: "osint-icon-btn", title: "Очистить историю чата" });
     setIcon(clearBtn, "trash");
-    clearBtn.addEventListener("click", () => {
+    clearBtn.addEventListener("click", async () => {
       const file = this.getCurrentFile();
       const key = file ? file.path : "default";
+      if (this.plugin.activeTasks.has(key)) { new Notice("Сначала завершите текущий запрос."); return; }
       this.plugin.chatHistories[key] = [];
+      await this.plugin.resetCanvasSession(key);
       this.loadCanvasChat();
       new Notice("История чата очищена");
     });
@@ -1750,11 +2037,14 @@ class OsintChatView extends ItemView {
   }
 
   updateFileStatus() {
-    const curModel = (this.plugin.settings.engineMode === "hermes_acp")
-      ? (this.plugin.acpClient?.currentModel || this.plugin.settings.acpModel || "agy/gemini-3.8-flash-high")
-      : (this.plugin.settings.model || "agy/gemini-3.8-flash-high");
+    const curModel = this.plugin.acpClient?.sessionModels.get(this.getCurrentFile()?.path || "default")
+      || this.plugin.acpClient?.currentModel || this.plugin.settings.acpModel || "Модель Hermes";
 
     if (this.modelSelectEl) {
+      this.modelSelectEl.empty();
+      for (const model of this.plugin.acpClient?.availableModels || []) {
+        this.modelSelectEl.createEl("option", { value: model.modelId, text: model.name || model.modelId });
+      }
       let found = false;
       for (let i = 0; i < this.modelSelectEl.options.length; i++) {
         if (this.modelSelectEl.options[i].value === curModel) {
@@ -1769,6 +2059,18 @@ class OsintChatView extends ItemView {
         this.modelSelectEl.value = curModel;
       }
     }
+    this.updateDeepModeUI();
+  }
+
+  updateDeepModeUI() {
+    if (!this.deepToggleEl) return;
+    const canvasKey = this.getCurrentFile()?.path || this.currentFilePath || "default";
+    const enabled = this.plugin.isDeepMode(canvasKey);
+    this.deepToggleEl.classList.toggle("active", enabled);
+    this.deepToggleEl.setAttribute("aria-pressed", String(enabled));
+    this.deepToggleEl.setAttribute("title", enabled
+      ? "Deep включён: активный поиск до насыщения"
+      : "Deep выключен: обычный режим");
   }
 
   renderMessageArea(container) {
@@ -1815,11 +2117,12 @@ class OsintChatView extends ItemView {
     if (history.length === 0 && (!activeTask || activeTask.isDone)) {
       this.appendWelcomeMessage(currentFile);
     } else {
-      for (const msg of history) {
+      for (let messageIndex = 0; messageIndex < history.length; messageIndex++) {
+        const msg = history[messageIndex];
         if (msg.role === "user") {
-          this.appendUserMessageUI(msg.content);
+          this.appendUserMessageUI(msg.content, msg, messageIndex, canvasKey);
         } else if (msg.role === "assistant") {
-          this.appendAssistantMessageUI(msg.content, msg.stats, msg.pivots, msg.toolLogs);
+          this.appendAssistantMessageUI(msg.content, msg.stats, msg.pivots, msg.toolLogs, msg.sources);
         }
       }
     }
@@ -1832,22 +2135,36 @@ class OsintChatView extends ItemView {
 
     this.updateInputControls();
     this.scrollToBottom();
+    const recoverableFollowUps = !activeTask ? history.filter(message => message?.role === "user" && message.queued) : [];
+    if (recoverableFollowUps.length) {
+      setTimeout(() => this.runQueuedFollowUps({
+        canvasKey,
+        followUps: recoverableFollowUps.map(message => ({ message, row: null }))
+      }).catch(error => {
+        console.warn("Cannot recover queued follow-up:", error);
+        new Notice(`Не удалось восстановить follow-up: ${error.message || error}`);
+      }), 0);
+    }
   }
 
   isCanvasLoading(canvasKey = null) {
     const key = canvasKey || (this.getCurrentFile() ? this.getCurrentFile().path : (this.currentFilePath || "default"));
     const task = this.plugin.activeTasks?.get(key);
-    return !!(task && !task.isDone);
+    return !!task;
   }
 
   updateInputControls() {
     const isRunning = this.isCanvasLoading();
+    const key = this.getCurrentFile()?.path || this.currentFilePath || "default";
+    const activeTask = this.plugin.activeTasks?.get(key);
     if (this.stopBtn) {
       this.stopBtn.style.display = isRunning ? "inline-flex" : "none";
+      this.stopBtn.disabled = !!activeTask?.cancelRequested;
+      this.stopBtn.title = activeTask?.cancelRequested ? "Останавливаю и восстанавливаю ACP..." : "Остановить";
     }
     if (this.sendBtn) {
       if (isRunning) {
-        this.sendBtn.title = "Скорректировать агента на лету (Steer / Redirect)";
+        this.sendBtn.title = "Добавить следующее сообщение (follow-up)";
       } else {
         this.sendBtn.title = "Отправить";
       }
@@ -1865,8 +2182,9 @@ class OsintChatView extends ItemView {
     liveToolsBox.createDiv({ cls: "osint-tool-title", text: "Действия агента:" });
     const liveToolsList = liveToolsBox.createDiv({ cls: "osint-tool-list" });
 
-    if (task.toolLogs && task.toolLogs.length > 0) {
-      task.toolLogs.forEach(toolTitle => {
+    const visibleTaskLogs = (task.toolLogs || []).filter(log => !/\[object Object\]/i.test(String(log)));
+    if (visibleTaskLogs.length > 0) {
+      visibleTaskLogs.forEach(toolTitle => {
         const tItem = liveToolsList.createDiv({ cls: "osint-tool-item" });
         tItem.setText(toolTitle);
       });
@@ -1889,7 +2207,27 @@ class OsintChatView extends ItemView {
     this.scrollToBottom();
   }
 
-  finalizeLiveBubbleUI(bubble, text, stats, pivots) {
+  renderSourcesDetails(bubble, text, explicitSources = []) {
+    const sources = extractSources(text, explicitSources);
+    if (!sources.length) return sources;
+    const details = bubble.createEl("details", { cls: "osint-sources-details" });
+    const summary = details.createEl("summary", { cls: "osint-sources-summary" });
+    summary.setText(`Источники (${sources.length})`);
+    const list = details.createEl("ol", { cls: "osint-sources-list" });
+    for (const source of sources) {
+      const item = list.createEl("li");
+      const link = item.createEl("a", {
+        text: source.title || source.url,
+        href: source.url,
+        title: source.url
+      });
+      link.setAttribute("target", "_blank");
+      link.setAttribute("rel", "noopener noreferrer");
+    }
+    return sources;
+  }
+
+  finalizeLiveBubbleUI(bubble, text, stats, pivots, sources = []) {
     if (!bubble) return;
 
     const copyBtn = bubble.createEl("button", {
@@ -1918,6 +2256,8 @@ class OsintChatView extends ItemView {
       badge.setText(`Холст: ${parts.join(", ")}`);
     }
 
+    this.renderSourcesDetails(bubble, text, sources);
+
     if (pivots && Array.isArray(pivots) && pivots.length > 0) {
       const pivotBox = bubble.createDiv({ cls: "osint-pivots-box" });
       pivotBox.createDiv({ cls: "osint-pivots-title", text: "Связанные ветки:" });
@@ -1925,7 +2265,7 @@ class OsintChatView extends ItemView {
       pivots.forEach(p => {
         const pStr = String(p).trim();
         if (!pStr) return;
-        const pill = pillsContainer.createSpan({ cls: "osint-pivot-pill", text: pStr });
+        const pill = pillsContainer.createSpan({ cls: "osint-pivot-pill", text: pStr, title: pStr });
         pill.addEventListener("click", () => {
           this.textarea.value = `Углубись в ветку: "${pStr}".`;
           this.handleSend();
@@ -1966,7 +2306,7 @@ class OsintChatView extends ItemView {
       { label: "Никнейм", prefix: "Сбор цифрового следа по нику: " },
       { label: "Email", prefix: "Поиск по email: " },
       { label: "Домен / IP", prefix: "Анализ инфраструктуры: " },
-      { label: "Углубить", prefix: "Углубись в найденные связи: " },
+      { label: "Глубокий поиск", prefix: "/deep Активно исследуй и развивай все найденные связи по цели: " },
       { label: "/reset", prefix: "/reset" },
       { label: "/stop", prefix: "/stop" }
     ];
@@ -2017,14 +2357,200 @@ class OsintChatView extends ItemView {
     this.updateInputControls();
   }
 
-  appendUserMessageUI(text) {
+  appendUserMessageUI(text, message = null, messageIndex = -1, canvasKey = null) {
     const row = this.messagesEl.createDiv({ cls: "osint-msg-row user" });
-    const bubble = row.createDiv({ cls: "osint-bubble user" });
+    const stack = row.createDiv({ cls: "osint-user-message-stack" });
+    const bubble = stack.createDiv({ cls: "osint-bubble user" });
     bubble.setText(text);
+
+    if (message && messageIndex >= 0) {
+      const controls = stack.createDiv({ cls: "osint-user-message-controls" });
+      if (message.queued) {
+        controls.createSpan({ cls: "osint-queued-label", text: "Следующее сообщение" });
+        this.scrollToBottom();
+        return row;
+      }
+      const editBtn = controls.createEl("button", { cls: "osint-user-message-btn", title: "Редактировать сообщение" });
+      setIcon(editBtn, "pencil");
+      editBtn.addEventListener("click", () => {
+        const key = canvasKey || this.getCurrentFile()?.path || this.currentFilePath || "default";
+        if (this.plugin.activeTasks.has(key)) {
+          new Notice("Сначала остановите или дождитесь текущего ответа.");
+          return;
+        }
+        this.beginUserMessageEdit(stack, bubble, controls, message, messageIndex, key);
+      });
+
+      const group = message.branchGroup;
+      if (group && Array.isArray(group.variants) && group.variants.length > 1) {
+        const active = Math.max(0, Math.min(Number(group.active) || 0, group.variants.length - 1));
+        const prevBtn = controls.createEl("button", { cls: "osint-user-message-btn", title: "Предыдущая ветка" });
+        setIcon(prevBtn, "chevron-left");
+        prevBtn.disabled = active <= 0;
+        prevBtn.addEventListener("click", () => this.switchUserMessageBranch(canvasKey, messageIndex, active - 1));
+        controls.createSpan({ cls: "osint-branch-counter", text: `${active + 1}/${group.variants.length}` });
+        const nextBtn = controls.createEl("button", { cls: "osint-user-message-btn", title: "Следующая ветка" });
+        setIcon(nextBtn, "chevron-right");
+        nextBtn.disabled = active >= group.variants.length - 1;
+        nextBtn.addEventListener("click", () => this.switchUserMessageBranch(canvasKey, messageIndex, active + 1));
+      }
+    }
     this.scrollToBottom();
+    return row;
   }
 
-  appendAssistantMessageUI(text, stats, pivots, toolLogs) {
+  async runQueuedFollowUps(completedTask) {
+    const canvasKey = completedTask.canvasKey;
+    this.followUpDispatches ||= new Set();
+    if (this.followUpDispatches.has(canvasKey)) return;
+    this.followUpDispatches.add(canvasKey);
+    try {
+      const entries = Array.isArray(completedTask.followUps) ? completedTask.followUps : [];
+      const queuedMessages = entries.map(entry => entry.message).filter(Boolean);
+      if (!queuedMessages.length) return;
+      const history = this.getHistory(canvasKey);
+      const present = queuedMessages.filter(message => history.includes(message));
+      if (!present.length) return;
+      const file = this.app.vault.getAbstractFileByPath(canvasKey);
+      const snapshot = file instanceof TFile ? await this.plugin.captureCanvasSnapshot(file) : "";
+      for (const message of present) {
+        message.queued = false;
+        message.canvasSnapshotBefore = snapshot;
+      }
+      await this.plugin.saveChatHistories();
+      if (this.currentFilePath === canvasKey) await this.loadCanvasChat();
+      const combinedText = present.map(message => message.content).join("\n\n[ЕЩЁ ОДНО ДОПОЛНЕНИЕ ПОЛЬЗОВАТЕЛЯ]\n");
+      const firstIndex = history.indexOf(present[0]);
+      await this.handleSend({
+        text: combinedText,
+        canvasKey,
+        dispatchQueued: true,
+        existingUserMessages: present,
+        currentUserStartIndex: firstIndex >= 0 ? firstIndex : Math.max(0, history.length - present.length),
+        canvasSnapshotBefore: snapshot
+      });
+    } finally {
+      this.followUpDispatches.delete(canvasKey);
+    }
+  }
+
+  beginUserMessageEdit(stack, bubble, controls, message, messageIndex, canvasKey) {
+    stack.addClass("editing");
+    bubble.empty();
+    controls.empty();
+    const editor = bubble.createEl("textarea", { cls: "osint-user-message-editor" });
+    editor.value = message.content || "";
+    const actions = controls.createDiv({ cls: "osint-user-edit-actions" });
+    const cancelBtn = actions.createEl("button", { text: "Отмена" });
+    const saveBtn = actions.createEl("button", { cls: "mod-cta", text: "Сохранить и отправить" });
+    const cancel = () => this.loadCanvasChat();
+    const save = async () => {
+      const value = editor.value.trim();
+      if (!value) { new Notice("Сообщение не может быть пустым."); return; }
+      if (value.startsWith("/")) { new Notice("При редактировании нельзя заменять запрос служебной командой."); return; }
+      if (value === String(message.content || "").trim()) { cancel(); return; }
+      saveBtn.disabled = true;
+      cancelBtn.disabled = true;
+      try {
+        await this.editUserMessage(canvasKey, messageIndex, value);
+      } catch (error) {
+        console.warn("Cannot edit user message:", error);
+        saveBtn.disabled = false;
+        cancelBtn.disabled = false;
+        new Notice(`Не удалось создать ветку: ${error.message || error}`);
+      }
+    };
+    cancelBtn.addEventListener("click", cancel);
+    saveBtn.addEventListener("click", save);
+    editor.addEventListener("keydown", event => {
+      if (event.key === "Escape") { event.preventDefault(); cancel(); }
+      else if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) { event.preventDefault(); save(); }
+    });
+    editor.focus();
+    editor.setSelectionRange(editor.value.length, editor.value.length);
+  }
+
+  async editUserMessage(canvasKey, messageIndex, newText) {
+    const history = this.getHistory(canvasKey);
+    const message = history[messageIndex];
+    if (!message || message.role !== "user") return;
+    if (this.plugin.activeTasks.has(canvasKey)) {
+      new Notice("Сначала остановите или дождитесь текущего ответа.");
+      return;
+    }
+
+    const file = this.app.vault.getAbstractFileByPath(canvasKey);
+    const currentCanvasState = file instanceof TFile ? await this.plugin.captureCanvasSnapshot(file) : "";
+    let group = message.branchGroup;
+    if (!group || !Array.isArray(group.variants)) {
+      group = {
+        id: crypto.randomUUID(), active: 0,
+        baseCanvasSnapshot: message.canvasSnapshotBefore || "",
+        variants: [{ content: message.content || "", tail: history.slice(messageIndex + 1), canvasState: currentCanvasState }]
+      };
+    } else {
+      const active = Math.max(0, Math.min(Number(group.active) || 0, group.variants.length - 1));
+      group.variants[active] = {
+        ...group.variants[active], content: message.content || "",
+        tail: history.slice(messageIndex + 1), canvasState: currentCanvasState
+      };
+      if (!group.baseCanvasSnapshot) group.baseCanvasSnapshot = message.canvasSnapshotBefore || "";
+    }
+
+    const baseSnapshot = message.canvasSnapshotBefore || group.baseCanvasSnapshot || "";
+    group.variants.push({ content: newText, tail: [], canvasState: baseSnapshot });
+    group.active = group.variants.length - 1;
+    this.plugin.chatHistories[canvasKey] = history.slice(0, messageIndex);
+
+    let restored = false;
+    if (file instanceof TFile && baseSnapshot) restored = await this.plugin.restoreCanvasSnapshot(file, baseSnapshot);
+    try { await this.plugin.acpClient.resetSession(canvasKey); }
+    catch (error) { console.warn("ACP reset before edited message:", error); }
+    this.plugin.touchCanvas(canvasKey);
+    await this.loadCanvasChat();
+    if (!restored && file instanceof TFile) {
+      new Notice("Для старого сообщения нет снимка Canvas: чат разветвлён, но карточки старой ветки автоматически не откатились.", 9000);
+    }
+    await this.handleSend({ text: newText, branchGroup: group, canvasSnapshotBefore: baseSnapshot });
+  }
+
+  async switchUserMessageBranch(canvasKey, messageIndex, targetIndex) {
+    if (this.plugin.activeTasks.has(canvasKey)) {
+      new Notice("Сначала остановите или дождитесь текущего ответа.");
+      return;
+    }
+    const history = this.getHistory(canvasKey);
+    const message = history[messageIndex];
+    const group = message?.branchGroup;
+    if (!group || !Array.isArray(group.variants) || !group.variants[targetIndex]) return;
+    const active = Math.max(0, Math.min(Number(group.active) || 0, group.variants.length - 1));
+    if (active === targetIndex) return;
+
+    const file = this.app.vault.getAbstractFileByPath(canvasKey);
+    const currentCanvasState = file instanceof TFile ? await this.plugin.captureCanvasSnapshot(file) : "";
+    group.variants[active] = {
+      ...group.variants[active], content: message.content || "",
+      tail: history.slice(messageIndex + 1), canvasState: currentCanvasState
+    };
+    const target = group.variants[targetIndex];
+    group.active = targetIndex;
+    const targetMessage = {
+      ...message, content: target.content || "", branchGroup: group,
+      canvasSnapshotBefore: message.canvasSnapshotBefore || group.baseCanvasSnapshot || ""
+    };
+    this.plugin.chatHistories[canvasKey] = [
+      ...history.slice(0, messageIndex), targetMessage,
+      ...(Array.isArray(target.tail) ? target.tail : [])
+    ];
+    const targetCanvasState = target.canvasState || group.baseCanvasSnapshot || "";
+    if (file instanceof TFile && targetCanvasState) await this.plugin.restoreCanvasSnapshot(file, targetCanvasState);
+    await this.plugin.saveChatHistories();
+    try { await this.plugin.acpClient.resetSession(canvasKey); }
+    catch (error) { console.warn("ACP reset after branch switch:", error); }
+    await this.loadCanvasChat();
+  }
+
+  appendAssistantMessageUI(text, stats, pivots, toolLogs, sources = []) {
     const row = this.messagesEl.createDiv({ cls: "osint-msg-row assistant" });
     const bubble = row.createDiv({ cls: "osint-bubble assistant" });
 
@@ -2047,12 +2573,15 @@ class OsintChatView extends ItemView {
     });
 
     // Лог инструментов (сворачиваемый, минималистичный)
-    if (toolLogs && Array.isArray(toolLogs) && toolLogs.length > 0) {
+    const visibleToolLogs = Array.isArray(toolLogs)
+      ? toolLogs.filter(log => !/\[object Object\]/i.test(String(log)))
+      : [];
+    if (visibleToolLogs.length > 0) {
       const details = bubble.createEl("details", { cls: "osint-tool-details" });
       const summary = details.createEl("summary", { cls: "osint-tool-summary" });
-      summary.setText(`Действия (${toolLogs.length})`);
+      summary.setText(`Действия (${visibleToolLogs.length})`);
       const tList = details.createDiv({ cls: "osint-tool-list" });
-      toolLogs.forEach(t => {
+      visibleToolLogs.forEach(t => {
         const item = tList.createDiv({ cls: "osint-tool-item" });
         item.setText(t);
       });
@@ -2078,7 +2607,7 @@ class OsintChatView extends ItemView {
       resetBtn.addEventListener("click", async () => {
         const file = this.getCurrentFile();
         const canvasKey = file ? file.path : "default";
-        await this.plugin.acpClient.resetSession(canvasKey);
+        await this.plugin.resetCanvasSession(canvasKey);
         new Notice("Контекст сброшен");
         const history = this.getHistory();
         const lastUser = [...history].reverse().find(m => m.role === "user");
@@ -2098,6 +2627,8 @@ class OsintChatView extends ItemView {
       badge.setText(`Холст: ${parts.join(", ")}`);
     }
 
+    this.renderSourcesDetails(bubble, text, sources);
+
     if (pivots && Array.isArray(pivots) && pivots.length > 0) {
       const pivotBox = bubble.createDiv({ cls: "osint-pivots-box" });
       pivotBox.createDiv({ cls: "osint-pivots-title", text: "Связанные ветки:" });
@@ -2106,7 +2637,7 @@ class OsintChatView extends ItemView {
       pivots.forEach(p => {
         const pStr = String(p).trim();
         if (!pStr) return;
-        const pill = pillsContainer.createSpan({ cls: "osint-pivot-pill", text: pStr });
+        const pill = pillsContainer.createSpan({ cls: "osint-pivot-pill", text: pStr, title: pStr });
         pill.addEventListener("click", () => {
           this.textarea.value = `Углубись в ветку: "${pStr}".`;
           this.handleSend();
@@ -2159,14 +2690,14 @@ class OsintChatView extends ItemView {
     const activeTask = this.plugin.activeTasks?.get(canvasKey);
     if (!activeTask && !this.isCanvasLoading(canvasKey)) return;
 
-    this.plugin.acpClient.cancel(canvasKey);
-    if (activeTask) {
-      activeTask.isDone = true;
-      this.plugin.activeTasks.delete(canvasKey);
-    }
-    this.hideTyping();
-    this.appendAssistantMessageUI("🛑 **Генерация остановлена пользователем.**");
-    new Notice("Генерация остановлена");
+    if (!activeTask || activeTask.cancelRequested) return;
+    activeTask.cancelRequested = true;
+    activeTask.currentStatus = "Останавливаю и проверяю состояние ACP...";
+    this.plugin.checkpointChatTask(activeTask, true)?.catch(() => {});
+    this.plugin.acpClient.cancel(activeTask.acpKey || canvasKey);
+    this.updateTyping("Останавливаю и восстанавливаю ACP...");
+    this.updateInputControls();
+    new Notice("Останавливаю генерацию...");
   }
 
   appendModelChooserUI(currentModel) {
@@ -2175,20 +2706,20 @@ class OsintChatView extends ItemView {
 
     bubble.createEl("h3", { text: "🤖 Управление моделью" });
     const p = bubble.createEl("p");
-    p.innerHTML = `<strong>Текущая активная модель:</strong> <code>${currentModel}</code>`;
+    p.createEl("strong", { text: "Текущая активная модель: " });
+    p.createEl("code", { text: currentModel });
 
-    const models = [
-      { id: "agy/gemini-3.8-flash-high", name: "⚡ OmniRoute: Gemini 3.8 Flash High (рекомендуется)", desc: "Основная модель: быстрый глубокий OSINT без лимитов" },
-      { id: "muse-spark-1.3-contributor", name: "🚀 OpenCode Go: Muse Spark 1.3", desc: "Альтернатива через Responses API" },
-      { id: "deepseek-v4-flash", name: "🧠 DeepSeek V4 Flash", desc: "Аналитическая модель" }
-    ];
+    const models = (this.plugin.acpClient?.availableModels || [])
+      .map(model => ({ id: model.modelId, name: model.name || model.modelId, desc: model.description || model.modelId }));
+    if (!models.length) bubble.createEl("p", { text: "Подключитесь к Hermes для получения списка моделей. Можно указать свой ID: /model provider:model или в настройках плагина." });
 
     const box = bubble.createDiv({ cls: "osint-model-list-box", style: "display:flex; flex-direction:column; gap:6px; margin-top:10px;" });
     models.forEach(m => {
       const btn = box.createEl("button", {
         style: "text-align:left; padding:8px 12px; cursor:pointer; background:var(--background-secondary); border:1px solid var(--background-modifier-border); border-radius:6px;"
       });
-      btn.innerHTML = `<div style="font-weight:600;">${m.name}</div><div style="font-size:11px; opacity:0.7;">${m.desc}</div>`;
+      btn.createEl("div", { text: m.name, attr: { style: "font-weight:600" } });
+      btn.createEl("div", { text: m.desc, attr: { style: "font-size:11px;opacity:0.7" } });
       btn.addEventListener("click", async () => {
         await this.switchModel(m.id);
       });
@@ -2200,12 +2731,8 @@ class OsintChatView extends ItemView {
   async switchModel(targetModel) {
     this.showTyping(`Смена модели на ${targetModel}...`);
     try {
-      if (this.plugin.settings.engineMode === "hermes_acp") {
-        await this.plugin.acpClient.setModel(targetModel);
-        this.plugin.settings.acpModel = targetModel;
-      } else {
-        this.plugin.settings.model = targetModel;
-      }
+      await this.plugin.acpClient.setModel(targetModel, this.getCurrentFile()?.path || "default");
+      this.plugin.settings.acpModel = targetModel;
       await this.plugin.saveSettings();
       this.updateFileStatus();
       this.hideTyping();
@@ -2223,13 +2750,15 @@ class OsintChatView extends ItemView {
     }
   }
 
-  async handleSend() {
-    const raw = this.textarea.value.trim();
+  async handleSend(options = {}) {
+    const raw = (typeof options.text === "string" ? options.text : this.textarea.value).trim();
     if (!raw) return;
 
-    const activeFile = this.getCurrentFile();
-    const canvasKey = activeFile ? activeFile.path : (this.currentFilePath || "default");
-    const isRunning = this.isCanvasLoading(canvasKey);
+    const forcedCanvasKey = typeof options.canvasKey === "string" ? options.canvasKey : "";
+    const forcedFile = forcedCanvasKey ? this.app.vault.getAbstractFileByPath(forcedCanvasKey) : null;
+    const activeFile = forcedFile instanceof TFile ? forcedFile : this.getCurrentFile();
+    const canvasKey = forcedCanvasKey || (activeFile ? activeFile.path : (this.currentFilePath || "default"));
+    const isRunning = (this.isCanvasLoading(canvasKey) || !!this.followUpDispatches?.has(canvasKey)) && !options.dispatchQueued;
 
     // 1. КОМАНДА /stop
     if (raw === "/stop") {
@@ -2238,27 +2767,27 @@ class OsintChatView extends ItemView {
       return;
     }
 
-    // 2. АКТИВНЫЙ СТИРИНГ / ПЕРЕНАПРАВЛЕНИЕ НА ТЕКУЩЕМ ХОЛСТЕ:
     if (isRunning) {
+      const activeTask = this.plugin.activeTasks?.get(canvasKey);
+      if (!activeTask || activeTask.cancelRequested) {
+        new Notice(activeTask
+          ? "Сейчас завершается отмена. Отправьте сообщение ещё раз после остановки."
+          : "Предыдущее follow-up уже передаётся Hermes. Сообщение осталось в поле ввода.");
+        return;
+      }
+      if (raw.startsWith("/")) {
+        new Notice("Служебную команду нельзя поставить в follow-up. Сначала завершите текущий ответ.");
+        return;
+      }
       this.textarea.value = "";
-      this.appendUserMessageUI(raw);
-      const canvasHistory = this.getHistory(canvasKey);
-      canvasHistory.push({ role: "user", content: raw });
+      const history = this.getHistory(canvasKey);
+      const queuedMessage = { role: "user", content: raw, queued: true, canvasSnapshotBefore: "" };
+      history.push(queuedMessage);
+      const row = this.appendUserMessageUI(raw, queuedMessage, history.length - 1, canvasKey);
+      (activeTask.followUps ||= []).push({ message: queuedMessage, row });
       await this.plugin.saveChatHistories();
-
-      const task = this.plugin.activeTasks?.get(canvasKey);
-      if (task && task.liveToolsList) {
-        const item = task.liveToolsList.createDiv({ cls: "osint-tool-item" });
-        item.setText(`🧭 Указание: ${raw}`);
-        this.scrollToBottom();
-      }
-
-      try {
-        await this.plugin.acpClient.prompt(raw, {}, canvasKey);
-        new Notice("Указание передано агенту (Redirected active turn)");
-      } catch (e) {
-        console.warn("Ошибка отправки указания:", e);
-      }
+      this.plugin.touchCanvas(canvasKey);
+      new Notice("Follow-up добавлен. Hermes получит его следующим сообщением.");
       return;
     }
 
@@ -2276,7 +2805,7 @@ class OsintChatView extends ItemView {
       const file = this.getCurrentFile();
       const key = file ? file.path : "default";
       this.plugin.chatHistories[key] = [];
-      await this.plugin.saveChatHistories();
+      await this.plugin.resetCanvasSession(key);
       this.loadCanvasChat();
       new Notice("История чата очищена");
       return;
@@ -2298,7 +2827,7 @@ class OsintChatView extends ItemView {
       this.appendUserMessageUI(text);
       this.showTyping("Сброс контекста и создание новой сессии...");
       try {
-        await this.plugin.acpClient.resetSession(canvasKey);
+        await this.plugin.resetCanvasSession(canvasKey);
         this.hideTyping();
         this.appendAssistantMessageUI(`🔄 **Сессия для "${file ? file.basename : 'холста'}" сброшена.** Контекст очищен (0 токенов).`);
         await this.plugin.saveChatHistories();
@@ -2316,9 +2845,8 @@ class OsintChatView extends ItemView {
       const parts = text.split(/\s+/);
 
       if (parts.length === 1 || parts[1] === "list" || parts[1] === "help") {
-        const cur = (this.plugin.settings.engineMode === "hermes_acp")
-          ? (this.plugin.acpClient?.currentModel || this.plugin.settings.acpModel || "agy/gemini-3.8-flash-high")
-          : (this.plugin.settings.model || "agy/gemini-3.8-flash-high");
+        const cur = this.plugin.acpClient?.sessionModels.get(this.getCurrentFile()?.path || "default")
+          || this.plugin.acpClient?.currentModel || this.plugin.settings.acpModel || "Модель Hermes";
 
         this.appendModelChooserUI(cur);
         return;
@@ -2329,19 +2857,34 @@ class OsintChatView extends ItemView {
       return;
     }
 
-    this.appendUserMessageUI(text);
-
     const canvasHistory = this.getHistory(canvasKey);
-    canvasHistory.push({ role: "user", content: text });
-    await this.plugin.saveChatHistories();
-
-    this.showTyping("Hermes Agent подключается...");
+    this.plugin.touchCanvas(canvasKey);
+    this.renderCanvasTabs();
+    const canvasSnapshotBefore = Object.prototype.hasOwnProperty.call(options, "canvasSnapshotBefore")
+      ? options.canvasSnapshotBefore
+      : await this.plugin.captureCanvasSnapshot(activeFile);
+    const existingUserMessages = Array.isArray(options.existingUserMessages) ? options.existingUserMessages : [];
+    let userMessage;
+    if (existingUserMessages.length) {
+      for (const existing of existingUserMessages) {
+        existing.queued = false;
+        existing.canvasSnapshotBefore = canvasSnapshotBefore;
+      }
+      userMessage = existingUserMessages[existingUserMessages.length - 1];
+    } else {
+      userMessage = { role: "user", content: text, canvasSnapshotBefore };
+      if (options.branchGroup) userMessage.branchGroup = options.branchGroup;
+      canvasHistory.push(userMessage);
+      if (this.currentFilePath === canvasKey) this.appendUserMessageUI(text, userMessage, canvasHistory.length - 1, canvasKey);
+    }
+    if (this.currentFilePath === canvasKey) this.showTyping("Hermes Agent подключается...");
 
     const toolLogs = [];
     let responseText = "";
 
     const task = {
       canvasKey: canvasKey,
+      acpKey: canvasKey,
       targetFile: activeFile,
       userText: text,
       streamedChunks: "",
@@ -2353,11 +2896,20 @@ class OsintChatView extends ItemView {
       liveToolsList: null,
       liveContent: null,
       renderTimer: null,
+      assistantInsertIndex: existingUserMessages.length
+        ? Math.max(0, canvasHistory.indexOf(userMessage) + 1)
+        : canvasHistory.length,
+      followUps: [],
       isDone: false
     };
     this.plugin.activeTasks.set(canvasKey, task);
 
     try {
+      await this.plugin.saveChatHistories();
+      const historyEnd = Number.isInteger(options.currentUserStartIndex)
+        ? options.currentUserStartIndex
+        : canvasHistory.length - 1;
+      const previousChatHistory = canvasHistory.slice(0, Math.max(0, historyEnd));
       const canvasCtx = await this.plugin.getCanvasContext(activeFile);
       let canvasContextMsg = "";
       if (canvasCtx && canvasCtx.nodesCount > 0) {
@@ -2366,15 +2918,21 @@ class OsintChatView extends ItemView {
         canvasContextMsg = `[ХОЛСТ "${activeFile ? activeFile.basename : 'Новый'}" ПУСТОЙ — начни сбор с чистого листа]\n`;
       }
 
-      const isHermesAcp = this.plugin.settings.engineMode === "hermes_acp";
+      const deepMode = isDeepResearchRequest(text, this.plugin.isDeepMode(canvasKey));
 
-      if (isHermesAcp) {
-        // РЕЖИМ 1: HERMES ACP (полноценный автономный агент со всеми инструментами)
-        this.updateTyping("Hermes Agent подключается и запускает разведку...");
+      // HERMES ACP: полноценный автономный агент со всеми инструментами.
+      if (this.currentFilePath === task.canvasKey) {
+        this.updateTyping(deepMode
+          ? "Hermes Agent: активный глубокий поиск до насыщения..."
+          : "Hermes Agent подключается и запускает разведку...");
+      }
 
         const missionPrompt = `[OBSIDIAN CANVAS OSINT ДЛЯ "${activeFile ? activeFile.basename : 'Холст'}"]
 Цель: "${text}"
 ${canvasContextMsg}
+${buildResearchExecutionContract(text, this.plugin.isDeepMode(canvasKey))}
+
+Холст находится в Obsidian у клиента и может быть недоступен на машине агента. Используй переданный контекст холста и возвращай изменения JSON-блоками. Не пытайся открыть или записать локальный файл .canvas через терминал.
 
 СТРОГИЕ ПРАВИЛА ИЗОЛЯЦИИ И СКИЛЛЫ:
 1. Исследуй ИСКЛЮЧИТЕЛЬНО указанную цель.
@@ -2409,6 +2967,7 @@ ${canvasContextMsg}
 {
   "summary": "Краткая сводка",
   "pivots": ["зацепка_1", "зацепка_2"],
+  "sources": [{"title": "Название источника", "url": "https://example.com/page"}],
   "delete_node_ids": ["id_для_удаления"],
   "update_nodes": [
     { "id": "id_существующей_карточки", "text": "### Заголовок\\n\\n• Актуализированные факты..." }
@@ -2425,20 +2984,24 @@ ${canvasContextMsg}
 \`\`\`
 Только факты и готовые данные. Без туториалов и нравоучений.`;
 
-        // Создаем живой пузырь сообщения в чате
-        this.hideTyping();
-        const liveRow = this.messagesEl.createDiv({ cls: "osint-msg-row assistant" });
-        const liveBubble = liveRow.createDiv({ cls: "osint-bubble assistant" });
-
-        const liveToolsBox = liveBubble.createDiv({ cls: "osint-tool-box", style: "margin-bottom:8px;" });
-        liveToolsBox.createDiv({ cls: "osint-tool-title", text: "Шаги исследования:" });
-        const liveToolsList = liveToolsBox.createDiv({ cls: "osint-tool-list" });
-
+        // Создаем живой пузырь только если пользователь всё ещё смотрит этот чат.
+        let liveBubble = null;
+        let liveToolsList = null;
+        let liveContent = null;
         const isWarm = !!this.plugin.acpClient.sessionId;
         const initStatusText = isWarm ? "Анализ цели..." : "Инициализация сессии...";
-        const initStatus = liveToolsList.createDiv({ cls: "osint-tool-item muted", text: initStatusText });
-
-        const liveContent = liveBubble.createDiv({ cls: "osint-markdown-content" });
+        if (this.currentFilePath === task.canvasKey) {
+          this.hideTyping();
+          const liveRow = this.messagesEl.createDiv({ cls: "osint-msg-row assistant" });
+          const firstQueuedRow = task.followUps?.find(entry => entry.row?.isConnected)?.row;
+          if (firstQueuedRow) this.messagesEl.insertBefore(liveRow, firstQueuedRow);
+          liveBubble = liveRow.createDiv({ cls: "osint-bubble assistant" });
+          const liveToolsBox = liveBubble.createDiv({ cls: "osint-tool-box", style: "margin-bottom:8px;" });
+          liveToolsBox.createDiv({ cls: "osint-tool-title", text: "Шаги исследования:" });
+          liveToolsList = liveToolsBox.createDiv({ cls: "osint-tool-list" });
+          liveToolsList.createDiv({ cls: "osint-tool-item muted", text: initStatusText });
+          liveContent = liveBubble.createDiv({ cls: "osint-markdown-content" });
+        }
 
         task.currentStatus = initStatusText;
         task.liveBubble = liveBubble;
@@ -2464,21 +3027,23 @@ ${canvasContextMsg}
           }
         };
 
-        await this.plugin.acpClient.prompt(missionPrompt, {
+        const promptResult = await this.plugin.acpClient.prompt(missionPrompt, {
+          history: previousChatHistory,
           onChunk: (chunk) => {
             task.streamedChunks += chunk;
+            this.plugin.checkpointChatTask(task);
             task.currentStatus = "";
 
             tryApplyLiveBlocks(task.streamedChunks);
 
-            if (this.currentFilePath === canvasKey && task.liveContent) {
+            if (this.currentFilePath === task.canvasKey && task.liveContent) {
               const muted = task.liveToolsList?.querySelector(".osint-tool-item.muted");
               if (muted) muted.remove();
 
               if (!task.renderTimer) {
                 task.renderTimer = setTimeout(() => {
                   task.renderTimer = null;
-                  if (this.currentFilePath !== canvasKey || !task.liveContent) return;
+                  if (this.currentFilePath !== task.canvasKey || !task.liveContent) return;
                   task.liveContent.empty();
                   const cleanSoFar = task.streamedChunks.replace(/```(?:json|canvas)?[\s\S]*?```/g, "").trim();
                   MarkdownRenderer.render(this.plugin.app, cleanSoFar || "...", task.liveContent, "", this);
@@ -2491,7 +3056,7 @@ ${canvasContextMsg}
             task.toolLogs.push(toolTitle);
             task.currentStatus = "";
 
-            if (this.currentFilePath === canvasKey && task.liveToolsList) {
+            if (this.currentFilePath === task.canvasKey && task.liveToolsList) {
               const muted = task.liveToolsList.querySelector(".osint-tool-item.muted");
               if (muted) muted.remove();
 
@@ -2499,8 +3064,26 @@ ${canvasContextMsg}
               tItem.setText(toolTitle);
               this.scrollToBottom();
             }
+          },
+          onToolEnd: (toolTitle, result) => {
+            const summary = summarizeAcpToolResult(result);
+            const log = summary ? `${toolTitle}: ${summary}` : `${toolTitle}: завершено`;
+            task.toolLogs.push(log);
+            if (summary && this.currentFilePath === task.canvasKey && task.liveToolsList) {
+              const item = task.liveToolsList.createDiv({ cls: "osint-tool-item muted" });
+              item.setText(`↳ ${summary}`);
+              this.scrollToBottom();
+            }
           }
-        }, canvasKey);
+        }, task.acpKey);
+        task.cancelled = !!task.cancelRequested || promptResult?.stopReason === "cancelled";
+        if (task.cancelRequested) {
+          const marker = "🛑 **Генерация остановлена пользователем.**";
+          task.streamedChunks = task.streamedChunks.trim()
+            ? `${task.streamedChunks.trim()}\n\n${marker}`
+            : marker;
+        }
+        this.updateFileStatus();
 
         if (task.renderTimer) {
           clearTimeout(task.renderTimer);
@@ -2508,71 +3091,104 @@ ${canvasContextMsg}
         }
         await tryApplyLiveBlocks(task.streamedChunks);
 
-        if (this.currentFilePath === canvasKey && task.liveContent) {
+        if (this.currentFilePath === task.canvasKey && task.liveContent) {
           task.liveContent.empty();
           const finalClean = task.streamedChunks.replace(/```(?:json|canvas)?[\s\S]*?```/g, "").trim();
           MarkdownRenderer.render(this.plugin.app, finalClean || "Данные обработаны.", task.liveContent, "", this);
         }
 
         responseText = task.streamedChunks;
-      } else {
-        // РЕЖИМ 2: DIRECT HTTP API
-        this.updateTyping("Запрос к Direct API...");
-        const apiMessages = canvasHistory.slice(-10).map((m, idx) => {
-          if (idx === canvasHistory.slice(-10).length - 1 && m.role === "user") {
-            return { role: "user", content: canvasContextMsg + "\n" + m.content };
-          }
-          return { role: m.role, content: m.content };
-        });
-
-        responseText = await this.plugin.queryDirectApi(apiMessages);
-        this.hideTyping();
-      }
 
       task.isDone = true;
       let stats = task.totalLiveStats || { added: 0, updated: 0, deleted: 0 };
       let pivots = [];
+      let sources = [];
 
       const osintData = this.plugin.extractJson(responseText);
       if (osintData) {
         if (Array.isArray(osintData.pivots)) {
           pivots = osintData.pivots;
         }
-        if (!isHermesAcp) {
-          const directStats = await this.plugin.applyCanvasActions(osintData, activeFile);
-          stats.added += directStats.added || 0;
-          stats.updated += directStats.updated || 0;
-          stats.deleted += directStats.deleted || 0;
+        if (Array.isArray(osintData.sources)) {
+          sources = extractSources("", osintData.sources);
         }
       }
+      sources = extractSources(responseText, sources);
 
       // СОХРАНЯЕМ В ИСТОРИЮ НУЖНОГО ХОЛСТА
-      const currentCanvasHistory = this.getHistory(canvasKey);
-      currentCanvasHistory.push({
-        role: "assistant",
-        content: responseText,
-        stats: stats,
-        pivots: pivots,
-        toolLogs: task.toolLogs || []
-      });
+      const currentCanvasHistory = this.getHistory(task.canvasKey);
+      clearTimeout(task.historyTimer);
+      const completedMessage = {
+        role: "assistant", content: responseText, stats, pivots, sources,
+        toolLogs: task.toolLogs || [], incomplete: !!task.cancelled
+      };
+      if (task.historyMessage) Object.assign(task.historyMessage, completedMessage);
+      else {
+        task.historyMessage = completedMessage;
+        const insertAt = Math.max(0, Math.min(Number(task.assistantInsertIndex) || currentCanvasHistory.length, currentCanvasHistory.length));
+        currentCanvasHistory.splice(insertAt, 0, completedMessage);
+      }
+      this.plugin.touchCanvas(task.canvasKey);
+      this.renderCanvasTabs();
       await this.plugin.saveChatHistories();
 
       // Если пользователь сейчас на этом холсте и живой пузырь на экране — финализируем его
-      if (this.currentFilePath === canvasKey && task.liveBubble && task.liveBubble.isConnected) {
-        this.finalizeLiveBubbleUI(task.liveBubble, responseText, stats, pivots);
+      if (this.currentFilePath === task.canvasKey && task.liveBubble && task.liveBubble.isConnected) {
+        this.finalizeLiveBubbleUI(task.liveBubble, responseText, stats, pivots, sources);
         this.scrollToBottom();
-      } else if (this.currentFilePath === canvasKey) {
-        this.appendAssistantMessageUI(responseText, stats, pivots, task.toolLogs || []);
+      } else if (this.currentFilePath === task.canvasKey) {
+        this.appendAssistantMessageUI(responseText, stats, pivots, task.toolLogs || [], sources);
       }
 
-      this.plugin.activeTasks.delete(canvasKey);
-      if (this.currentFilePath === canvasKey) {
+      if (this.plugin.activeTasks.get(task.canvasKey) === task) this.plugin.activeTasks.delete(task.canvasKey);
+      this.plugin.finishCanvasKeyMigration(task);
+      if (this.currentFilePath === task.canvasKey) {
         this.hideTyping();
       }
       this.updateInputControls();
+      if (task.followUps?.length) {
+        this.runQueuedFollowUps(task).catch(error => {
+          console.warn("Cannot run queued follow-up:", error);
+          new Notice(`Не удалось отправить follow-up: ${error.message || error}`);
+        });
+      }
     } catch (err) {
-      this.plugin.activeTasks.delete(canvasKey);
-      if (this.currentFilePath === canvasKey) {
+      clearTimeout(task.renderTimer);
+      await this.plugin.checkpointChatTask(task, true)?.catch(() => {});
+      if (this.plugin.activeTasks.get(task.canvasKey) === task) this.plugin.activeTasks.delete(task.canvasKey);
+      this.plugin.finishCanvasKeyMigration(task);
+      if (task.cancelRequested) {
+        task.isDone = true;
+        task.cancelled = true;
+        const marker = "🛑 **Генерация остановлена пользователем.**";
+        const stoppedText = task.streamedChunks.trim()
+          ? `${task.streamedChunks.trim()}\n\n${marker}`
+          : marker;
+        task.streamedChunks = stoppedText;
+        const stoppedMessage = {
+          role: "assistant", content: stoppedText, stats: task.totalLiveStats,
+          pivots: [], sources: extractSources(stoppedText), toolLogs: task.toolLogs || [], incomplete: true
+        };
+        if (task.historyMessage) Object.assign(task.historyMessage, stoppedMessage);
+        else {
+          task.historyMessage = stoppedMessage;
+          const history = (this.plugin.chatHistories[task.canvasKey] ||= []);
+          const insertAt = Math.max(0, Math.min(Number(task.assistantInsertIndex) || history.length, history.length));
+          history.splice(insertAt, 0, stoppedMessage);
+        }
+        this.plugin.touchCanvas(task.canvasKey);
+        this.renderCanvasTabs();
+        await this.plugin.saveChatHistories().catch(() => {});
+        if (this.currentFilePath === task.canvasKey) this.loadCanvasChat();
+        this.updateInputControls();
+        new Notice("Генерация остановлена. ACP готов к следующему запросу.");
+        if (task.followUps?.length) this.runQueuedFollowUps(task).catch(error => {
+          console.warn("Cannot run queued follow-up after stop:", error);
+          new Notice(`Не удалось отправить follow-up: ${error.message || error}`);
+        });
+        return;
+      }
+      if (this.currentFilePath === task.canvasKey) {
         this.hideTyping();
         const errRow = this.messagesEl.createDiv({ cls: "osint-msg-row assistant error" });
         const bubble = errRow.createDiv({ cls: "osint-bubble assistant error-bubble" });
@@ -2590,7 +3206,7 @@ ${canvasContextMsg}
         resetBtn.addEventListener("click", async () => {
           const file = this.getCurrentFile();
           const canvasKey = file ? file.path : "default";
-          await this.plugin.acpClient.resetSession(canvasKey);
+          await this.plugin.resetCanvasSession(canvasKey);
           new Notice("Контекст сброшен, повтор запроса...");
           this.textarea.value = text;
           this.handleSend();
@@ -2599,6 +3215,11 @@ ${canvasContextMsg}
         new Notice(`Ошибка OSINT: ${err.message}`);
         this.scrollToBottom();
       }
+      this.updateInputControls();
+      if (task.followUps?.length) this.runQueuedFollowUps(task).catch(error => {
+        console.warn("Cannot run queued follow-up after error:", error);
+        new Notice(`Не удалось отправить follow-up: ${error.message || error}`);
+      });
     }
   }
 }
@@ -2617,102 +3238,67 @@ class OsintSettingTab extends PluginSettingTab {
     containerEl.empty();
 
     containerEl.createEl("h2", { text: "Настройки OSINT Canvas Agent" });
-
-    // Выбор режима работы
-    new Setting(containerEl)
-      .setName("Движок расследования (Engine Mode)")
-      .setDesc("Hermes ACP запускает локального агента с полным доступом к терминалу, вебу и скриптам")
-      .addDropdown((dropdown) => {
-        dropdown
-          .addOption("hermes_acp", "⚡ Hermes ACP (Автономный локальный агент)")
-          .addOption("direct_api", "🌐 Direct HTTP API (OpenCode Go / OmniRoute)")
-          .setValue(this.plugin.settings.engineMode || "hermes_acp")
-          .onChange(async (val) => {
-            this.plugin.settings.engineMode = val;
+    containerEl.createEl("h3", { text: "Подключение Hermes ACP" });
+      containerEl.createEl("p", { text: "Настройки сохраняются автоматически. После изменений нажмите «Применить и проверить» или перезапустите плагин. Для SSH локальная установка Hermes не нужна." });
+      new Setting(containerEl).setName("Транспорт")
+        .addDropdown(dropdown => dropdown
+          .addOption("local", "Локальный Hermes · stdio")
+          .addOption("ssh", "Внешний Hermes · SSH")
+          .addOption("command", "Своя команда · stdio")
+          .setValue(this.plugin.settings.acpTransport)
+          .onChange(async value => {
+            this.plugin.settings.acpTransport = value;
             await this.plugin.saveSettings();
             this.display();
+          }));
+      const field = (key, name, description, placeholder = "", multiline = false) => {
+        const setting = new Setting(containerEl).setName(name).setDesc(description);
+        const setup = input => {
+          input.setPlaceholder(placeholder).setValue(this.plugin.settings[key] || "").onChange(async value => {
+            this.plugin.settings[key] = value;
+            await this.plugin.saveSettings();
           });
-      });
-
-    if (this.plugin.settings.engineMode === "direct_api") {
-      const presetBox = containerEl.createDiv({
-        style: "background: var(--background-secondary); padding: 10px; border-radius: 6px; margin-bottom: 14px; border: 1px solid var(--background-modifier-border);"
-      });
-      presetBox.createEl("div", {
-        text: "⚡ Быстрые пресеты для Direct API",
-        style: "font-weight: 600; margin-bottom: 6px; font-size: 12px;"
-      });
-
-      const presetRow = presetBox.createDiv({ style: "display: flex; gap: 8px; flex-wrap: wrap;" });
-
-      const presets = [
-        {
-          name: "OpenAI Official (GPT-4o)",
-          url: "https://api.openai.com/v1",
-          key: "",
-          model: "gpt-4o"
-        },
-        {
-          name: "OpenRouter (Gemini 2.0 Flash)",
-          url: "https://openrouter.ai/api/v1",
-          key: "",
-          model: "google/gemini-2.0-flash-001"
-        }
-      ];
-
-      presets.forEach(p => {
-        const btn = presetRow.createEl("button", { text: p.name });
-        btn.addEventListener("click", async () => {
-          this.plugin.settings.apiBaseUrl = p.url;
-          this.plugin.settings.model = p.model;
-          if (p.key) this.plugin.settings.apiKey = p.key;
+          input.inputEl.style.width = "100%";
+          if (multiline) input.inputEl.rows = 3;
+        };
+        if (multiline) setting.addTextArea(setup); else setting.addText(setup);
+      };
+      if (this.plugin.settings.acpTransport === "ssh") {
+        field("acpSshHost", "SSH-хост", "Пользователь и сервер либо Host-алиас из ~/.ssh/config. Вход по ключу или через ssh-agent.", "user@server");
+        field("acpSshPort", "SSH-порт (необязательно)", "Пусто — из SSH config или стандартный 22.", "22");
+        field("acpSshKey", "SSH-ключ (необязательно)", "Локальный путь к приватному ключу; пусто — использовать SSH config / ssh-agent.", "~/.ssh/id_ed25519");
+        field("acpSshCommand", "Программа SSH", "Имя или абсолютный путь к OpenSSH на компьютере с Obsidian.", "ssh");
+      }
+      field("acpCommand", "Команда ACP", this.plugin.settings.acpTransport === "ssh"
+        ? "Исполняемый файл Hermes на сервере. Рекомендуется абсолютный путь; пусто — hermes из PATH сервера."
+        : "Исполняемый файл без аргументов и без кавычек. В локальном режиме пусто — поиск Hermes автоматически.",
+        this.plugin.settings.acpTransport === "ssh" ? "/home/user/.local/bin/hermes" : "hermes");
+      field("acpArgs", "Аргументы ACP (JSON)", 'Например ["acp"] или ["-p","obsidian","acp"] для существующего профиля.', '["acp"]', true);
+      field("acpCwd", "Рабочая папка Hermes", this.plugin.settings.acpTransport === "ssh"
+        ? "Обязательный существующий абсолютный путь НА СЕРВЕРЕ. Vault туда копировать не требуется."
+        : "Абсолютный путь рабочей папки агента; пусто — папка vault. Для своей команды это путь, передаваемый агенту в session/new.", "/home/user");
+      field("acpEnv", "Переменные окружения (JSON)", "Необязательно. Для SSH передаются только эти переменные, окружение вашего компьютера на сервер не копируется. Значения хранятся в настройках плагина открытым текстом.", "{}", true);
+      field("acpModel", "Модель Hermes (необязательно)", "Пусто — модель из конфигурации Hermes. Можно указать ID модели, который принимает ваш агент.");
+      new Setting(containerEl).setName("Автоматически разрешать инструменты")
+        .setDesc("Без запроса в Obsidian подтверждать предлагаемые агентом разрешения. По умолчанию выключено.")
+        .addToggle(toggle => toggle.setValue(!!this.plugin.settings.acpAutoApprove).onChange(async value => {
+          this.plugin.settings.acpAutoApprove = value;
           await this.plugin.saveSettings();
-          this.display();
-          new Notice(`Применен пресет: ${p.name}`);
-        });
-      });
-
-      new Setting(containerEl)
-        .setName("API Key")
-        .setDesc("Ключ доступа к API")
-        .addText((text) => {
-          text
-            .setPlaceholder("sk-...")
-            .setValue(this.plugin.settings.apiKey)
-            .onChange(async (val) => {
-              this.plugin.settings.apiKey = val;
-              await this.plugin.saveSettings();
-            });
-          text.inputEl.type = "password";
-          text.inputEl.style.width = "280px";
-        });
-
-      new Setting(containerEl)
-        .setName("API Base URL")
-        .setDesc("Эндпоинт сервера")
-        .addText((text) => {
-          text
-            .setValue(this.plugin.settings.apiBaseUrl)
-            .onChange(async (val) => {
-              this.plugin.settings.apiBaseUrl = val;
-              await this.plugin.saveSettings();
-            });
-          text.inputEl.style.width = "320px";
-        });
-
-      new Setting(containerEl)
-        .setName("Модель (Model)")
-        .setDesc("Имя модели")
-        .addText((text) =>
-          text
-            .setValue(this.plugin.settings.model)
-            .onChange(async (val) => {
-              this.plugin.settings.model = val;
-              await this.plugin.saveSettings();
-            })
-        );
-    }
+        }));
+      new Setting(containerEl).setName("Проверить подключение")
+        .setDesc("Переподключится и создаст тестовую ACP-сессию без запроса к модели. Рабочая сессия холста будет отдельной.")
+        .addButton(button => button.setButtonText("Применить и проверить").setCta().onClick(async () => {
+          button.setDisabled(true);
+          try {
+            if (this.plugin.activeTasks.size) throw new Error("Сначала остановите или завершите активные запросы.");
+            buildAcpLaunch(this.plugin.settings, this.plugin.vaultPath);
+            this.plugin.configureAcpClient();
+            await this.plugin.acpClient.getSession("__connection_check__");
+            new Notice(`ACP подключён: ${this.plugin.acpClient.agentInfo?.name || "агент"}. Модель: ${this.plugin.acpClient.currentModel || "из настроек Hermes"}`, 8000);
+          } catch (error) { new Notice(`Ошибка ACP: ${error.message}`, 12000); }
+          finally { button.setDisabled(false); }
+        }));
   }
 }
 
-module.exports = GeminiCanvasOsintPlugin;
+module.exports = VibeOsintPlugin;
