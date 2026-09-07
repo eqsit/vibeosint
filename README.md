@@ -1,16 +1,37 @@
-# Gemini Canvas OSINT (Obsidian Plugin)
+# External Hermes ACP edition · 1.2.1
+
+Ready-to-install Obsidian plugin. Supports local Hermes, remote Hermes over SSH,
+and custom ACP stdio commands. The configured Hermes model is used by default.
+
+**Installation and configuration: [README_RU.md](README_RU.md).**
+Extract the plugin folder into `<vault>/.obsidian/plugins/`, enable the plugin,
+select SSH in settings and click Apply and test. No npm/build step is needed.
+Preserve any existing `data.json` and `chats.json` when updating.
+
+Source: https://github.com/eqsit/vibeosint at commit
+`6bacb58210fe57256d1d11ed67d6752c1c10cc2a`.
+This is a modified archive; no GitHub fork or upstream changes were created.
+
+The SSH transport launches a remote ACP process over stdio. It is not an HTTP
+or WebSocket client. Canvas files stay in Obsidian; only their text context and
+the user prompt are sent, and returned JSON actions are applied locally.
+Credentials and tools come from the user's Hermes installation.
+
+---
+
+## Project overview
+
+# VibeOSINT (Obsidian Plugin)
 
 [🇷🇺 Читать на русском](README_RU.md)
 
-**Gemini Canvas OSINT** is an Obsidian plugin designed for visual OSINT investigations directly on Obsidian Canvas. It leverages autonomous AI agents and modern LLMs to build entity graphs, digital footprint maps, target dossiers, and relationship trees.
+**VibeOSINT** is an Obsidian plugin designed for visual OSINT investigations directly on Obsidian Canvas. It leverages autonomous AI agents and modern LLMs to build entity graphs, digital footprint maps, target dossiers, and relationship trees.
 
 ## Features
 
 - **Obsidian Canvas Integration**: Automatically visualizes investigation findings as interconnected nodes and relationship edges on your active Canvas.
 - **Hierarchical Mind-Mapping**: Intelligent left-to-right tree layout with automatic card resizing, collision detection, and neat spacing.
-- **Dual Engine Architecture**:
-  - **Hermes ACP Mode**: Integrates with [Hermes Agent](https://hermes-agent.nousresearch.com) over Agent Client Protocol (ACP), enabling autonomous web searches, deep investigations, Python execution, and verified dossier compilation.
-  - **Direct API Mode**: Direct REST integration supporting OpenAI-compatible endpoints, Google Gemini, OpenRouter, and custom LLM providers.
+- **Hermes ACP**: Integrates with [Hermes Agent](https://hermes-agent.nousresearch.com) over Agent Client Protocol (ACP), enabling autonomous web searches, deep investigations, Python execution, and verified dossier compilation.
 - **Proxy & Anti-Blocking Subsystem**: Built-in methodology and routing support for SOCKS5H / HTTP proxies to bypass geo-restrictions, Cloudflare, and regional firewalls without DNS leaks.
 - **Interactive Sidebar & Ribbon**: Dedicated investigation chat view with live streaming, tool call visibility, and quick actions.
 - **Smart Updates & Deduplication**: Updates existing nodes as new facts emerge and eliminates outdated or duplicate hypotheses.
@@ -32,25 +53,20 @@ To configure your proxy environment, ensure your local or upstream proxy (e.g. S
 
 1. Download or clone this repository.
 2. Copy the following files into your Obsidian vault's plugin directory:
-   `<Vault>/.obsidian/plugins/gemini-canvas-osint/`
+   `<Vault>/.obsidian/plugins/vibeosint/`
    - `manifest.json`
    - `main.js`
    - `styles.css`
 3. Reload Obsidian (`Ctrl+R` or restart).
-4. Go to **Settings -> Community plugins**, find **Gemini Canvas OSINT**, and enable it.
+4. Go to **Settings -> Community plugins**, find the installed plugin, and enable it.
 
 ## Configuration
 
-Open **Settings -> Gemini Canvas OSINT**:
+Open the plugin settings:
 
-- **Engine Mode**: Choose between `Hermes ACP` (autonomous system agent) or `Direct API` (standard LLM chat).
 - **Hermes ACP Settings**:
   - Requires Hermes Agent installed and accessible in your environment (`hermes`).
-  - Configure the model identifier (e.g. `agy/gemini-3.8-flash-high`, `gemini-2.0-flash`).
-- **Direct API Settings**:
-  - Set your `API Base URL` (e.g., `https://api.openai.com/v1` or OpenRouter).
-  - Provide your `API Key`.
-  - Choose your preferred target model.
+  - Configure the model identifier accepted by your Hermes installation.
 
 ## Usage
 
