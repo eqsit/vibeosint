@@ -150,7 +150,9 @@ function normalizeAcpProxy(value) {
     throw new Error("Прокси: поддерживаются схемы socks5h, socks5, socks4, http, https.");
   }
   if (!url.hostname || !url.port) throw new Error("Прокси: укажите хост и порт, например socks5h://127.0.0.1:2080.");
-  return url.origin === "null" ? `${url.protocol}//${url.host}` : url.origin;
+  // url.origin теряет логин/пароль, а для прокси с авторизацией они обязательны.
+  const auth = url.username ? `${url.username}${url.password ? `:${url.password}` : ""}@` : "";
+  return `${url.protocol}//${auth}${url.host}`;
 }
 
 function isAcpProxyEnabled(settings) {
