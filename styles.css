@@ -791,3 +791,32 @@
 @keyframes osintSpin {
   to { transform: rotate(360deg); }
 }
+
+/* Поиск моделей */
+.osint-model-suggestion-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-monospace);
+  font-size: 12px;
+}
+
+.osint-model-suggestion-current {
+  font-family: var(--font-interface);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+}
+
+.osint-model-suggestion-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

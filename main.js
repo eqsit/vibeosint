@@ -544,6 +544,81 @@ class AcpPermissionModal extends obsidian.Modal {
   onClose() { this.contentEl.empty(); this.done(this.result || { outcome: "cancelled" }); }
 }
 
+// Провайдер моделей вида "agy/gemini-3.8-flash-high" — префикс до первого слэша.
+function modelProviderOf(modelId) {
+  const id = String(modelId || "");
+  const slash = id.indexOf("/");
+  return slash > 0 ? id.slice(0, slash) : "";
+}
+
+// Список моделей ACP в стабильном порядке: текущая первой, дальше по провайдеру и имени.
+// Hermes отдаёт availableModels в порядке провайдера, который выглядит случайным.
+function sortAcpModels(models, currentModel = "") {
+  return (Array.isArray(models) ? models : [])
+    .filter(model => model && model.modelId)
+    .map(model => ({
+      modelId: model.modelId,
+      name: model.name || model.modelId,
+      description: model.description || "",
+      provider: modelProviderOf(model.modelId)
+    }))
+    .sort((a, b) => {
+      if (a.modelId === currentModel) return -1;
+      if (b.modelId === currentModel) return 1;
+      return a.provider.localeCompare(b.provider) || a.modelId.localeCompare(b.modelId);
+    });
+}
+
+/**
+ * Поиск по списку моделей: ввод фильтрует, Enter выбирает.
+ * Без него 600+ моделей от шлюза-агрегатора невозможно просматривать.
+ */
+class ModelPickerModal extends obsidian.FuzzySuggestModal {
+  constructor(app, models, currentModel, onChoose, initialQuery = "") {
+    super(app);
+    this.models = models;
+    this.currentModel = currentModel;
+    this.onChoose = onChoose;
+    this.initialQuery = initialQuery;
+    this.setPlaceholder("Часть названия модели: gemini, opus, flash-high…");
+    this.setInstructions?.([
+      { command: "↑↓", purpose: "выбрать" },
+      { command: "↵", purpose: "переключить" },
+      { command: "esc", purpose: "отмена" }
+    ]);
+  }
+
+  onOpen() {
+    super.onOpen();
+    if (this.initialQuery && this.inputEl) {
+      this.inputEl.value = this.initialQuery;
+      this.inputEl.dispatchEvent(new Event("input"));
+    }
+  }
+
+  getItems() { return this.models; }
+
+  // Ищем сразу по ID, имени и описанию — пользователь может помнить любое из них.
+  getItemText(model) {
+    return `${model.modelId} ${model.name} ${model.description}`.trim();
+  }
+
+  renderSuggestion(match, el) {
+    const model = match.item ?? match;
+    el.addClass("osint-model-suggestion");
+    const title = el.createDiv({ cls: "osint-model-suggestion-title" });
+    title.createSpan({ text: model.modelId });
+    if (model.modelId === this.currentModel) {
+      title.createSpan({ cls: "osint-model-suggestion-current", text: "активна" });
+    }
+    const subtitle = [model.name !== model.modelId ? model.name : "", model.description]
+      .filter(Boolean).join(" · ");
+    if (subtitle) el.createDiv({ cls: "osint-model-suggestion-desc", text: subtitle });
+  }
+
+  onChooseItem(model) { this.onChoose(model.modelId); }
+}
+
 /**
  * Базовый системный шаблон для Hermes ACP
  */
@@ -2080,8 +2155,16 @@ class OsintChatView extends ItemView {
 
     if (this.modelSelectEl) {
       this.modelSelectEl.empty();
-      for (const model of this.plugin.acpClient?.availableModels || []) {
-        this.modelSelectEl.createEl("option", { value: model.modelId, text: model.name || model.modelId });
+      // Сгруппировано по провайдеру: иначе 600+ пунктов идут вперемешку.
+      let group = null;
+      let groupName = null;
+      for (const model of sortAcpModels(this.plugin.acpClient?.availableModels, curModel)) {
+        const provider = model.provider || "без префикса";
+        if (provider !== groupName) {
+          groupName = provider;
+          group = this.modelSelectEl.createEl("optgroup", { attr: { label: provider } });
+        }
+        group.createEl("option", { value: model.modelId, text: model.name || model.modelId });
       }
       let found = false;
       for (let i = 0; i < this.modelSelectEl.options.length; i++) {
@@ -2747,23 +2830,37 @@ class OsintChatView extends ItemView {
     p.createEl("strong", { text: "Текущая активная модель: " });
     p.createEl("code", { text: currentModel });
 
-    const models = (this.plugin.acpClient?.availableModels || [])
-      .map(model => ({ id: model.modelId, name: model.name || model.modelId, desc: model.description || model.modelId }));
-    if (!models.length) bubble.createEl("p", { text: "Подключитесь к Hermes для получения списка моделей. Можно указать свой ID: /model provider:model или в настройках плагина." });
+    const models = sortAcpModels(this.plugin.acpClient?.availableModels, currentModel);
+    if (!models.length) {
+      bubble.createEl("p", { text: "Список моделей приходит от Hermes при подключении. Подключитесь через «Применить и проверить» либо задайте ID вручную: /model provider/model." });
+      this.scrollToBottom();
+      return;
+    }
 
-    const box = bubble.createDiv({ cls: "osint-model-list-box", style: "display:flex; flex-direction:column; gap:6px; margin-top:10px;" });
-    models.forEach(m => {
-      const btn = box.createEl("button", {
-        style: "text-align:left; padding:8px 12px; cursor:pointer; background:var(--background-secondary); border:1px solid var(--background-modifier-border); border-radius:6px;"
-      });
-      btn.createEl("div", { text: m.name, attr: { style: "font-weight:600" } });
-      btn.createEl("div", { text: m.desc, attr: { style: "font-size:11px;opacity:0.7" } });
-      btn.addEventListener("click", async () => {
-        await this.switchModel(m.id);
-      });
-    });
+    const byProvider = new Map();
+    for (const model of models) byProvider.set(model.provider || "без префикса", (byProvider.get(model.provider || "без префикса") || 0) + 1);
+    const providers = [...byProvider.entries()].sort((a, b) => b[1] - a[1]);
+
+    bubble.createEl("p", { text: `Доступно моделей: ${models.length}. Провайдеры: ${providers.slice(0, 6).map(([name, count]) => `${name} (${count})`).join(", ")}${providers.length > 6 ? " и др." : ""}` });
+
+    const openBtn = bubble.createEl("button", { cls: "mod-cta", text: "🔍 Найти модель" });
+    openBtn.addEventListener("click", () => this.openModelPicker());
+
+    const hint = bubble.createEl("p", { attr: { style: "font-size:11px;opacity:0.7;margin-top:8px" } });
+    hint.setText("Или сразу: /model gemini — откроет поиск с этим запросом. Точный ID переключает без диалога.");
 
     this.scrollToBottom();
+  }
+
+  openModelPicker(initialQuery = "") {
+    const currentModel = this.plugin.acpClient?.sessionModels.get(this.getCurrentFile()?.path || "default")
+      || this.plugin.acpClient?.currentModel || this.plugin.settings.acpModel || "";
+    const models = sortAcpModels(this.plugin.acpClient?.availableModels, currentModel);
+    if (!models.length) {
+      new Notice("Список моделей ещё не получен. Подключитесь к Hermes или укажите ID вручную: /model provider/model");
+      return;
+    }
+    new ModelPickerModal(this.app, models, currentModel, modelId => this.switchModel(modelId), initialQuery).open();
   }
 
   async switchModel(targetModel) {
@@ -2890,8 +2987,15 @@ class OsintChatView extends ItemView {
         return;
       }
 
-      const targetModel = parts[1];
-      await this.switchModel(targetModel);
+      const query = parts.slice(1).join(" ");
+      const available = sortAcpModels(this.plugin.acpClient?.availableModels);
+      // Точный ID переключает сразу; иначе показываем поиск с уже введённым запросом.
+      // Если списка ещё нет, отдаём ID как есть — так задаются свои модели.
+      if (!available.length || available.some(model => model.modelId === query)) {
+        await this.switchModel(query);
+      } else {
+        this.openModelPicker(query);
+      }
       return;
     }
 
