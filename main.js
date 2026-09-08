@@ -544,11 +544,21 @@ class AcpPermissionModal extends obsidian.Modal {
   onClose() { this.contentEl.empty(); this.done(this.result || { outcome: "cancelled" }); }
 }
 
-// Hermes ACP выдаёт ID как "провайдер:модель" ("anthropic:claude-opus-4-8",
-// "custom:agy/gemini-3.8-flash-high"). Слэш внутри — часть имени у провайдера,
-// поэтому двоеточие проверяем первым; слэш остаётся запасным для голых ID.
+// Формы ID от Hermes ACP:
+//   anthropic:claude-opus-4-8                      → anthropic
+//   custom:agy/gemini-3.8-flash-high               → agy
+//   custom:185.143.238.30:20128:aihorde/model      → aihorde
+//   custom:deepseek-v4-pro                         → custom
+// У префикса custom: осмысленная группа — это часть до слэша в самом имени
+// модели, иначе всё содержимое шлюза-агрегатора схлопывается в одну кучу.
 function modelProviderOf(modelId) {
   const id = String(modelId || "");
+  if (id.startsWith("custom:")) {
+    const rest = id.slice("custom:".length);
+    const model = rest.slice(rest.lastIndexOf(":") + 1);
+    const slash = model.indexOf("/");
+    return slash > 0 ? model.slice(0, slash) : "custom";
+  }
   const colon = id.indexOf(":");
   if (colon > 0) return id.slice(0, colon);
   const slash = id.indexOf("/");
