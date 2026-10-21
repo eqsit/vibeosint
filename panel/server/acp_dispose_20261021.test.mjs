@@ -2,11 +2,12 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import {spawn} from 'node:child_process';
 import {once} from 'node:events';
 import {AcpClient} from './acp_client.mjs';
 
-const scratch = '/root/.hermes/cache/scratch';
+const scratch = os.tmpdir();
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function ignoringAcp(t) {
   const dir = fs.mkdtempSync(path.join(scratch, 'acp-dispose-regression-'));

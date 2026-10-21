@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import vm from 'node:vm';
 import crypto from 'node:crypto';
 import { AcpClient } from './acp_client.mjs';
@@ -31,7 +32,7 @@ function response() {
   return {code:200, result:null, status(code) {this.code=code;return this;}, json(value) {this.result=value;return this;}};
 }
 function fixture(t) {
-  const dir = fs.mkdtempSync('/root/.hermes/cache/scratch/followup-race-');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'followup-race-'));
   const file = path.join(dir, `${sid}.json`);
   const base = {id:sid, title:'Synthetic fixture', messages:[], report:'# Synthetic dossier',
     reportState:{sections:[{id:'fixture', rows:[['saved fact']]}]}, logs:[]};

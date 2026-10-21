@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import vm from 'node:vm';
 import crypto from 'node:crypto';
 import {spawn} from 'node:child_process';
@@ -10,7 +11,7 @@ import {once} from 'node:events';
 // Exercise real persistence/helpers and HTTP handlers without starting a server,
 // reading real investigations or launching Hermes. All data is synthetic.
 const source = fs.readFileSync(new URL('./index.mjs', import.meta.url), 'utf8');
-const scratch = '/root/.hermes/cache/scratch';
+const scratch = os.tmpdir();
 const sid = 'ses_robustness_fixture';
 function extract(name) {
   const match = source.match(new RegExp(`(?:async )?function ${name}\\([^]*?\\n\\}`));
