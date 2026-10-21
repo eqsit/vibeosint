@@ -1,0 +1,7926 @@
+[
+ {
+  "name": "WhatsMyName Web",
+  "url": "https://whatsmyname.app/",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "WhatsMyName (T)",
+  "url": "https://github.com/WebBreacher/WhatsMyName",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Sylva Identity Discovery (T)",
+  "url": "https://sylva.pfeister.dev/",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Sherlock (T)",
+  "url": "https://github.com/sherlock-project/sherlock",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Namechk",
+  "url": "https://namechk.com/",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Thats Them",
+  "url": "https://thatsthem.com/",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "NameCheckup",
+  "url": "https://namecheckup.com/",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "FootprintIQ",
+  "url": "https://footprintiq.app",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "GitFive (T)",
+  "url": "https://github.com/mxrch/GitFive",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Sherlock",
+  "url": "https://github.com/sherlock-project/sherlock",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Names Directory",
+  "url": "https://namesdir.com/",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Lullar",
+  "url": "https://com.lullar.com",
+  "cat": "Username",
+  "sub": "Username Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Amazon Usernames (M)",
+  "url": "https://www.google.com/search?q=site:amazon.com+%3Cusername%3E",
+  "cat": "Username",
+  "sub": "Specific Sites",
+  "sub2": ""
+ },
+ {
+  "name": "Github User (M)",
+  "url": "https://api.github.com/users/%3Cusername%3E/events/public",
+  "cat": "Username",
+  "sub": "Specific Sites",
+  "sub2": ""
+ },
+ {
+  "name": "Tinder Usernames (M)",
+  "url": "https://www.gotinder.com/@%3Cusername%3E",
+  "cat": "Username",
+  "sub": "Specific Sites",
+  "sub2": ""
+ },
+ {
+  "name": "Keybase",
+  "url": "https://keybase.io/",
+  "cat": "Username",
+  "sub": "Specific Sites",
+  "sub2": ""
+ },
+ {
+  "name": "MIT PGP Key Server",
+  "url": "https://pgp.mit.edu/",
+  "cat": "Username",
+  "sub": "Specific Sites",
+  "sub2": ""
+ },
+ {
+  "name": "ProtonMail users (M)",
+  "url": "https://api.protonmail.ch/pks/lookup?op=index&search=<username>@protonmail.com",
+  "cat": "Username",
+  "sub": "Specific Sites",
+  "sub2": ""
+ },
+ {
+  "name": "ProtonMail Domains (M)",
+  "url": "https://api.protonmail.ch/pks/lookup?op=index&search=<email_address>",
+  "cat": "Username",
+  "sub": "Specific Sites",
+  "sub2": ""
+ },
+ {
+  "name": "ThatsThem",
+  "url": "https://thatsthem.com/reverse-email-lookup",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "Hunter",
+  "url": "https://hunter.io/",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "Email to Address (R)",
+  "url": "https://www.melissa.com/",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "VoilaNorbert",
+  "url": "https://www.voilanorbert.com/",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "GHunt (T)",
+  "url": "https://github.com/mxrch/GHunt",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "OSINT Industries",
+  "url": "https://www.osint.industries/",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "theHarvester (T)",
+  "url": "https://github.com/laramies/theHarvester",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "Infoga (T)",
+  "url": "https://github.com/m4ll0k/infoga",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "Skymem",
+  "url": "https://www.skymem.info/",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "Epieos Email Tool",
+  "url": "https://tools.epieos.com/email.php",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "breach.vip",
+  "url": "https://breach.vip/",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "Holehe (T)",
+  "url": "https://github.com/megadose/holehe",
+  "cat": "Email Address",
+  "sub": "Email Search",
+  "sub2": ""
+ },
+ {
+  "name": "Email Format",
+  "url": "https://www.email-format.com/",
+  "cat": "Email Address",
+  "sub": "Common Email Formats",
+  "sub2": ""
+ },
+ {
+  "name": "Email Permutator",
+  "url": "https://metricsparrow.com/toolkit/email-permutator/",
+  "cat": "Email Address",
+  "sub": "Common Email Formats",
+  "sub2": ""
+ },
+ {
+  "name": "Reacher Github (T)",
+  "url": "https://github.com/reacherhq/check-if-email-exists",
+  "cat": "Email Address",
+  "sub": "Email Verification",
+  "sub2": ""
+ },
+ {
+  "name": "Reacher Demo",
+  "url": "https://reacher.email",
+  "cat": "Email Address",
+  "sub": "Email Verification",
+  "sub2": ""
+ },
+ {
+  "name": "MailScrap",
+  "url": "https://mailscrap.com/",
+  "cat": "Email Address",
+  "sub": "Email Verification",
+  "sub2": ""
+ },
+ {
+  "name": "Read Notify",
+  "url": "https://www.readnotify.com/",
+  "cat": "Email Address",
+  "sub": "Email Verification",
+  "sub2": ""
+ },
+ {
+  "name": "Email Reputation",
+  "url": "https://emailrep.io/",
+  "cat": "Email Address",
+  "sub": "Email Verification",
+  "sub2": ""
+ },
+ {
+  "name": "MailboxValidator",
+  "url": "https://www.mailboxvalidator.com/demo",
+  "cat": "Email Address",
+  "sub": "Email Verification",
+  "sub2": ""
+ },
+ {
+  "name": "VerifyEmail (R$)",
+  "url": "https://emailable.com/",
+  "cat": "Email Address",
+  "sub": "Email Verification",
+  "sub2": ""
+ },
+ {
+  "name": "Disposable Email Domains (T)",
+  "url": "https://github.com/disposable-email-domains/disposable-email-domains",
+  "cat": "Email Address",
+  "sub": "Email Verification",
+  "sub2": ""
+ },
+ {
+  "name": "Disposable Emails Registry",
+  "url": "https://disposable-emails.github.io/",
+  "cat": "Email Address",
+  "sub": "Email Verification",
+  "sub2": ""
+ },
+ {
+  "name": "Burner Email Providers (T)",
+  "url": "https://github.com/wesbos/burner-email-providers",
+  "cat": "Email Address",
+  "sub": "Email Verification",
+  "sub2": ""
+ },
+ {
+  "name": "Have I been pwned?",
+  "url": "https://haveibeenpwned.com/",
+  "cat": "Email Address",
+  "sub": "Breach Data",
+  "sub2": ""
+ },
+ {
+  "name": "Hudson Rock",
+  "url": "https://www.hudsonrock.com/threat-intelligence-cybercrime-tools",
+  "cat": "Email Address",
+  "sub": "Breach Data",
+  "sub2": ""
+ },
+ {
+  "name": "DeHashed (R)",
+  "url": "https://dehashed.com/",
+  "cat": "Email Address",
+  "sub": "Breach Data",
+  "sub2": ""
+ },
+ {
+  "name": "Vigilante.pw",
+  "url": "https://www.vigilante.pw/",
+  "cat": "Email Address",
+  "sub": "Breach Data",
+  "sub2": ""
+ },
+ {
+  "name": "MxToolbox",
+  "url": "https://mxtoolbox.com/",
+  "cat": "Email Address",
+  "sub": "Mail Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "Domain Dossier",
+  "url": "https://centralops.net/co/DomainDossier.aspx",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "domainIQ",
+  "url": "https://www.domainiq.com/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "DomainTools Whois",
+  "url": "https://whois.domaintools.com/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "SWITCH Internet Domains Whois (.ch)",
+  "url": "https://www.nic.ch/whois/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "Whoisology",
+  "url": "https://whoisology.com/#advanced",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "Whois ARIN",
+  "url": "https://whois.arin.net/ui/advanced.jsp",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "DNSstuff",
+  "url": "https://www.dnsstuff.com/freetools",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "Robtex (R)",
+  "url": "https://robtex.com/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "Domaincrawler.com",
+  "url": "https://domaincrawler.com/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "MarkMonitor Whois Search",
+  "url": "https://domains.markmonitor.com/whois/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "easyWhois",
+  "url": "https://www.easywhois.com/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "Website Informer",
+  "url": "https://website.informer.com/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "Who.is",
+  "url": "https://who.is/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "Whois AMPed",
+  "url": "https://whoisamped.com/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "ViewDNS.info",
+  "url": "https://viewdns.info/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "Daily DNS Changes",
+  "url": "https://dailychanges.domaintools.com/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "IP2WHOIS",
+  "url": "https://www.ip2whois.com",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "Netlas.io",
+  "url": "https://app.netlas.io/whois_domains/",
+  "cat": "Domain Name",
+  "sub": "Whois Records",
+  "sub2": ""
+ },
+ {
+  "name": "SynapsInt",
+  "url": "https://synapsint.com",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "Aquatone (T)",
+  "url": "https://github.com/michenriksen/aquatone",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "FindSubDomains",
+  "url": "https://findsubdomains.com/",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "Google Subdomains (D)",
+  "url": "https://www.google.com/?gws_rd=ssl#q=site:%3Cdomain.com%3E",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "Recon-ng (T)",
+  "url": "https://github.com/lanmaster53/recon-ng",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "XRay",
+  "url": "https://github.com/evilsocket/xray",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "DNS Recon (T)",
+  "url": "https://github.com/darkoperator/dnsrecon",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "Gobuster (T)",
+  "url": "https://github.com/OJ/gobuster",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "Fierce Domain Scanner (T)",
+  "url": "https://github.com/davidpepper/fierce-domain-scanner",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "Bluto (T)",
+  "url": "https://github.com/darryllane/Bluto",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "OWASP Maryam (T)",
+  "url": "https://github.com/saeeddhqan/Maryam",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "Pentest-tools.com Subdomains",
+  "url": "https://pentest-tools.com/information-gathering/find-subdomains-of-domain",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "SecLists DNS Subdomains (T)",
+  "url": "https://github.com/danielmiessler/SecLists/tree/master/Discovery/DNS",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "dnspop (T)",
+  "url": "https://github.com/bitquark/dnspop",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "gdns (T)",
+  "url": "https://github.com/hrbrmstr/gdns",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "Sublist3r",
+  "url": "https://github.com/aboul3la/Sublist3r",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "AltDNS (T)",
+  "url": "https://github.com/infosec-au/altdns",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "Netlas.io",
+  "url": "https://app.netlas.io/domains/",
+  "cat": "Domain Name",
+  "sub": "Subdomains",
+  "sub2": ""
+ },
+ {
+  "name": "Shodan",
+  "url": "https://www.shodan.io/",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Netlas.io",
+  "url": "https://app.netlas.io/",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Kraken (T)",
+  "url": "https://github.com/Sw4mpf0x/Kraken",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Online Nikto scanner",
+  "url": "https://nikto.online/",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "urlscan.io",
+  "url": "https://urlscan.io/search/#*",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Redirect Detective",
+  "url": "https://redirectdetective.com/",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Sitediff (T)",
+  "url": "https://github.com/digininja/sitediff",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "BuiltWith",
+  "url": "https://builtwith.com/",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Wappalyzer",
+  "url": "https://www.wappalyzer.com/",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "AnalyzeID",
+  "url": "https://analyzeid.com/",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Criminal IP Search",
+  "url": "https://www.criminalip.io/",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "urlDNA",
+  "url": "https://urldna.io",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "ZoomEye.ai",
+  "url": "https://www.zoomeye.org/",
+  "cat": "Domain Name",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Google's Certificate Transparency",
+  "url": "https://www.certificate-transparency.org/known-logs",
+  "cat": "Domain Name",
+  "sub": "Certificate Search",
+  "sub2": ""
+ },
+ {
+  "name": "Spyse",
+  "url": "https://spyse.com/search/certificate",
+  "cat": "Domain Name",
+  "sub": "Certificate Search",
+  "sub2": ""
+ },
+ {
+  "name": "Censys",
+  "url": "https://censys.io/",
+  "cat": "Domain Name",
+  "sub": "Certificate Search",
+  "sub2": ""
+ },
+ {
+  "name": "crt.sh - Certificate Search",
+  "url": "https://crt.sh/?",
+  "cat": "Domain Name",
+  "sub": "Certificate Search",
+  "sub2": ""
+ },
+ {
+  "name": "CertKit - Certificate Transparency Log Search",
+  "url": "https://www.certkit.io/tools/ct-logs/",
+  "cat": "Domain Name",
+  "sub": "Certificate Search",
+  "sub2": ""
+ },
+ {
+  "name": "certgraph (T)",
+  "url": "https://github.com/lanrat/certgraph",
+  "cat": "Domain Name",
+  "sub": "Certificate Search",
+  "sub2": ""
+ },
+ {
+  "name": "Netlas.io",
+  "url": "https://app.netlas.io/certs/",
+  "cat": "Domain Name",
+  "sub": "Certificate Search",
+  "sub2": ""
+ },
+ {
+  "name": "Mnemonic",
+  "url": "https://passivedns.mnemonic.no/",
+  "cat": "Domain Name",
+  "sub": "PassiveDNS",
+  "sub2": ""
+ },
+ {
+  "name": "DNS Dumpster",
+  "url": "https://dnsdumpster.com/",
+  "cat": "Domain Name",
+  "sub": "PassiveDNS",
+  "sub2": ""
+ },
+ {
+  "name": "Deteque (R)",
+  "url": "https://www.deteque.com/",
+  "cat": "Domain Name",
+  "sub": "PassiveDNS",
+  "sub2": ""
+ },
+ {
+  "name": "UrlQuery.net",
+  "url": "https://urlquery.net/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "URL Void",
+  "url": "https://www.urlvoid.com/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "FortiGuard Reputation Service",
+  "url": "https://fortiguard.com/iprep",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Trend Micro Site Safety Center",
+  "url": "https://global.sitesafety.trendmicro.com/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "WatchGuard ReputationAuthority",
+  "url": "https://www.reputationauthority.org/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Sucuri SiteCheck",
+  "url": "https://sitecheck.sucuri.net/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "ThreatMiner.org",
+  "url": "https://www.threatminer.org/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "BlueCoat WebPulse",
+  "url": "https://sitereview.bluecoat.com/sitereview.jsp",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Zscaler Zulu URL Risk Analyzer",
+  "url": "https://zulu.zscaler.com/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Joe Sandbox Url Analyzer",
+  "url": "https://www.url-analyzer.net/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Deepviz Domain Search",
+  "url": "https://search.deepviz.com/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "AVG Threat Labs",
+  "url": "https://www.avg.com/en/signal/website-safety",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Webroot BrightCloud URL/IP Lookup",
+  "url": "https://www.brightcloud.com/tools/url-ip-lookup.php",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "vURL Online",
+  "url": "https://vurldissect.co.uk/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "AlienVault Open Threat Exchange",
+  "url": "https://otx.alienvault.com/browse/pulses/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Malware Domain List",
+  "url": "https://www.malwaredomainlist.com/mdl.php",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Web Inspector Online Scan",
+  "url": "https://www.webinspector.com/website-malware-scanner/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Google Safe Browsing API",
+  "url": "https://developers.google.com/safe-browsing/?csw=1",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Cisco Talos",
+  "url": "https://talosintelligence.com/",
+  "cat": "Domain Name",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Threatexpert.com Malicious URLs",
+  "url": "https://www.networksec.org/grabbho/block.txt",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "Zeus C2 Tracker",
+  "url": "https://zeustracker.abuse.ch/blocklist.php?download=domainblocklist",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "Malware Domains Blacklist",
+  "url": "https://mirror1.malwaredomains.com/files/domains.txt",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "Blackweb",
+  "url": "https://github.com/maravento/blackweb",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "Critical Stack Intel (R)",
+  "url": "https://intel.criticalstack.com/",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "DNS Sinkhole",
+  "url": "https://malc0de.com/bl/",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "DNS-BH Malware Domain Blocklist",
+  "url": "https://www.malwaredomains.com/wordpress/?page_id=66",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "Malware Domain List",
+  "url": "https://www.malwaredomainlist.com/hostslist/hosts.txt",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "MalwareURL (R)",
+  "url": "https://www.malwareurl.com/index.php",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "scumware.org",
+  "url": "https://www.scumware.org/",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "ZeuS Tracker",
+  "url": "https://zeustracker.abuse.ch/blocklist.php",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "Shadowserver Foundation",
+  "url": "https://www.shadowserver.org/",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "Email Domain Validation",
+  "url": "https://www.mailboxvalidator.com/domain",
+  "cat": "Domain Name",
+  "sub": "Domain Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "DNS Twist (T)",
+  "url": "https://github.com/elceef/dnstwist",
+  "cat": "Domain Name",
+  "sub": "Typosquatting",
+  "sub2": ""
+ },
+ {
+  "name": "URLCrazy (T)",
+  "url": "https://www.morningstarsecurity.com/research/urlcrazy",
+  "cat": "Domain Name",
+  "sub": "Typosquatting",
+  "sub2": ""
+ },
+ {
+  "name": "dnstwister",
+  "url": "https://dnstwister.report/",
+  "cat": "Domain Name",
+  "sub": "Typosquatting",
+  "sub2": ""
+ },
+ {
+  "name": "Catphish (T)",
+  "url": "https://github.com/ring0lab/catphish",
+  "cat": "Domain Name",
+  "sub": "Typosquatting",
+  "sub2": ""
+ },
+ {
+  "name": "SiteSleuth",
+  "url": "https://www.sitesleuth.io/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Wappalyzer (T)",
+  "url": "https://www.wappalyzer.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "SEMrush",
+  "url": "https://www.semrush.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Moonsearch",
+  "url": "https://moonsearch.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Ewhois",
+  "url": "https://www.ewhois.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "StatsCrop",
+  "url": "https://www.statscrop.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Open Site Explorer",
+  "url": "https://moz.com/link-explorer",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "SpyOnWeb",
+  "url": "https://www.spyonweb.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Keyword Density",
+  "url": "https://tools.seobook.com/general/keyword-density/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Alexa Site Statistics",
+  "url": "https://alexa.amazon.com/about",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Cisco Umbrella Popularity List",
+  "url": "https://s3-us-west-1.amazonaws.com/umbrella-static/index.html",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Alexa Top 500 Global Sites",
+  "url": "https://alexa.amazon.com/about",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Sitedossier",
+  "url": "https://www.sitedossier.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Visual Site Mapper",
+  "url": "https://github.com/alentum/sitemapper-nodejs",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "ClearWebStats.com",
+  "url": "https://www.clearwebstats.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "PubDB",
+  "url": "https://pub-db.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "SimilarWeb",
+  "url": "https://www.similarweb.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Siteliner",
+  "url": "https://www.siteliner.com/",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "WhatWeb",
+  "url": "https://github.com/urbanadventurer/WhatWeb",
+  "cat": "Domain Name",
+  "sub": "Analytics",
+  "sub2": ""
+ },
+ {
+  "name": "Link Expander",
+  "url": "https://www.linkexpander.com/",
+  "cat": "Domain Name",
+  "sub": "URL Expanders",
+  "sub2": ""
+ },
+ {
+  "name": "CheckShortURL",
+  "url": "https://checkshorturl.com/",
+  "cat": "Domain Name",
+  "sub": "URL Expanders",
+  "sub2": ""
+ },
+ {
+  "name": "URL Expander",
+  "url": "https://urlex.org/",
+  "cat": "Domain Name",
+  "sub": "URL Expanders",
+  "sub2": ""
+ },
+ {
+  "name": "Where Does This Link Go?",
+  "url": "https://wheregoes.com/",
+  "cat": "Domain Name",
+  "sub": "URL Expanders",
+  "sub2": ""
+ },
+ {
+  "name": "KnowURL",
+  "url": "https://www.knowurl.com/",
+  "cat": "Domain Name",
+  "sub": "URL Expanders",
+  "sub2": ""
+ },
+ {
+  "name": "VisualPing",
+  "url": "https://visualping.io/",
+  "cat": "Domain Name",
+  "sub": "Change Detection",
+  "sub2": ""
+ },
+ {
+  "name": "Change Detection",
+  "url": "https://changedetection.io/",
+  "cat": "Domain Name",
+  "sub": "Change Detection",
+  "sub2": ""
+ },
+ {
+  "name": "UPcheck",
+  "url": "https://upcheck.online/",
+  "cat": "Domain Name",
+  "sub": "Change Detection",
+  "sub2": ""
+ },
+ {
+  "name": "Follow That Page",
+  "url": "https://www.followthatpage.com/",
+  "cat": "Domain Name",
+  "sub": "Change Detection",
+  "sub2": ""
+ },
+ {
+  "name": "Urlwatch",
+  "url": "https://github.com/thp/urlwatch",
+  "cat": "Domain Name",
+  "sub": "Change Detection",
+  "sub2": ""
+ },
+ {
+  "name": "WatchThatPage",
+  "url": "https://watchthatpage.com/",
+  "cat": "Domain Name",
+  "sub": "Change Detection",
+  "sub2": ""
+ },
+ {
+  "name": "ChangeDetect",
+  "url": "https://changedetection.io/",
+  "cat": "Domain Name",
+  "sub": "Change Detection",
+  "sub2": ""
+ },
+ {
+  "name": "Google Trends",
+  "url": "https://trends.google.com/trends/",
+  "cat": "Domain Name",
+  "sub": "Social Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "DNSSEC Analyzer",
+  "url": "https://dnssec-analyzer.verisignlabs.com/",
+  "cat": "Domain Name",
+  "sub": "DNSSEC",
+  "sub2": ""
+ },
+ {
+  "name": "DNSViz",
+  "url": "https://dnsviz.net/",
+  "cat": "Domain Name",
+  "sub": "DNSSEC",
+  "sub2": ""
+ },
+ {
+  "name": "Sn1per (T)",
+  "url": "https://github.com/1N3/Sn1per",
+  "cat": "Domain Name",
+  "sub": "Vulnerabilities",
+  "sub2": "Scanners"
+ },
+ {
+  "name": "Web Data Exposure Scanner (T)",
+  "url": "https://github.com/eduardoit/web-data-exposure-scanner",
+  "cat": "Domain Name",
+  "sub": "Vulnerabilities",
+  "sub2": "Scanners"
+ },
+ {
+  "name": "Zone-H.org",
+  "url": "https://zone-h.org/archive",
+  "cat": "Domain Name",
+  "sub": "Vulnerabilities",
+  "sub2": "Disclosure Sites"
+ },
+ {
+  "name": "RobotsDisallowed",
+  "url": "https://github.com/danielmiessler/RobotsDisallowed",
+  "cat": "Domain Name",
+  "sub": "Vulnerabilities",
+  "sub2": ""
+ },
+ {
+  "name": "Belati (T)",
+  "url": "https://github.com/aancw/Belati",
+  "cat": "Domain Name",
+  "sub": "Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Burp Suite (T)",
+  "url": "https://portswigger.net/burp",
+  "cat": "Domain Name",
+  "sub": "Tools",
+  "sub2": ""
+ },
+ {
+  "name": "EyeWitness (T)",
+  "url": "https://github.com/ChrisTruncer/EyeWitness",
+  "cat": "Domain Name",
+  "sub": "Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Hunting-New-Registered-Domains (T)",
+  "url": "https://github.com/gfek/Hunting-New-Registered-Domains",
+  "cat": "Domain Name",
+  "sub": "Tools",
+  "sub2": ""
+ },
+ {
+  "name": "International Domain Name Conversion Tool",
+  "url": "https://mct.verisign-grs.com/",
+  "cat": "Domain Name",
+  "sub": "Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Windows Defender Security Intelligence (WDSI)",
+  "url": "https://www.microsoft.com/en-us/wdsi",
+  "cat": "Domain Name",
+  "sub": "Report Malicious Sites",
+  "sub2": ""
+ },
+ {
+  "name": "Google Safe Browsing",
+  "url": "https://safebrowsing.google.com/",
+  "cat": "Domain Name",
+  "sub": "Report Malicious Sites",
+  "sub2": ""
+ },
+ {
+  "name": "AWSBucketDump (T)",
+  "url": "https://github.com/jordanpotti/AWSBucketDump",
+  "cat": "Cloud Infrastructure",
+  "sub": "AWS Enumeration",
+  "sub2": ""
+ },
+ {
+  "name": "cloud_enum (T)",
+  "url": "https://github.com/initstring/cloud_enum",
+  "cat": "Cloud Infrastructure",
+  "sub": "AWS Enumeration",
+  "sub2": ""
+ },
+ {
+  "name": "Subfinder (T)",
+  "url": "https://github.com/projectdiscovery/subfinder",
+  "cat": "Cloud Infrastructure",
+  "sub": "AWS Enumeration",
+  "sub2": ""
+ },
+ {
+  "name": "AADInternals (T)",
+  "url": "https://github.com/Gerenios/AADInternals",
+  "cat": "Cloud Infrastructure",
+  "sub": "Azure/GCP Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "GCPBucketBrute (T)",
+  "url": "https://github.com/RhinoSecurityLabs/GCPBucketBrute",
+  "cat": "Cloud Infrastructure",
+  "sub": "Azure/GCP Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "MicroBurst (T)",
+  "url": "https://github.com/NetSPI/MicroBurst",
+  "cat": "Cloud Infrastructure",
+  "sub": "Azure/GCP Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "ROADtools (T)",
+  "url": "https://github.com/dirkjanm/roadtools",
+  "cat": "Cloud Infrastructure",
+  "sub": "Azure/GCP Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Stormspotter (T)",
+  "url": "https://github.com/Azure/Stormspotter",
+  "cat": "Cloud Infrastructure",
+  "sub": "Azure/GCP Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "BucketLoot (T)",
+  "url": "https://github.com/redhuntlabs/BucketLoot",
+  "cat": "Cloud Infrastructure",
+  "sub": "S3/Blob Storage",
+  "sub2": ""
+ },
+ {
+  "name": "goblob (T)",
+  "url": "https://github.com/Macmod/goblob",
+  "cat": "Cloud Infrastructure",
+  "sub": "S3/Blob Storage",
+  "sub2": ""
+ },
+ {
+  "name": "lazys3 (T)",
+  "url": "https://github.com/nahamsec/lazys3",
+  "cat": "Cloud Infrastructure",
+  "sub": "S3/Blob Storage",
+  "sub2": ""
+ },
+ {
+  "name": "Public Buckets",
+  "url": "https://buckets.grayhatwarfare.com/",
+  "cat": "Cloud Infrastructure",
+  "sub": "S3/Blob Storage",
+  "sub2": ""
+ },
+ {
+  "name": "S3Scanner (T)",
+  "url": "https://github.com/sa7mon/s3scanner",
+  "cat": "Cloud Infrastructure",
+  "sub": "S3/Blob Storage",
+  "sub2": ""
+ },
+ {
+  "name": "Checkov (T)",
+  "url": "https://github.com/bridgecrewio/checkov",
+  "cat": "Cloud Infrastructure",
+  "sub": "Cloud Configuration Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Cloud Custodian (T)",
+  "url": "https://github.com/cloud-custodian/cloud-custodian",
+  "cat": "Cloud Infrastructure",
+  "sub": "Cloud Configuration Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Prowler (T)",
+  "url": "https://github.com/prowler-cloud/prowler",
+  "cat": "Cloud Infrastructure",
+  "sub": "Cloud Configuration Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "ScoutSuite (T)",
+  "url": "https://github.com/nccgroup/ScoutSuite",
+  "cat": "Cloud Infrastructure",
+  "sub": "Cloud Configuration Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Steampipe (T)",
+  "url": "https://github.com/turbot/steampipe",
+  "cat": "Cloud Infrastructure",
+  "sub": "Cloud Configuration Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Amass (T)",
+  "url": "https://github.com/owasp-amass/amass",
+  "cat": "Cloud Infrastructure",
+  "sub": "SaaS Footprinting",
+  "sub2": ""
+ },
+ {
+  "name": "dnsrecon (T)",
+  "url": "https://github.com/darkoperator/dnsrecon",
+  "cat": "Cloud Infrastructure",
+  "sub": "SaaS Footprinting",
+  "sub2": ""
+ },
+ {
+  "name": "SpiderFoot (T)",
+  "url": "https://github.com/smicallef/spiderfoot",
+  "cat": "Cloud Infrastructure",
+  "sub": "SaaS Footprinting",
+  "sub2": ""
+ },
+ {
+  "name": "Sublist3r (T)",
+  "url": "https://github.com/aboul3la/Sublist3r",
+  "cat": "Cloud Infrastructure",
+  "sub": "SaaS Footprinting",
+  "sub2": ""
+ },
+ {
+  "name": "MaxMind Demo",
+  "url": "https://www.maxmind.com/en/home",
+  "cat": "IP & MAC Address",
+  "sub": "Geolocation",
+  "sub2": ""
+ },
+ {
+  "name": "IPv4/IPv6 lists by country code",
+  "url": "https://github.com/ipverse/",
+  "cat": "IP & MAC Address",
+  "sub": "Geolocation",
+  "sub2": ""
+ },
+ {
+  "name": "IP2Location.com",
+  "url": "https://www.ip2location.com/demo",
+  "cat": "IP & MAC Address",
+  "sub": "Geolocation",
+  "sub2": ""
+ },
+ {
+  "name": "IP Fingerprints",
+  "url": "https://ipfingerprints.com/",
+  "cat": "IP & MAC Address",
+  "sub": "Geolocation",
+  "sub2": ""
+ },
+ {
+  "name": "DB-IP",
+  "url": "https://db-ip.com/",
+  "cat": "IP & MAC Address",
+  "sub": "Geolocation",
+  "sub2": ""
+ },
+ {
+  "name": "IP Location Finder",
+  "url": "https://www.iplocation.net/",
+  "cat": "IP & MAC Address",
+  "sub": "Geolocation",
+  "sub2": ""
+ },
+ {
+  "name": "Info Sniper",
+  "url": "https://www.infosniper.net/",
+  "cat": "IP & MAC Address",
+  "sub": "Geolocation",
+  "sub2": ""
+ },
+ {
+  "name": "utrace",
+  "url": "https://en.utrace.de/",
+  "cat": "IP & MAC Address",
+  "sub": "Geolocation",
+  "sub2": ""
+ },
+ {
+  "name": "Spyse",
+  "url": "https://spyse.com/search/ip",
+  "cat": "IP & MAC Address",
+  "sub": "Host / Port Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Netlas.io",
+  "url": "https://netlas.io/",
+  "cat": "IP & MAC Address",
+  "sub": "Host / Port Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Portmap",
+  "url": "https://portmap.com/",
+  "cat": "IP & MAC Address",
+  "sub": "Host / Port Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Scans.io",
+  "url": "https://scans.io/",
+  "cat": "IP & MAC Address",
+  "sub": "Host / Port Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Nmap (T)",
+  "url": "https://nmap.org/download.html",
+  "cat": "IP & MAC Address",
+  "sub": "Host / Port Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Online Port scanner",
+  "url": "https://portscanner.online/",
+  "cat": "IP & MAC Address",
+  "sub": "Host / Port Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Internet Census Search",
+  "url": "https://www.exfiltrated.com/querystart.php",
+  "cat": "IP & MAC Address",
+  "sub": "Host / Port Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Scanless (T)",
+  "url": "https://github.com/vesche/scanless",
+  "cat": "IP & MAC Address",
+  "sub": "Host / Port Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "BinaryEdge (R)",
+  "url": "https://www.binaryedge.io/",
+  "cat": "IP & MAC Address",
+  "sub": "Host / Port Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Masscan (T)",
+  "url": "https://github.com/robertdavidgraham/masscan",
+  "cat": "IP & MAC Address",
+  "sub": "Host / Port Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "ASlookup.com",
+  "url": "https://aslookup.com/",
+  "cat": "IP & MAC Address",
+  "sub": "IPv4",
+  "sub2": ""
+ },
+ {
+  "name": "Port scanner Online",
+  "url": "https://portscanner.online/",
+  "cat": "IP & MAC Address",
+  "sub": "IPv4",
+  "sub2": ""
+ },
+ {
+  "name": "Onyphe",
+  "url": "https://www.onyphe.io/",
+  "cat": "IP & MAC Address",
+  "sub": "IPv4",
+  "sub2": ""
+ },
+ {
+  "name": "IPv4 CIDR Report",
+  "url": "https://www.cidr-report.org/as2.0/",
+  "cat": "IP & MAC Address",
+  "sub": "IPv4",
+  "sub2": ""
+ },
+ {
+  "name": "Reverse.report",
+  "url": "https://reverse.report/",
+  "cat": "IP & MAC Address",
+  "sub": "IPv4",
+  "sub2": ""
+ },
+ {
+  "name": "Team Cymru IP to ASN",
+  "url": "https://asn.cymru.com/",
+  "cat": "IP & MAC Address",
+  "sub": "IPv4",
+  "sub2": ""
+ },
+ {
+  "name": "IP to ASN DB",
+  "url": "https://iptoasn.com/",
+  "cat": "IP & MAC Address",
+  "sub": "IPv4",
+  "sub2": ""
+ },
+ {
+  "name": "Hacker Target - Reverse DNS",
+  "url": "https://hackertarget.com/reverse-dns-lookup/",
+  "cat": "IP & MAC Address",
+  "sub": "IPv4",
+  "sub2": ""
+ },
+ {
+  "name": "IPv6 CIDR Report",
+  "url": "https://www.cidr-report.org/v6/as2.0/",
+  "cat": "IP & MAC Address",
+  "sub": "IPv6",
+  "sub2": ""
+ },
+ {
+  "name": "Hurricane Electric BGP Toolkit",
+  "url": "https://bgp.he.net/",
+  "cat": "IP & MAC Address",
+  "sub": "BGP",
+  "sub2": ""
+ },
+ {
+  "name": "BGP Malicious Content Ranking",
+  "url": "https://bgpranking.circl.lu/",
+  "cat": "IP & MAC Address",
+  "sub": "BGP",
+  "sub2": ""
+ },
+ {
+  "name": "PeeringDB",
+  "url": "https://www.peeringdb.com/advanced_search",
+  "cat": "IP & MAC Address",
+  "sub": "BGP",
+  "sub2": ""
+ },
+ {
+  "name": "BGP Tools",
+  "url": "https://www.bgp4.as/tools",
+  "cat": "IP & MAC Address",
+  "sub": "BGP",
+  "sub2": ""
+ },
+ {
+  "name": "IP Void",
+  "url": "https://www.ipvoid.com/",
+  "cat": "IP & MAC Address",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "ExoneraTor",
+  "url": "https://exonerator.torproject.org/",
+  "cat": "IP & MAC Address",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Grey Noise",
+  "url": "https://viz.greynoise.io/",
+  "cat": "IP & MAC Address",
+  "sub": "Reputation",
+  "sub2": ""
+ },
+ {
+  "name": "Blocklist.de",
+  "url": "https://www.blocklist.de/en/index.html",
+  "cat": "IP & MAC Address",
+  "sub": "Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "DShield API",
+  "url": "https://isc.sans.edu/api/",
+  "cat": "IP & MAC Address",
+  "sub": "Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "FireHOL IP Lists",
+  "url": "https://iplists.firehol.org/",
+  "cat": "IP & MAC Address",
+  "sub": "Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "Project Honey Pot",
+  "url": "https://www.projecthoneypot.org/list_of_ips.php",
+  "cat": "IP & MAC Address",
+  "sub": "Blacklists",
+  "sub2": ""
+ },
+ {
+  "name": "IP Fingerprints - Reverse IP Lookup",
+  "url": "https://ipfingerprints.com/reverseip.php",
+  "cat": "IP & MAC Address",
+  "sub": "Neighbor Domains",
+  "sub2": ""
+ },
+ {
+  "name": "Bing IP Search (D)",
+  "url": "https://www.bing.com/search?q=ip%3A8.8.8.8",
+  "cat": "IP & MAC Address",
+  "sub": "Neighbor Domains",
+  "sub2": ""
+ },
+ {
+  "name": "TCP/IP Utils - Domain Neighbors",
+  "url": "https://dnslytics.com/",
+  "cat": "IP & MAC Address",
+  "sub": "Neighbor Domains",
+  "sub2": ""
+ },
+ {
+  "name": "MyIPNeighbors",
+  "url": "https://www.my-ip-neighbors.com/",
+  "cat": "IP & MAC Address",
+  "sub": "Neighbor Domains",
+  "sub2": ""
+ },
+ {
+  "name": "CloudFlare Watch",
+  "url": "https://www.crimeflare.com/",
+  "cat": "IP & MAC Address",
+  "sub": "Protected by Cloud Services",
+  "sub2": ""
+ },
+ {
+  "name": "CloudFail (T)",
+  "url": "https://github.com/m0rtem/CloudFail",
+  "cat": "IP & MAC Address",
+  "sub": "Protected by Cloud Services",
+  "sub2": ""
+ },
+ {
+  "name": "WiGLE: Wireless Network Mapping",
+  "url": "https://wigle.net/",
+  "cat": "IP & MAC Address",
+  "sub": "Wireless Network Info",
+  "sub2": ""
+ },
+ {
+  "name": "OpenCellid: Database of Cell Towers",
+  "url": "https://opencellid.org/",
+  "cat": "IP & MAC Address",
+  "sub": "Wireless Network Info",
+  "sub2": ""
+ },
+ {
+  "name": "Wireshark",
+  "url": "https://www.wireshark.org/download.html",
+  "cat": "IP & MAC Address",
+  "sub": "Network Analysis Tools",
+  "sub2": ""
+ },
+ {
+  "name": "NetworkMiner",
+  "url": "https://www.netresec.com/?page=Networkminer",
+  "cat": "IP & MAC Address",
+  "sub": "Network Analysis Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Packet Total",
+  "url": "https://www.packettotal.com/",
+  "cat": "IP & MAC Address",
+  "sub": "Network Analysis Tools",
+  "sub2": ""
+ },
+ {
+  "name": "checkip (T)",
+  "url": "https://github.com/jreisinger/checkip",
+  "cat": "IP & MAC Address",
+  "sub": "Network Analysis Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Ki.tc",
+  "url": "https://ki.tc",
+  "cat": "IP & MAC Address",
+  "sub": "IP Loggers",
+  "sub2": ""
+ },
+ {
+  "name": "Grabify",
+  "url": "https://grabify.link",
+  "cat": "IP & MAC Address",
+  "sub": "IP Loggers",
+  "sub2": ""
+ },
+ {
+  "name": "IP Logger",
+  "url": "https://iplogger.com/",
+  "cat": "IP & MAC Address",
+  "sub": "IP Loggers",
+  "sub2": ""
+ },
+ {
+  "name": "Google Images",
+  "url": "https://images.google.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Bing Images",
+  "url": "https://www.bing.com/images",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "FaceCheck Facial Recognition Search",
+  "url": "https://facecheck.id/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Surfface Face & People Search Engine",
+  "url": "https://surfface.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "PimEyes Face Search Engine",
+  "url": "https://pimeyes.com/en",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Yandex Images",
+  "url": "https://yandex.com/images/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Baidu Images",
+  "url": "https://image.baidu.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Twitter Image Search (M)",
+  "url": "https://twitter.com/search?q=%3Csearchterm%3E&src=typd&vertical=default&f=images",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Imgur Search",
+  "url": "https://imgur.com/search",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Photobucket",
+  "url": "https://photobucket.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "7Photos.net",
+  "url": "https://7photos.net/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Current Location",
+  "url": "https://current-location.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Lenso.ai",
+  "url": "https://lenso.ai/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "CC Search",
+  "url": "https://search.creativecommons.org/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "CamFind App",
+  "url": "https://camfindapp.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "RevEye Reverse Image Search (T)",
+  "url": "https://github.com/steven2358/reveye",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "SmugMug Search",
+  "url": "https://www.smugmug.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "ImageNet",
+  "url": "https://image-net.org/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Places2",
+  "url": "http://places2.csail.mit.edu/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Image Identification Project",
+  "url": "https://www.imageidentify.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "SauceNAO",
+  "url": "https://saucenao.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Picarta",
+  "url": "https://picarta.ai/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "FaceSeek Face Search Engine",
+  "url": "https://www.faceseek.online/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Search"
+ },
+ {
+  "name": "Webstigram",
+  "url": "https://websta.me/search-engine-optimization/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Instagram"
+ },
+ {
+  "name": "Instagram",
+  "url": "https://www.instagram.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Instagram"
+ },
+ {
+  "name": "Mini Instagram",
+  "url": "https://mini-for-instagram.en.softonic.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Instagram"
+ },
+ {
+  "name": "Imgrab",
+  "url": "https://www.imgrab.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Instagram"
+ },
+ {
+  "name": "Tofo.me",
+  "url": "https://tofo.me/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Instagram"
+ },
+ {
+  "name": "Flickr",
+  "url": "https://www.flickr.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Flickr"
+ },
+ {
+  "name": "Flickr Map",
+  "url": "https://www.flickr.com/map/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Flickr"
+ },
+ {
+  "name": "My Pics Map",
+  "url": "https://www.mypicsmap.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Flickr"
+ },
+ {
+  "name": "idGettr",
+  "url": "https://www.webfx.com/tools/idgettr/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Flickr"
+ },
+ {
+  "name": "Flickr Hive Mind",
+  "url": "https://flickrhivemind.net/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Flickr"
+ },
+ {
+  "name": "ExifEditor",
+  "url": "https://exifeditor.io",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "ExifTool (T)",
+  "url": "https://exiftool.org/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "ExifViewer",
+  "url": "https://www.exifviewer.org/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "FOCA (T)",
+  "url": "https://github.com/ElevenPaths/FOCA",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "GeoSetter",
+  "url": "https://geosetter.de/en/main-en/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "Jeffrey's Exif Viewer",
+  "url": "https://regex.info/blog/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "JPEGsnoop (T)",
+  "url": "https://www.impulseadventure.com/photo/jpeg-snoop.html",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "Metapicz",
+  "url": "https://metapicz.com/#landing",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "Search by Exif",
+  "url": "https://exif.osint-tool.com",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "xeuledoc - Fetch metadata about any public Google document",
+  "url": "https://github.com/Malfrats/xeuledoc",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "Exiv2 (T)",
+  "url": "https://exiv2.org/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "MediaInfo (T)",
+  "url": "https://mediaarea.net/en/MediaInfo",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "Apache Tika (T)",
+  "url": "https://tika.apache.org/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "oletools (T)",
+  "url": "https://github.com/decalage2/oletools",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "Hachoir (T)",
+  "url": "https://hachoir.readthedocs.io/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "C2PA Verify",
+  "url": "https://c2paviewer.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "Metadata2Go",
+  "url": "https://www.metadata2go.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Metadata"
+ },
+ {
+  "name": "Ghiro (T)",
+  "url": "https://getghiro.org/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Forensics"
+ },
+ {
+  "name": "Forensically",
+  "url": "https://29a.ch/photo-forensics/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Forensics"
+ },
+ {
+  "name": "i2OCR",
+  "url": "https://www.i2ocr.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "OCR"
+ },
+ {
+  "name": "New OCR",
+  "url": "https://www.newocr.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "OCR"
+ },
+ {
+  "name": "Online OCR",
+  "url": "https://www.onlineocr.net/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "OCR"
+ },
+ {
+  "name": "Creepy (T)",
+  "url": "https://github.com/ilektrojohn/creepy",
+  "cat": "Images / Videos / Docs",
+  "sub": "Images",
+  "sub2": "Tools"
+ },
+ {
+  "name": "Google Videos",
+  "url": "https://www.google.com/videohp",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "Bing Videos",
+  "url": "https://www.bing.com/videos",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "Internet Archive Videos",
+  "url": "https://archive.org/details/movies",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "Vines (D)",
+  "url": "https://www.google.com/search?q=site:vine.co+%3Csearchterm%3E",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "Dogpile",
+  "url": "https://www.dogpile.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "Geo Search Tool",
+  "url": "https://youtube.github.io/geo-search-tool/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "blinkx Video Search",
+  "url": "https://blinkx.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "Facebook Live Map",
+  "url": "https://facebook.com/live",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "LiveLeak (D)",
+  "url": "https://www.liveleak.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "Metatube",
+  "url": "https://github.com/JVT038/MetaTube",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "Yahoo Video Search",
+  "url": "https://video.search.yahoo.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "Search YouTube by Location",
+  "url": "https://mattw.io/youtube-geofind/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Search"
+ },
+ {
+  "name": "Print YouTube StoryBoard Instructions",
+  "url": "https://www.labnol.org/internet/print-youtube-video/28217",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Analyze / Record"
+ },
+ {
+  "name": "Print Storyboard from Youtube",
+  "url": "javascript:(function(){a=ytplayer.config.args.storyboard_spec;if(!a){alert(\"Sorry we cannot process this YouTube video. Could you please try another one\");exit();}b=a.split(\"|\");base=b[0].split(\"$\")[0]+\"2/M\";c=b[3].split(\"%23\");sigh=c[c.length-1];var imgs=\"\";t=ytplayer.config.args.length_seconds;n=Math.ceil(c[2]/(c[3]*c[4]));for(i=0;i<n;i++){imgs+=\"<PICTURE='\"+base+i+\".jpg%3Fsigh=\"+sigh+\"'><br/>\";}var title=ytplayer.config.args.title;msg=\"<body style='background-color:#444;color:#eee;margin:20px%20auto;width:90%;text-align:center'%3E%3Ch2%3ETITLE%3C/h2%3E%3Cdiv%3EIMAGES%3C/div%3E%3Cbr/%3E%3Cem%3E%3Ca%20href='http://labnol.org/?p=28217'%20style='text-decoration:none;color:#fff;font-style:bold'%3EPrinted%20using%20the%20YouTube%20bookmarklet.%3C/a%3E%3C/em%3E%3C/body%3E%22;msg=msg.replace(%22TITLE%22,title).replace(%22IMAGES%22,imgs).replace(/PICTURE/g,%22img%20src%22);var%20labnol=window.open();labnol.document.open();labnol.document.write(msg);labnol.document.close();})();",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Analyze / Record"
+ },
+ {
+  "name": "Frame by Frame for YouTube (T)",
+  "url": "https://chrome.google.com/webstore/detail/frame-by-frame-for-youtub/elkadbdicdciddfkdpmaolomehalghio?hl=en-GB",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Analyze / Record"
+ },
+ {
+  "name": "TubeChop",
+  "url": "https://tubechop.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Analyze / Record"
+ },
+ {
+  "name": "YouTube Data Tools",
+  "url": "https://tools.digitalmethods.net/netvizz/youtube/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Analyze / Record"
+ },
+ {
+  "name": "Hooktube",
+  "url": "https://hooktube.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Analyze / Record"
+ },
+ {
+  "name": "yasiv-youtube",
+  "url": "https://yasiv.com/youtube/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Videos",
+  "sub2": "Analyze / Record"
+ },
+ {
+  "name": "SeeAllTheThings",
+  "url": "https://github.com/baywolf88/seeallthethings",
+  "cat": "Images / Videos / Docs",
+  "sub": "Webcams",
+  "sub2": ""
+ },
+ {
+  "name": "Insecam",
+  "url": "https://insecam.org/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Webcams",
+  "sub2": ""
+ },
+ {
+  "name": "EarthCam",
+  "url": "https://www.earthcam.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Webcams",
+  "sub2": ""
+ },
+ {
+  "name": "GoogleDocs (D)",
+  "url": "https://www.google.com/?q=site:docs.google.com+%3Csearchterm%3E",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search / Common GoogleDorks"
+ },
+ {
+  "name": "GoogleDrive (D)",
+  "url": "https://www.google.com/?q=site:drive.google.com+%3Csearchterm%3E",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search / Common GoogleDorks"
+ },
+ {
+  "name": "Dropbox (D)",
+  "url": "https://www.google.com/?q=site:dl.dropbox.com+%3Csearchterm%3E",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search / Common GoogleDorks"
+ },
+ {
+  "name": "Amazon AWS (D)",
+  "url": "https://www.google.com/search?q=site:s3.amazonaws.com+%3Csearchterm%3E",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search / Common GoogleDorks"
+ },
+ {
+  "name": "OneDrive (D)",
+  "url": "https://www.google.com/search?safe=off&q=site:onedrive.live.com+%3Csearchterm%3E",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search / Common GoogleDorks"
+ },
+ {
+  "name": "Cryptome (D)",
+  "url": "https://www.google.com/search?q=site:cryptome.org+%3Csearchterm%3E",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search / Common GoogleDorks"
+ },
+ {
+  "name": "Scribd",
+  "url": "https://www.scribd.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search"
+ },
+ {
+  "name": "WikiLeaks Search",
+  "url": "https://search.wikileaks.org/advanced",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search"
+ },
+ {
+  "name": "RECAP Court Doc Repo",
+  "url": "https://archive.recapthelaw.org/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search"
+ },
+ {
+  "name": "filessoo.com",
+  "url": "https://filessoo.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search"
+ },
+ {
+  "name": "Leaked Cables",
+  "url": "https://search.wikileaks.org/plusd/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Search"
+ },
+ {
+  "name": "Pastebin OSINT Harvester (T)",
+  "url": "https://github.com/needmorecowbell/sniff-paste",
+  "cat": "Images / Videos / Docs",
+  "sub": "Documents",
+  "sub2": "Paste Sites"
+ },
+ {
+  "name": "What The Font",
+  "url": "https://www.myfonts.com/pages/whatthefont",
+  "cat": "Images / Videos / Docs",
+  "sub": "Fonts",
+  "sub2": ""
+ },
+ {
+  "name": "Font Squirrel",
+  "url": "https://www.fontsquirrel.com/matcherator",
+  "cat": "Images / Videos / Docs",
+  "sub": "Fonts",
+  "sub2": ""
+ },
+ {
+  "name": "IdentiFont",
+  "url": "https://www.identifont.com/index.html",
+  "cat": "Images / Videos / Docs",
+  "sub": "Fonts",
+  "sub2": ""
+ },
+ {
+  "name": "What Font Is",
+  "url": "https://www.whatfontis.com/",
+  "cat": "Images / Videos / Docs",
+  "sub": "Fonts",
+  "sub2": ""
+ },
+ {
+  "name": "FB Email Search",
+  "url": "https://www.facebook.com/public?query=email@gmail.com&nomc=0",
+  "cat": "Social Networks",
+  "sub": "Facebook",
+  "sub2": "Search"
+ },
+ {
+  "name": "Recover FB Account",
+  "url": "https://www.facebook.com/login/identify?ctx=recover",
+  "cat": "Social Networks",
+  "sub": "Facebook",
+  "sub2": "Search"
+ },
+ {
+  "name": "Facebook Photos by ID (M)",
+  "url": "https://www.facebook.com/photo.php?fbid=PHOTO-ID-HERE",
+  "cat": "Social Networks",
+  "sub": "Facebook",
+  "sub2": "Search"
+ },
+ {
+  "name": "FB Lookup ID",
+  "url": "https://lookup-id.com/",
+  "cat": "Social Networks",
+  "sub": "Facebook",
+  "sub2": "Search"
+ },
+ {
+  "name": "FB Identify (Requires Logout)",
+  "url": "https://www.facebook.com/login/identify",
+  "cat": "Social Networks",
+  "sub": "Facebook",
+  "sub2": "Search"
+ },
+ {
+  "name": "Fedifinder",
+  "url": "https://fedifinder.glitch.me/",
+  "cat": "Social Networks",
+  "sub": "Fediverse/Mastodon",
+  "sub2": ""
+ },
+ {
+  "name": "Fediverse Observer",
+  "url": "https://fediverse.observer/",
+  "cat": "Social Networks",
+  "sub": "Fediverse/Mastodon",
+  "sub2": ""
+ },
+ {
+  "name": "Fediverse_OSINT (T)",
+  "url": "https://github.com/cyfinoid/fediverse_osint",
+  "cat": "Social Networks",
+  "sub": "Fediverse/Mastodon",
+  "sub2": ""
+ },
+ {
+  "name": "Masto (T)",
+  "url": "https://github.com/C3n7ral051nt4g3ncy/Masto",
+  "cat": "Social Networks",
+  "sub": "Fediverse/Mastodon",
+  "sub2": ""
+ },
+ {
+  "name": "Inflact Instagram Viewer (Anonymous)",
+  "url": "https://inflact.com/instagram-viewer/profile/",
+  "cat": "Social Networks",
+  "sub": "Instagram",
+  "sub2": ""
+ },
+ {
+  "name": "Osintgram (T)",
+  "url": "https://github.com/Datalux/Osintgram",
+  "cat": "Social Networks",
+  "sub": "Instagram",
+  "sub2": ""
+ },
+ {
+  "name": "Twitter Advanced Search",
+  "url": "https://twitter.com/search-advanced",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Search"
+ },
+ {
+  "name": "Twitter Location Search",
+  "url": "https://twitter.com/search?q=geocode%3A36.1143855%2C-115.1727518%2C1km&src=typd",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Search"
+ },
+ {
+  "name": "Twitter Date Search",
+  "url": "https://twitter.com/search?q=SearchTerm%20since:2016-03-01%20until:2016-03-02",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Search"
+ },
+ {
+  "name": "Followerwonk (R)",
+  "url": "https://followerwonk.com/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Search"
+ },
+ {
+  "name": "Twopcharts",
+  "url": "https://twopcharts.com/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Search"
+ },
+ {
+  "name": "TweeterID",
+  "url": "https://tweeterid.com/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Search"
+ },
+ {
+  "name": "Tweepsect",
+  "url": "https://tweepsect.com/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics / Profile"
+ },
+ {
+  "name": "Twitonomy",
+  "url": "https://www.twitonomy.com/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics / Profile"
+ },
+ {
+  "name": "Foller.me Analytics",
+  "url": "https://foller.me/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics / Profile"
+ },
+ {
+  "name": "X0rz Tweets_analyzer (T)",
+  "url": "https://github.com/x0rz/tweets_analyzer",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics / Profile"
+ },
+ {
+  "name": "RiteTag",
+  "url": "https://ritetag.com/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics / Hashtag"
+ },
+ {
+  "name": "TAGSExplorer",
+  "url": "https://tags.hawksey.info/tagsexplorer/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics / Hashtag"
+ },
+ {
+  "name": "Tweet Metadata",
+  "url": "https://www.wsj.com/public/resources/documents/TweetMetadata.pdf",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics"
+ },
+ {
+  "name": "Birdwatcher (T)",
+  "url": "https://github.com/michenriksen/birdwatcher",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics"
+ },
+ {
+  "name": "Tinfoleak Web",
+  "url": "https://tinfoleak.com/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics"
+ },
+ {
+  "name": "Tinfoleak.py (T)",
+  "url": "https://github.com/vaguileradiaz/tinfoleak",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics"
+ },
+ {
+  "name": "DMI-TCAT (T)",
+  "url": "https://github.com/digitalmethodsinitiative/dmi-tcat",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics"
+ },
+ {
+  "name": "Twint (T)",
+  "url": "https://github.com/twintproject/twint",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Analytics"
+ },
+ {
+  "name": "GeoSocial Footprint",
+  "url": "https://geosocialfootprint.com/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Location / Mapping"
+ },
+ {
+  "name": "One Million Tweet Map",
+  "url": "https://onemilliontweetmap.com/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Location / Mapping"
+ },
+ {
+  "name": "Fedica",
+  "url": "https://fedica.com/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Location / Mapping"
+ },
+ {
+  "name": "All My Tweets",
+  "url": "https://www.allmytweets.net/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Archive / Deleted Tweets"
+ },
+ {
+  "name": "Spoonbill",
+  "url": "https://spoonbill.io/",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Archive / Deleted Tweets"
+ },
+ {
+  "name": "TweetVacuum (T)",
+  "url": "https://github.com/UberKitten/TweetVacuum",
+  "cat": "Social Networks",
+  "sub": "Twitter",
+  "sub2": "Archive / Deleted Tweets"
+ },
+ {
+  "name": "Reddit Metis",
+  "url": "https://redditmetis.com/",
+  "cat": "Social Networks",
+  "sub": "Reddit",
+  "sub2": ""
+ },
+ {
+  "name": "Reddit Archive",
+  "url": "https://www.redditarchive.com/",
+  "cat": "Social Networks",
+  "sub": "Reddit",
+  "sub2": ""
+ },
+ {
+  "name": "subreddits",
+  "url": "https://subreddits.org/",
+  "cat": "Social Networks",
+  "sub": "Reddit",
+  "sub2": ""
+ },
+ {
+  "name": "Reddit Comment History",
+  "url": "https://roadtolarissa.com/javascript/reddit-comment-visualizer/",
+  "cat": "Social Networks",
+  "sub": "Reddit",
+  "sub2": ""
+ },
+ {
+  "name": "LinkedInt - LinkedIn Recon Tool (T)",
+  "url": "https://github.com/vysecurity/LinkedInt",
+  "cat": "Social Networks",
+  "sub": "LinkedIn",
+  "sub2": ""
+ },
+ {
+  "name": "ScrapedIn (T)",
+  "url": "https://github.com/dchrastil/ScrapedIn",
+  "cat": "Social Networks",
+  "sub": "LinkedIn",
+  "sub2": ""
+ },
+ {
+  "name": "InSpy (T)",
+  "url": "https://github.com/jobroche/InSpy",
+  "cat": "Social Networks",
+  "sub": "LinkedIn",
+  "sub2": ""
+ },
+ {
+  "name": "raven (T)",
+  "url": "https://github.com/0x09AL/raven",
+  "cat": "Social Networks",
+  "sub": "LinkedIn",
+  "sub2": ""
+ },
+ {
+  "name": "TikTok (M)",
+  "url": "https://www.tiktok.com/@username",
+  "cat": "Social Networks",
+  "sub": "TikTok",
+  "sub2": ""
+ },
+ {
+  "name": "TikTok-OSINT (T)",
+  "url": "https://github.com/Omicron166/TikTok-OSINT",
+  "cat": "Social Networks",
+  "sub": "TikTok",
+  "sub2": ""
+ },
+ {
+  "name": "Unfurl",
+  "url": "https://github.com/obsidianforensics/unfurl",
+  "cat": "Social Networks",
+  "sub": "TikTok",
+  "sub2": ""
+ },
+ {
+  "name": "yt-dlp (T)",
+  "url": "https://github.com/yt-dlp/yt-dlp",
+  "cat": "Social Networks",
+  "sub": "TikTok",
+  "sub2": ""
+ },
+ {
+  "name": "Treeverse (T)",
+  "url": "https://treeverse.app/",
+  "cat": "Social Networks",
+  "sub": "Bluesky",
+  "sub2": ""
+ },
+ {
+  "name": "Bellingcat Meta Content Library",
+  "url": "https://bellingcat.gitbook.io/toolkit/more/all-tools/meta-content-library",
+  "cat": "Social Networks",
+  "sub": "Threads",
+  "sub2": ""
+ },
+ {
+  "name": "Threads Dashboard",
+  "url": "https://www.threadsdashboard.com/",
+  "cat": "Social Networks",
+  "sub": "Threads",
+  "sub2": ""
+ },
+ {
+  "name": "Threads-Scraper (T)",
+  "url": "https://github.com/Zeeshanahmad4/Threads-Scraper",
+  "cat": "Social Networks",
+  "sub": "Threads",
+  "sub2": ""
+ },
+ {
+  "name": "ThreadsRecon (T)",
+  "url": "https://github.com/offseq/threadsrecon",
+  "cat": "Social Networks",
+  "sub": "Threads",
+  "sub2": ""
+ },
+ {
+  "name": "SteamOSINT (T)",
+  "url": "https://github.com/Frontline-Femmes/Steam-OSINT",
+  "cat": "Social Networks",
+  "sub": "Steam, Discord & Gaming Networks",
+  "sub2": ""
+ },
+ {
+  "name": "Ask FM",
+  "url": "https://ask.fm/%3Cusername%3E",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "Myspace",
+  "url": "https://myspace.com/",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "Tumblr",
+  "url": "https://www.tumblr.com/tagged/search",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "BlackPlanet.com - Member Find",
+  "url": "https://www.blackplanet.com/user_search/index.html",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "MiGente (Latino)",
+  "url": "https://migente.com/wp-login.php?redirect_to=https%3A%2F%2Fmigente.com%2Fuser_search%2Findex.html&bp-auth=1&action=bpnoaccess",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "Asian Avenue",
+  "url": "https://blackplanet.com/",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "Orkut (Brazil)",
+  "url": "https://orkut.google.com/",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "Odnoklassniki",
+  "url": "https://ok.ru/",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "VK",
+  "url": "https://vk.com/",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "Delicious",
+  "url": "https://del.icio.us/",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "TheHoodUp (NSFW)",
+  "url": "https://thehoodup.com/board/",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "Share Secret Feedback (M)",
+  "url": "https://secreto.site/en/%3Cuser_id%3E",
+  "cat": "Social Networks",
+  "sub": "Other Social Networks",
+  "sub2": ""
+ },
+ {
+  "name": "Social Searcher",
+  "url": "https://www.social-searcher.com/",
+  "cat": "Social Networks",
+  "sub": "Search",
+  "sub2": ""
+ },
+ {
+  "name": "Google Social Search",
+  "url": "https://www.social-searcher.com/google-social-search/",
+  "cat": "Social Networks",
+  "sub": "Search",
+  "sub2": ""
+ },
+ {
+  "name": "Talkwalker Social Media Search (R)",
+  "url": "https://www.talkwalker.com/social-media-analytics-search",
+  "cat": "Social Networks",
+  "sub": "Search",
+  "sub2": ""
+ },
+ {
+  "name": "PinGroupie",
+  "url": "https://pingroupie.com/",
+  "cat": "Social Networks",
+  "sub": "Search",
+  "sub2": ""
+ },
+ {
+  "name": "Comms Analyzer Toolbox (T)",
+  "url": "https://github.com/bitsofinfo/comms-analyzer-toolbox",
+  "cat": "Instant Messaging",
+  "sub": "Chat Archive Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Disboard",
+  "url": "https://disboard.org/",
+  "cat": "Instant Messaging",
+  "sub": "Discord",
+  "sub2": ""
+ },
+ {
+  "name": "DiscordOSINT (T)",
+  "url": "https://github.com/husseinmuhaisen/DiscordOSINT",
+  "cat": "Instant Messaging",
+  "sub": "Discord",
+  "sub2": ""
+ },
+ {
+  "name": "Awesome OSINT",
+  "url": "https://github.com/jivoi/awesome-osint",
+  "cat": "Instant Messaging",
+  "sub": "Resources",
+  "sub2": ""
+ },
+ {
+  "name": "SlackPirate (T)",
+  "url": "https://github.com/emtunc/SlackPirate",
+  "cat": "Instant Messaging",
+  "sub": "Slack",
+  "sub2": ""
+ },
+ {
+  "name": "slack-intelbot (T)",
+  "url": "https://github.com/pun1sh3r/slack-intelbot",
+  "cat": "Instant Messaging",
+  "sub": "Slack",
+  "sub2": ""
+ },
+ {
+  "name": "slack-web-scraper (T)",
+  "url": "https://github.com/iulspop/slack-web-scraper",
+  "cat": "Instant Messaging",
+  "sub": "Slack",
+  "sub2": ""
+ },
+ {
+  "name": "Google CSE for Telegram links",
+  "url": "https://cse.google.com/cse?cx=006368593537057042503:efxu7xprihg",
+  "cat": "Instant Messaging",
+  "sub": "Telegram",
+  "sub2": ""
+ },
+ {
+  "name": "Telegago (T)",
+  "url": "https://tools.osintnewsletter.com/osint-tools/telegago-telegram",
+  "cat": "Instant Messaging",
+  "sub": "Telegram",
+  "sub2": ""
+ },
+ {
+  "name": "Telegram-OSINT (T)",
+  "url": "https://github.com/The-Osint-Toolbox/Telegram-OSINT",
+  "cat": "Instant Messaging",
+  "sub": "Telegram",
+  "sub2": ""
+ },
+ {
+  "name": "TGStat",
+  "url": "https://tgstat.com/",
+  "cat": "Instant Messaging",
+  "sub": "Telegram",
+  "sub2": ""
+ },
+ {
+  "name": "Tosint (T)",
+  "url": "https://github.com/drego85/tosint",
+  "cat": "Instant Messaging",
+  "sub": "Telegram",
+  "sub2": ""
+ },
+ {
+  "name": "Sogou WeChat Search",
+  "url": "https://weixin.sogou.com/",
+  "cat": "Instant Messaging",
+  "sub": "WeChat / LINE",
+  "sub2": ""
+ },
+ {
+  "name": "WechatSogou (T)",
+  "url": "https://github.com/Chowency/WechatSogou",
+  "cat": "Instant Messaging",
+  "sub": "WeChat / LINE",
+  "sub2": ""
+ },
+ {
+  "name": "wechat-dump (T)",
+  "url": "https://github.com/ppwwyyxx/wechat-dump",
+  "cat": "Instant Messaging",
+  "sub": "WeChat / LINE",
+  "sub2": ""
+ },
+ {
+  "name": "wechat-text-backup (T)",
+  "url": "https://github.com/zhaofeng-shu33/wechat-text-backup",
+  "cat": "Instant Messaging",
+  "sub": "WeChat / LINE",
+  "sub2": ""
+ },
+ {
+  "name": "linelog2py (T)",
+  "url": "https://github.com/jyu0414/linelog2py",
+  "cat": "Instant Messaging",
+  "sub": "WeChat / LINE",
+  "sub2": ""
+ },
+ {
+  "name": "line-message-analyzer (T)",
+  "url": "https://github.com/chonyy/line-message-analyzer",
+  "cat": "Instant Messaging",
+  "sub": "WeChat / LINE",
+  "sub2": ""
+ },
+ {
+  "name": "Email2WhatsApp (T)",
+  "url": "https://github.com/dsonbaker/email2whatsapp",
+  "cat": "Instant Messaging",
+  "sub": "WhatsApp",
+  "sub2": ""
+ },
+ {
+  "name": "WhatsApp-OSINT (T)",
+  "url": "https://github.com/kinghacker0/WhatsApp-OSINT",
+  "cat": "Instant Messaging",
+  "sub": "WhatsApp",
+  "sub2": ""
+ },
+ {
+  "name": "InfoFlow Public People Search In Chilean",
+  "url": "https://infoflow.cloud/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "ThatsThem",
+  "url": "https://thatsthem.com/name-address-search",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "Melissa Data - People Finder (R)",
+  "url": "https://www.melissa.com/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "PeekYou",
+  "url": "https://www.peekyou.com/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "Webmii",
+  "url": "https://webmii.com/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "Snitch.name",
+  "url": "https://snitch.name/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "Lullar",
+  "url": "https://com.lullar.com/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "Yasni",
+  "url": "https://www.yasni.com/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "findmypast.com",
+  "url": "https://www.findmypast.com/discover",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "IDCrawl",
+  "url": "https://www.idcrawl.com/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "FamilySearch.org",
+  "url": "https://familysearch.org/search/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "Ancestry.com",
+  "url": "https://www.ancestry.com/search/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "AnyWho",
+  "url": "https://www.anywho.com/whitepages",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "Addresses.com",
+  "url": "https://www.addresses.com/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "FaceCheckID",
+  "url": "https://facecheck.id/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "usa-people-search.com",
+  "url": "https://www.usa-people-search.com/",
+  "cat": "People Search Engines",
+  "sub": "General People Search",
+  "sub2": ""
+ },
+ {
+  "name": "The Knot",
+  "url": "https://www.theknot.com/registry/couplesearch",
+  "cat": "People Search Engines",
+  "sub": "Registries",
+  "sub2": ""
+ },
+ {
+  "name": "Registry Finder",
+  "url": "https://registryfinder.com:443/",
+  "cat": "People Search Engines",
+  "sub": "Registries",
+  "sub2": ""
+ },
+ {
+  "name": "My Registry",
+  "url": "https://www.myregistry.com/",
+  "cat": "People Search Engines",
+  "sub": "Registries",
+  "sub2": ""
+ },
+ {
+  "name": "Amazon Registry Search",
+  "url": "https://www.amazon.com/registries",
+  "cat": "People Search Engines",
+  "sub": "Registries",
+  "sub2": ""
+ },
+ {
+  "name": "The Bump",
+  "url": "https://registry.thebump.com/babyregistrysearch",
+  "cat": "People Search Engines",
+  "sub": "Registries",
+  "sub2": ""
+ },
+ {
+  "name": "AYI.com",
+  "url": "https://www.ayichat.com",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Plenty Of Fish.com",
+  "url": "https://www.pof.com/",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "eHarmony",
+  "url": "https://www.eharmony.com/",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Farmers Only",
+  "url": "https://www.farmersonly.com/",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Tinder (R)",
+  "url": "https://tinder.com/",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Bumble (R)",
+  "url": "https://bumble.com/",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Tantan (R)",
+  "url": "https://int.tantanapp.com",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "AdultFriendFinder",
+  "url": "https://www.adultfriendfinder.com",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "BeautifulPeople.com",
+  "url": "https://www.beautifulpeople.com/en-US",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Badoo",
+  "url": "https://badoo.com",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Spark.com",
+  "url": "https://spark.com",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Meetup",
+  "url": "https://www.meetup.com/",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Hinge",
+  "url": "https://hinge.co/en-gb",
+  "cat": "Dating",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Slydial",
+  "url": "https://www.slydial.com/",
+  "cat": "Telephone Numbers",
+  "sub": "Voicemail",
+  "sub2": ""
+ },
+ {
+  "name": "Numbering Plans",
+  "url": "https://www.numberingplans.com/?page=analysis&sub=phonenr",
+  "cat": "Telephone Numbers",
+  "sub": "International",
+  "sub2": ""
+ },
+ {
+  "name": "Numberway",
+  "url": "https://www.numberway.com/",
+  "cat": "Telephone Numbers",
+  "sub": "International",
+  "sub2": ""
+ },
+ {
+  "name": "WhoCalld",
+  "url": "https://whocalld.com/",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "CallerID Test",
+  "url": "https://calleridtest.com/",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Twilio Lookup",
+  "url": "https://www.twilio.com/lookup",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Fone Finder",
+  "url": "https://www.fonefinder.net/",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "True Caller",
+  "url": "https://www.truecaller.com/",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Reverse Genie",
+  "url": "https://www.reversegenie.com/phone.php",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "SpyDialer",
+  "url": "https://www.spydialer.com:443/default.aspx",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Phone Validator",
+  "url": "https://www.phonevalidator.com/index.aspx",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Phonerator",
+  "url": "https://www.martinvigo.com/phonerator/",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Mr. Number (M)",
+  "url": "https://www.hiya.com/products/apps/hiya-spam-blocker",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Next Caller (R)",
+  "url": "https://nextcaller.com/",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Data24-7 (R)",
+  "url": "https://www.data24-7.com/signup.php",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "HLR Lookup Portal (R)",
+  "url": "https://www.hlr-lookups.com/en/start",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "OpenCNAM API",
+  "url": "https://api.opencnam.com/v2/phone/+19073372323",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Numspy-Api",
+  "url": "https://numspy.pythonanywhere.com/",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Family Tree Now (M)",
+  "url": "https://www.familytreenow.com/search/genealogy/results?phoneno=(555)555-5555",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Whitepages Reverse Phone",
+  "url": "https://www.whitepages.com/reverse-phone",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Hiya (R$)",
+  "url": "https://www.hiya.com/",
+  "cat": "Telephone Numbers",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Melissa Data - Property Viewer (R)",
+  "url": "https://melissa-data.com",
+  "cat": "Public Records",
+  "sub": "Property Records",
+  "sub2": ""
+ },
+ {
+  "name": "Regrid (US Only)",
+  "url": "https://regrid.com",
+  "cat": "Public Records",
+  "sub": "Property Records",
+  "sub2": ""
+ },
+ {
+  "name": "Emporis",
+  "url": "https://www.emporis.com/",
+  "cat": "Public Records",
+  "sub": "Property Records",
+  "sub2": ""
+ },
+ {
+  "name": "Neighbor Report",
+  "url": "https://neighbor.report/",
+  "cat": "Public Records",
+  "sub": "Property Records",
+  "sub2": ""
+ },
+ {
+  "name": "Redfin",
+  "url": "https://redfin.com",
+  "cat": "Public Records",
+  "sub": "Property Records",
+  "sub2": ""
+ },
+ {
+  "name": "Nationwide County Court Records",
+  "url": "https://www.publicrecordcenter.com/onlinecourtrecords.htm",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "World Legal Information Institute",
+  "url": "https://worldlii.org",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "Most Wanted Criminal Pages",
+  "url": "https://www.fbi.gov/wanted/fugitives",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "Black Book Online - Criminal Search",
+  "url": "https://www.blackbookonline.info/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "CrimeReports.com",
+  "url": "https://crimereports.com",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "Familywatchdog - Sex Offender Search",
+  "url": "https://www.familywatchdog.us/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "The Inmate Locator",
+  "url": "https://www.bop.gov/inmateloc/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "National Sex Offender Search",
+  "url": "https://www.nsopw.gov/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "Mugshots.com",
+  "url": "https://mugshots.com",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "judyrecords",
+  "url": "https://www.judyrecords.com/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "Caselaw Access Project",
+  "url": "https://case.law/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "CourtListener",
+  "url": "https://courtlistener.com/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "Docket Alarm",
+  "url": "https://docketalarm.com",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "Google Scholar Case Law",
+  "url": "https://scholar.google.com/scholar_courts",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "PACER",
+  "url": "https://pacer.uscourts.gov/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "Free Law RECAP Archive",
+  "url": "https://www.courtlistener.com/recap/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "UniCourt",
+  "url": "https://unicourt.com/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "Federal Inmate Locator",
+  "url": "https://www.bop.gov/inmateloc/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "Epstein Exposed",
+  "url": "https://epsteinexposed.com/",
+  "cat": "Public Records",
+  "sub": "Court / Criminal Records",
+  "sub2": ""
+ },
+ {
+  "name": "NC Salary DB",
+  "url": "https://www.ncosc.gov/public-information/state-employee-salary-database",
+  "cat": "Public Records",
+  "sub": "Government Records",
+  "sub2": ""
+ },
+ {
+  "name": "Gov Data Canada",
+  "url": "https://open.canada.ca/data/en/dataset",
+  "cat": "Public Records",
+  "sub": "Government Records",
+  "sub2": ""
+ },
+ {
+  "name": "CA Salary DB",
+  "url": "https://transparentcalifornia.com/",
+  "cat": "Public Records",
+  "sub": "Government Records",
+  "sub2": ""
+ },
+ {
+  "name": "BIN Base",
+  "url": "https://www.buybindatabase.binbase.com/",
+  "cat": "Public Records",
+  "sub": "Financial / Tax Resources",
+  "sub2": ""
+ },
+ {
+  "name": "VAT Research",
+  "url": "https://www.belastingdienst.nl/",
+  "cat": "Public Records",
+  "sub": "Financial / Tax Resources",
+  "sub2": ""
+ },
+ {
+  "name": "NETR Online",
+  "url": "https://publicrecords.netronline.com/",
+  "cat": "Public Records",
+  "sub": "Financial / Tax Resources",
+  "sub2": ""
+ },
+ {
+  "name": "Sorted by Birth Date",
+  "url": "https://www.bop.gov/inmateloc/",
+  "cat": "Public Records",
+  "sub": "Birth Records",
+  "sub2": ""
+ },
+ {
+  "name": "Death Check",
+  "url": "https://www.deathindexes.com/",
+  "cat": "Public Records",
+  "sub": "Death Records",
+  "sub2": ""
+ },
+ {
+  "name": "Find A Grave",
+  "url": "https://www.findagrave.com/",
+  "cat": "Public Records",
+  "sub": "Death Records",
+  "sub2": ""
+ },
+ {
+  "name": "GraveInfo",
+  "url": "https://billiongraves.com/",
+  "cat": "Public Records",
+  "sub": "Death Records",
+  "sub2": ""
+ },
+ {
+  "name": "NACo County Explorer",
+  "url": "https://explorer.naco.org/",
+  "cat": "Public Records",
+  "sub": "US County Data",
+  "sub2": ""
+ },
+ {
+  "name": "Voter Registration Data",
+  "url": "https://www.sos.secretary.state.gov/",
+  "cat": "Public Records",
+  "sub": "US Voter Records",
+  "sub2": ""
+ },
+ {
+  "name": "US Patent Office Search",
+  "url": "https://www.uspto.gov/patents/search",
+  "cat": "Public Records",
+  "sub": "Patent Records",
+  "sub2": ""
+ },
+ {
+  "name": "Google Patent Search",
+  "url": "https://patents.google.com/",
+  "cat": "Public Records",
+  "sub": "Patent Records",
+  "sub2": ""
+ },
+ {
+  "name": "Political MoneyLine",
+  "url": "https://www.opensecrets.org/",
+  "cat": "Public Records",
+  "sub": "US Political Records",
+  "sub2": ""
+ },
+ {
+  "name": "MelissaData - Campaign Contributions",
+  "url": "https://melissa-data.com",
+  "cat": "Public Records",
+  "sub": "US Political Records",
+  "sub2": ""
+ },
+ {
+  "name": "Influence Explorer",
+  "url": "https://influenceexplorer.com/",
+  "cat": "Public Records",
+  "sub": "US Political Records",
+  "sub2": ""
+ },
+ {
+  "name": "US Federal Election Commission",
+  "url": "https://fec.gov/data",
+  "cat": "Public Records",
+  "sub": "US Political Records",
+  "sub2": ""
+ },
+ {
+  "name": "Every Politician",
+  "url": "https://everypolitician.org/",
+  "cat": "Public Records",
+  "sub": "US Political Records",
+  "sub2": ""
+ },
+ {
+  "name": "Public Records?",
+  "url": "https://www.brbpublications.com/",
+  "cat": "Public Records",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "The World Bank Open Data Catalog",
+  "url": "https://datacatalog.worldbank.org/",
+  "cat": "Public Records",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "BRB Public Records",
+  "url": "https://www.brbpublications.com/",
+  "cat": "Public Records",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "GOVDATA - Das Datenportal für Deutschland (German)",
+  "url": "https://www.govdata.de/",
+  "cat": "Public Records",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Open-Data-Portal München (German)",
+  "url": "https://opendata.muenchen.de/",
+  "cat": "Public Records",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Searchable FCC ID Database",
+  "url": "https://www.fcc.gov/oet/ea/fccid",
+  "cat": "Public Records",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "OpenSanctions",
+  "url": "https://www.opensanctions.org/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "Sanctions Screening",
+  "sub2": ""
+ },
+ {
+  "name": "OFAC Sanctions List Search",
+  "url": "https://sanctionssearch.ofac.treas.gov/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "Sanctions Screening",
+  "sub2": ""
+ },
+ {
+  "name": "EU Sanctions Tool (D)",
+  "url": "https://sanctions-tool.ec.europa.eu",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "Sanctions Screening",
+  "sub2": ""
+ },
+ {
+  "name": "dilisense",
+  "url": "https://dilisense.com/en",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "Sanctions Screening",
+  "sub2": ""
+ },
+ {
+  "name": "NameScan",
+  "url": "https://namescan.io",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "KYC / AML Tools",
+  "sub2": ""
+ },
+ {
+  "name": "OpenScreening",
+  "url": "https://resources.linkurious.com/openscreening",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "KYC / AML Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Companies House (R)",
+  "url": "https://find-and-update.company-information.service.gov.uk/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "KYC / AML Tools",
+  "sub2": ""
+ },
+ {
+  "name": "OpenOwnership",
+  "url": "https://www.openownership.org/en/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "Beneficial Ownership Lookup",
+  "sub2": ""
+ },
+ {
+  "name": "ICIJ Offshore Leaks Database",
+  "url": "https://offshoreleaks.icij.org/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "Beneficial Ownership Lookup",
+  "sub2": ""
+ },
+ {
+  "name": "OCCRP Aleph (R)",
+  "url": "https://aleph.occrp.org/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "Beneficial Ownership Lookup",
+  "sub2": ""
+ },
+ {
+  "name": "Public Records?",
+  "url": "https://publicrecords.searchsystems.net/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "BRB Public Records",
+  "url": "https://www.brbpub.com/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Open-Data-Portal München (German)",
+  "url": "https://www.opengov-muenchen.de/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Searchable FCC ID Database",
+  "url": "https://fccid.io/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "PepChecker (R)",
+  "url": "https://pepchecker.com",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "Sanctions / PEP",
+  "sub2": ""
+ },
+ {
+  "name": "Ukraine PEP Register (D)",
+  "url": "https://pep.org.ua/en/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "Sanctions / PEP",
+  "sub2": ""
+ },
+ {
+  "name": "EveryPolitician",
+  "url": "https://everypolitician.org/",
+  "cat": "Compliance & Risk Intelligence",
+  "sub": "Sanctions / PEP",
+  "sub2": ""
+ },
+ {
+  "name": "AnnualReports.com",
+  "url": "https://www.annualreports.com/",
+  "cat": "Business Records",
+  "sub": "Annual Reports",
+  "sub2": ""
+ },
+ {
+  "name": "Public Register Online",
+  "url": "https://www.annualreportservice.com/",
+  "cat": "Business Records",
+  "sub": "Annual Reports",
+  "sub2": ""
+ },
+ {
+  "name": "Public Register's Annual Report Service",
+  "url": "https://www.prars.com/search/alpha/A",
+  "cat": "Business Records",
+  "sub": "Annual Reports",
+  "sub2": ""
+ },
+ {
+  "name": "International Registries",
+  "url": "https://www.gov.uk/government/publications/overseas-registries/overseas-registries",
+  "cat": "Business Records",
+  "sub": "Annual Reports",
+  "sub2": ""
+ },
+ {
+  "name": "Commercial Register - Worldwide",
+  "url": "https://www.sg.ch/recht/handelsregister-notariate.html",
+  "cat": "Business Records",
+  "sub": "General Info & News",
+  "sub2": ""
+ },
+ {
+  "name": "SEC.gov - EDGAR",
+  "url": "https://www.sec.gov/submit-filings",
+  "cat": "Business Records",
+  "sub": "General Info & News",
+  "sub2": ""
+ },
+ {
+  "name": "International White Pages",
+  "url": "https://www.wayp.com/",
+  "cat": "Business Records",
+  "sub": "General Info & News",
+  "sub2": ""
+ },
+ {
+  "name": "UK Companies",
+  "url": "https://www.gov.uk/get-information-about-a-company",
+  "cat": "Business Records",
+  "sub": "General Info & News",
+  "sub2": ""
+ },
+ {
+  "name": "Global EDGE Resource Directory",
+  "url": "https://globaledge.msu.edu/global-resources",
+  "cat": "Business Records",
+  "sub": "General Info & News",
+  "sub2": ""
+ },
+ {
+  "name": "Google Finance",
+  "url": "https://www.google.com/finance/",
+  "cat": "Business Records",
+  "sub": "General Info & News",
+  "sub2": ""
+ },
+ {
+  "name": "OpenCorporates",
+  "url": "https://opencorporates.com/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "AIHIT",
+  "url": "https://www.aihitdata.com/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Plonked",
+  "url": "https://www.plonked.com/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Buzzfile",
+  "url": "https://www.buzzfile.com/Home/Basic",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "LittleSis",
+  "url": "https://littlesis.org/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Rusprofile",
+  "url": "https://www.rusprofile.ru/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Companies House",
+  "url": "https://beta.companieshouse.gov.uk/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Company Data Rex (EU)",
+  "url": "https://www.cdrex.com/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Europages",
+  "url": "https://www.europages.co.uk:443/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Owler (R)",
+  "url": "https://www.owler.com/corp",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Vault",
+  "url": "https://vault.com/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Companies In The UK",
+  "url": "https://www.companiesintheuk.co.uk/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "UK Data",
+  "url": "https://ukdata.com/",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Orbis Directory",
+  "url": "https://orbisdirectory.bvdinfo.com/version-2016121/OrbisDirectory/Companies",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "Crunchbase",
+  "url": "https://www.crunchbase.com/#/home/index",
+  "cat": "Business Records",
+  "sub": "Company Profiles",
+  "sub2": ""
+ },
+ {
+  "name": "RecruitEm",
+  "url": "https://recruitin.net/",
+  "cat": "Business Records",
+  "sub": "Employee Profiles & Resumes",
+  "sub2": ""
+ },
+ {
+  "name": "LinkedIn",
+  "url": "https://www.linkedin.com/",
+  "cat": "Business Records",
+  "sub": "Employee Profiles & Resumes",
+  "sub2": ""
+ },
+ {
+  "name": "Jobster",
+  "url": "https://jobster.com/",
+  "cat": "Business Records",
+  "sub": "Employee Profiles & Resumes",
+  "sub2": ""
+ },
+ {
+  "name": "XING (R)",
+  "url": "https://www.xing.com/",
+  "cat": "Business Records",
+  "sub": "Employee Profiles & Resumes",
+  "sub2": ""
+ },
+ {
+  "name": "CVGadget",
+  "url": "https://cvgadget.com/",
+  "cat": "Business Records",
+  "sub": "Employee Profiles & Resumes",
+  "sub2": ""
+ },
+ {
+  "name": "RBA - Business Information Resources",
+  "url": "https://www.rba.co.uk/sources/",
+  "cat": "Business Records",
+  "sub": "Additional Resources",
+  "sub2": ""
+ },
+ {
+  "name": "VAT Number Validation",
+  "url": "https://ec.europa.eu/taxation_customs/vies/?locale=en",
+  "cat": "Business Records",
+  "sub": "Additional Resources",
+  "sub2": ""
+ },
+ {
+  "name": "MyAccident - traffic accident map",
+  "url": "https://myaccident.org/",
+  "cat": "Transportation",
+  "sub": "Vehicle Records",
+  "sub2": ""
+ },
+ {
+  "name": "NHTSA Vehicle API",
+  "url": "https://vpic.nhtsa.dot.gov/api/",
+  "cat": "Transportation",
+  "sub": "Vehicle Records",
+  "sub2": ""
+ },
+ {
+  "name": "FindByPlate",
+  "url": "https://findbyplate.com/",
+  "cat": "Transportation",
+  "sub": "Vehicle Records",
+  "sub2": ""
+ },
+ {
+  "name": "carVertical VIN Decoder",
+  "url": "https://www.carvertical.com/vin-decoder",
+  "cat": "Transportation",
+  "sub": "Vehicle Records",
+  "sub2": ""
+ },
+ {
+  "name": "autoDNA VIN Lookup",
+  "url": "https://www.autodna.com/",
+  "cat": "Transportation",
+  "sub": "Vehicle Records",
+  "sub2": ""
+ },
+ {
+  "name": "VinDecodr",
+  "url": "https://vindecodr.com/",
+  "cat": "Transportation",
+  "sub": "Vehicle Records",
+  "sub2": ""
+ },
+ {
+  "name": "AutoRef (EU)",
+  "url": "https://www.autoref.eu/en",
+  "cat": "Transportation",
+  "sub": "Vehicle Records",
+  "sub2": ""
+ },
+ {
+  "name": "Carnet.ai",
+  "url": "https://carnet.ai/",
+  "cat": "Transportation",
+  "sub": "Vehicle Records",
+  "sub2": ""
+ },
+ {
+  "name": "Finnik (NL)",
+  "url": "https://finnik.nl/en",
+  "cat": "Transportation",
+  "sub": "Vehicle Records",
+  "sub2": ""
+ },
+ {
+  "name": "Flightradar24.com",
+  "url": "https://www.flightradar24.com/",
+  "cat": "Transportation",
+  "sub": "Air Traffic Records",
+  "sub2": ""
+ },
+ {
+  "name": "World Aeronautical Database",
+  "url": "https://worldaerodata.com/",
+  "cat": "Transportation",
+  "sub": "Air Traffic Records",
+  "sub2": ""
+ },
+ {
+  "name": "ADS-B Exchange",
+  "url": "https://www.adsbexchange.com/",
+  "cat": "Transportation",
+  "sub": "Air Traffic Records",
+  "sub2": ""
+ },
+ {
+  "name": "ADS-B.NL",
+  "url": "https://www.ads-b.nl/index.php?pageno=9999",
+  "cat": "Transportation",
+  "sub": "Air Traffic Records",
+  "sub2": ""
+ },
+ {
+  "name": "OpenAIP World Aeronautical Database",
+  "url": "https://www.openaip.net/",
+  "cat": "Transportation",
+  "sub": "Air Traffic Records",
+  "sub2": ""
+ },
+ {
+  "name": "Vessel Tracker",
+  "url": "https://www.vesseltracker.com/",
+  "cat": "Transportation",
+  "sub": "Marine Records",
+  "sub2": ""
+ },
+ {
+  "name": "Ship AIS",
+  "url": "https://shipais.uk/",
+  "cat": "Transportation",
+  "sub": "Marine Records",
+  "sub2": ""
+ },
+ {
+  "name": "OpenSeaMap - The free nautical chart",
+  "url": "https://www.openseamap.org",
+  "cat": "Transportation",
+  "sub": "Marine Records",
+  "sub2": ""
+ },
+ {
+  "name": "Vessel Finder",
+  "url": "https://www.vesselfinder.com/",
+  "cat": "Transportation",
+  "sub": "Marine Records",
+  "sub2": ""
+ },
+ {
+  "name": "Global Fishing Watch",
+  "url": "https://globalfishingwatch.org",
+  "cat": "Transportation",
+  "sub": "Marine Records",
+  "sub2": ""
+ },
+ {
+  "name": "Deutsche Bahn Open-Data-Portal (German)",
+  "url": "https://data.deutschebahn.com/opendata",
+  "cat": "Transportation",
+  "sub": "Railway Records",
+  "sub2": ""
+ },
+ {
+  "name": "OpenRailwayMap",
+  "url": "https://www.openrailwaymap.org/",
+  "cat": "Transportation",
+  "sub": "Railway Records",
+  "sub2": ""
+ },
+ {
+  "name": "Satellite Tracking",
+  "url": "https://www.n2yo.com/",
+  "cat": "Transportation",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Track-Trace",
+  "url": "https://www.track-trace.com/",
+  "cat": "Transportation",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Astrometry",
+  "url": "https://nova.astrometry.net/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Geolocation Tools",
+  "sub2": ""
+ },
+ {
+  "name": "SunCalc",
+  "url": "https://suncalc.net/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Geolocation Tools",
+  "sub2": ""
+ },
+ {
+  "name": "SunCalc",
+  "url": "https://suncalc.org/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Geolocation Tools",
+  "sub2": ""
+ },
+ {
+  "name": "GeoSpy",
+  "url": "https://geospy.ai/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Geolocation Tools",
+  "sub2": ""
+ },
+ {
+  "name": "GPSVisualizer",
+  "url": "https://www.gpsvisualizer.com/geocode",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Coordinates",
+  "sub2": ""
+ },
+ {
+  "name": "Military Grid Reference System Coordinates",
+  "url": "https://dominoc925-pages.appspot.com/mapplets/cs_mgrs.html",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Coordinates",
+  "sub2": ""
+ },
+ {
+  "name": "Batch Geocoding",
+  "url": "https://www.doogal.co.uk/BatchGeocoding",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Coordinates",
+  "sub2": ""
+ },
+ {
+  "name": "Batch Reverse Geocoding",
+  "url": "https://www.doogal.co.uk/BatchReverseGeocoding",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Coordinates",
+  "sub2": ""
+ },
+ {
+  "name": "Hyperlapse (T)",
+  "url": "https://github.com/TeehanLax/Hyperlapse.js",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Map Reporting Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Google Maps Streetview Player",
+  "url": "https://brianfolts.com/driver/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Map Reporting Tools",
+  "sub2": ""
+ },
+ {
+  "name": "ScribbleMaps",
+  "url": "https://www.scribblemaps.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Map Reporting Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Beholder",
+  "url": "https://beholder.infragard.io/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Map Reporting Tools",
+  "sub2": ""
+ },
+ {
+  "name": "LiveUaMap",
+  "url": "https://liveuamap.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Map Reporting Tools",
+  "sub2": ""
+ },
+ {
+  "name": "OpenSignal",
+  "url": "https://www.opensignal.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Mobile Coverage",
+  "sub2": ""
+ },
+ {
+  "name": "AntennaSearch",
+  "url": "https://www.antennasearch.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Mobile Coverage",
+  "sub2": ""
+ },
+ {
+  "name": "OpenCelliD",
+  "url": "https://opencellid.org/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Mobile Coverage",
+  "sub2": ""
+ },
+ {
+  "name": "beaconDB",
+  "url": "https://beacondb.net/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "Mobile Coverage",
+  "sub2": ""
+ },
+ {
+  "name": "Google Maps",
+  "url": "https://www.google.com/maps/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Bing Maps",
+  "url": "https://www.bing.com/maps",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "HERE Maps",
+  "url": "https://maps.here.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Dual Maps",
+  "url": "https://data.mashedworld.com/dualmaps/map.htm",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Instant Google Street View",
+  "url": "https://www.instantstreetview.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Wikimapia",
+  "url": "https://wikimapia.org/#lang=en&lat=40.078071&lon=-100.458984&z=5&m=b",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "OpenStreetMap",
+  "url": "https://www.openstreetmap.org/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Flash Earth",
+  "url": "https://zoom.earth/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Historic Aerials",
+  "url": "https://www.historicaerials.com/?javascript=&",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Google Maps Update Alerts",
+  "url": "https://followyourworld.appspot.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Google Earth Overlays",
+  "url": "https://www.mgmaps.com/kml/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Yandex.Maps",
+  "url": "https://yandex.com/maps/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Google Earth",
+  "url": "https://earth.google.com/web/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Baidu Maps",
+  "url": "https://map.baidu.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Corona",
+  "url": "https://corona.cast.uark.edu/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Naver (Korean)",
+  "url": "https://map.naver.com/p/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Overpass Turbo",
+  "url": "https://overpass-turbo.eu/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "EarthExplorer",
+  "url": "https://earthexplorer.usgs.gov/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "OpenStreetCam",
+  "url": "https://kartaview.org/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Travel by Drone",
+  "url": "https://travelbydrone.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Hivemapper",
+  "url": "https://hivemapper.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "LandsatLook Viewer",
+  "url": "https://landsatlook.usgs.gov/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "NEXRAD Data Inventory Search",
+  "url": "https://www.ncdc.noaa.gov/nexradinv/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "MapQuest",
+  "url": "https://www.mapquest.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "OpenInfrastructureMap",
+  "url": "https://openinframap.org/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Hiking & Biking Map",
+  "url": "https://hikebikemap.org/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "US Nav Guide Zip Code Data",
+  "url": "https://www.usnaviguide.com/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Wayback Imagery",
+  "url": "https://livingatlas.arcgis.com/wayback/",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "SkyFi.com - Satellite Open Data (R)",
+  "url": "https://app.skyfi.com/explore/open",
+  "cat": "Geolocation Tools / Maps",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Google",
+  "url": "https://www.google.com/?gws_rd=ssl",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Bing",
+  "url": "https://www.bing.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "DuckDuckGo",
+  "url": "https://duckduckgo.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Yahoo Advanced Web Search",
+  "url": "https://search.yahoo.com/web/advanced",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "StartPage",
+  "url": "https://www.startpage.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Yandex",
+  "url": "https://yandex.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Baidu",
+  "url": "https://www.baidu.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Google Advanced Search",
+  "url": "https://www.google.com/advanced_search",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "iZito",
+  "url": "https://www.izito.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Advangle",
+  "url": "https://advangle.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Instya",
+  "url": "https://www.instya.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Hulbee",
+  "url": "https://hulbee.com/de",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Mojeek",
+  "url": "https://mojeek.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Swisscows",
+  "url": "https://swisscows.com/en",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Brave",
+  "url": "https://search.brave.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "Stract",
+  "url": "https://stract.com/",
+  "cat": "Search Engines",
+  "sub": "General Search",
+  "sub2": ""
+ },
+ {
+  "name": "iSEEK",
+  "url": "https://iseek.com/iseek/home.page",
+  "cat": "Search Engines",
+  "sub": "Meta Search",
+  "sub2": ""
+ },
+ {
+  "name": "eTools.ch",
+  "url": "https://www.etools.ch/",
+  "cat": "Search Engines",
+  "sub": "Meta Search",
+  "sub2": ""
+ },
+ {
+  "name": "PublicWWW",
+  "url": "https://publicwww.com/",
+  "cat": "Search Engines",
+  "sub": "Code Search",
+  "sub2": ""
+ },
+ {
+  "name": "Searchcode",
+  "url": "https://searchcode.com/",
+  "cat": "Search Engines",
+  "sub": "Code Search",
+  "sub2": ""
+ },
+ {
+  "name": "NerdyData",
+  "url": "https://www.nerdydata.com/reports/new",
+  "cat": "Search Engines",
+  "sub": "Code Search",
+  "sub2": ""
+ },
+ {
+  "name": "Gitrob (T)",
+  "url": "https://github.com/michenriksen/gitrob",
+  "cat": "Search Engines",
+  "sub": "Code Search",
+  "sub2": ""
+ },
+ {
+  "name": "Github-Dorks (T)",
+  "url": "https://github.com/techgaun/github-dorks",
+  "cat": "Search Engines",
+  "sub": "Code Search",
+  "sub2": ""
+ },
+ {
+  "name": "GitLeaks",
+  "url": "https://github.com/gitleaks/gitleaks",
+  "cat": "Search Engines",
+  "sub": "Code Search",
+  "sub2": ""
+ },
+ {
+  "name": "GlobalFile",
+  "url": "https://globalfilesearch.com/",
+  "cat": "Search Engines",
+  "sub": "FTP Search",
+  "sub2": ""
+ },
+ {
+  "name": "FTP Google Dork (D)",
+  "url": "https://www.google.com/search?q=inurl%3Aftp+-inurl%3Ahttp+-inurl%3Ahttps+ftpsearchterm",
+  "cat": "Search Engines",
+  "sub": "FTP Search",
+  "sub2": ""
+ },
+ {
+  "name": "Napalm FTP",
+  "url": "https://www.searchftps.net/",
+  "cat": "Search Engines",
+  "sub": "FTP Search",
+  "sub2": ""
+ },
+ {
+  "name": "PubPeer",
+  "url": "https://pubpeer.com/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Bielefeld Academic Search Engine",
+  "url": "https://www.base-search.net/Search/Advanced",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Google Scholar",
+  "url": "https://scholar.google.com/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "PubMed - National Center for Biotechnology Information",
+  "url": "https://pubmed.ncbi.nlm.nih.gov/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Open Library",
+  "url": "https://openlibrary.org/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "JURN",
+  "url": "https://www.jurn.org/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "UK National Archives",
+  "url": "https://discovery.nationalarchives.gov.uk/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "OpenGrey EU Papers",
+  "url": "https://opengrey.eu/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "US Gov Publishing Office - FDsys",
+  "url": "https://www.gpo.gov/fdsys/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "OpenDOAR",
+  "url": "https://www.opendoar.org/search.php",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Microsoft Academic",
+  "url": "https://academic.microsoft.com/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Science Direct",
+  "url": "https://www.sciencedirect.com/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Think Tank Search",
+  "url": "https://guides.library.harvard.edu/hks/think_tank_search",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Library Databases",
+  "url": "https://guides.uflib.ufl.edu/az.php",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Copyscape Plagiarism Checker",
+  "url": "https://www.copyscape.com/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Lazy Scholar (T)",
+  "url": "https://lazyscholar.org/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Open Access Scholarly Journals",
+  "url": "https://www.pagepress.org/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "The Open Syllabus Project",
+  "url": "https://www.opensyllabus.org/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Science Publications",
+  "url": "https://www.thescipub.com/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "arXiv.org",
+  "url": "https://arxiv.org/",
+  "cat": "Search Engines",
+  "sub": "Academic / Publication Search",
+  "sub2": ""
+ },
+ {
+  "name": "Google News Search",
+  "url": "https://news.google.com/news/advanced_news_search?",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "Flipboard",
+  "url": "https://flipboard.com/",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "YouGotTheNews",
+  "url": "https://yougotthenews.com/",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "NewspaperARCHIVE.com",
+  "url": "https://newspaperarchive.com/",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "PressReader.com",
+  "url": "https://www.pressreader.com/",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "Newspaper Map",
+  "url": "https://newspapermap.com/",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "NewsBrief",
+  "url": "https://emm.newsbrief.eu/NewsBrief/clusteredition/en/latest.html",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "AllYouCanRead.com",
+  "url": "https://www.allyoucanread.com/",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "World News",
+  "url": "https://wn.com/#/search",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "NewsNow.co.uk",
+  "url": "https://www.newsnow.co.uk/h/",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "Hubii",
+  "url": "https://hubii.com/",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "Inshorts",
+  "url": "https://inshorts.com/en/read",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "NewsBot",
+  "url": "https://getnewsbot.com/",
+  "cat": "Search Engines",
+  "sub": "News Search",
+  "sub2": ""
+ },
+ {
+  "name": "Colossus International Engine List",
+  "url": "https://www.searchenginecolossus.com/",
+  "cat": "Search Engines",
+  "sub": "Other Search",
+  "sub2": ""
+ },
+ {
+  "name": "Zenodo",
+  "url": "https://zenodo.org/",
+  "cat": "Search Engines",
+  "sub": "Other Search",
+  "sub2": ""
+ },
+ {
+  "name": "EntityCube",
+  "url": "https://entitycube.research.microsoft.com/",
+  "cat": "Search Engines",
+  "sub": "Other Search",
+  "sub2": ""
+ },
+ {
+  "name": "FindTheData A Research Engine",
+  "url": "https://www.findthedata.com/",
+  "cat": "Search Engines",
+  "sub": "Other Search",
+  "sub2": ""
+ },
+ {
+  "name": "wayparam",
+  "url": "https://github.com/aleff-github/wayparam",
+  "cat": "Search Engines",
+  "sub": "Search Tools",
+  "sub2": ""
+ },
+ {
+  "name": "SearchDiggity (T)",
+  "url": "https://bishopfox.com/resources",
+  "cat": "Search Engines",
+  "sub": "Search Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Scanner-inurlbr (T)",
+  "url": "https://github.com/googleinurl/SCANNER-INURLBR",
+  "cat": "Search Engines",
+  "sub": "Search Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Google Alerts",
+  "url": "https://www.google.com/alerts",
+  "cat": "Search Engines",
+  "sub": "Search Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Google Custom Search Engine",
+  "url": "https://cse.google.com/cse/",
+  "cat": "Search Engines",
+  "sub": "Search Tools",
+  "sub2": ""
+ },
+ {
+  "name": "pagodo - Passive Google Dork (T)",
+  "url": "https://github.com/opsdisk/pagodo",
+  "cat": "Search Engines",
+  "sub": "Search Tools",
+  "sub2": ""
+ },
+ {
+  "name": "dorksearch.com",
+  "url": "https://www.dorksearch.com/",
+  "cat": "Search Engines",
+  "sub": "Search Tools",
+  "sub2": ""
+ },
+ {
+  "name": "dorkgenerator.pages.dev",
+  "url": "https://dorkgenerator.pages.dev/",
+  "cat": "Search Engines",
+  "sub": "Search Tools",
+  "sub2": ""
+ },
+ {
+  "name": "dorksearch.netlify.app",
+  "url": "https://dorksearch.netlify.app/",
+  "cat": "Search Engines",
+  "sub": "Search Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Google Hacking Database",
+  "url": "https://www.exploit-db.com/google-hacking-database",
+  "cat": "Search Engines",
+  "sub": "Search Engine Guides",
+  "sub2": ""
+ },
+ {
+  "name": "Google Search Operators Guide",
+  "url": "https://www.googleguide.com/advanced_operators_reference.html",
+  "cat": "Search Engines",
+  "sub": "Search Engine Guides",
+  "sub2": ""
+ },
+ {
+  "name": "Google Guide Cheat Sheet",
+  "url": "https://www.googleguide.com/help/calculator.html",
+  "cat": "Search Engines",
+  "sub": "Search Engine Guides",
+  "sub2": ""
+ },
+ {
+  "name": "Live Journal Seek",
+  "url": "https://ljseek.com/",
+  "cat": "Online Communities",
+  "sub": "Blog Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Blog Search Engine",
+  "url": "https://www.blogsearchengine.org/",
+  "cat": "Online Communities",
+  "sub": "Blog Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Discord Bot List",
+  "url": "https://discord.bots.gg/",
+  "cat": "Online Communities",
+  "sub": "Discord Servers",
+  "sub2": ""
+ },
+ {
+  "name": "ReconXplorer (T)",
+  "url": "https://github.com/root7am/ReconXplorer",
+  "cat": "Online Communities",
+  "sub": "Discord Servers",
+  "sub2": ""
+ },
+ {
+  "name": "Top.gg",
+  "url": "https://top.gg/",
+  "cat": "Online Communities",
+  "sub": "Discord Servers",
+  "sub2": ""
+ },
+ {
+  "name": "BoardReader",
+  "url": "https://boardreader.com/",
+  "cat": "Online Communities",
+  "sub": "Forum Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Omgili",
+  "url": "https://webz.io/",
+  "cat": "Online Communities",
+  "sub": "Forum Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Craigslist Forums",
+  "url": "https://forums.craigslist.org/",
+  "cat": "Online Communities",
+  "sub": "Forum Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Delphi Forum Search",
+  "url": "https://www.delphiforums.com/",
+  "cat": "Online Communities",
+  "sub": "Forum Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Google Groups Search",
+  "url": "https://groups.google.com/forum/#!overview",
+  "cat": "Online Communities",
+  "sub": "Forum Search Engines",
+  "sub2": ""
+ },
+ {
+  "name": "Mibbit",
+  "url": "https://search.mibbit.com/",
+  "cat": "Online Communities",
+  "sub": "IRC Search",
+  "sub2": ""
+ },
+ {
+  "name": "IRCP (T)",
+  "url": "https://github.com/internet-relay-chat/IRCP",
+  "cat": "Online Communities",
+  "sub": "IRC Search",
+  "sub2": ""
+ },
+ {
+  "name": "ircsnapshot (T)",
+  "url": "https://github.com/bwall/ircsnapshot",
+  "cat": "Online Communities",
+  "sub": "IRC Search",
+  "sub2": ""
+ },
+ {
+  "name": "netsplit.de",
+  "url": "https://netsplit.de/channels/search.php",
+  "cat": "Online Communities",
+  "sub": "IRC Search",
+  "sub2": ""
+ },
+ {
+  "name": "Arctic Shift",
+  "url": "https://arctic-shift.photon-reddit.com/",
+  "cat": "Online Communities",
+  "sub": "Reddit Communities",
+  "sub2": ""
+ },
+ {
+  "name": "Cama's Reddit Search",
+  "url": "https://camas.github.io/reddit-search/",
+  "cat": "Online Communities",
+  "sub": "Reddit Communities",
+  "sub2": ""
+ },
+ {
+  "name": "Reveddit",
+  "url": "https://www.reveddit.com/",
+  "cat": "Online Communities",
+  "sub": "Reddit Communities",
+  "sub2": ""
+ },
+ {
+  "name": "Anna's Archive",
+  "url": "https://annas-archive.org/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Archive.is",
+  "url": "https://archive.is/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Browsershots",
+  "url": "https://browsershots.org/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Cached Pages",
+  "url": "https://www.cachedpages.com/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Cached View",
+  "url": "https://cachedview.com/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Common Crawl",
+  "url": "https://commoncrawl.org/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Internet Archive: Wayback Machine",
+  "url": "https://web.archive.org/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "PDF My URL",
+  "url": "https://pdfmyurl.com/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Screenshots.com",
+  "url": "https://www.screenshots.com/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Wayback Machine Chrome Extension",
+  "url": "https://chrome.google.com/webstore/detail/wayback-machine/fpnmgdkabkmnadcjpehmlllkndpkmiak",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Textfiles.com",
+  "url": "https://textfiles.com/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "UK Web Archive",
+  "url": "https://www.webarchive.org.uk/ukwa/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Waybackpack (T)",
+  "url": "https://github.com/jsvine/waybackpack",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Web Archive-RU",
+  "url": "https://web-arhive.ru/",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "WebCite",
+  "url": "https://www.webcitation.org:443/query",
+  "cat": "Archives",
+  "sub": "Web",
+  "sub2": ""
+ },
+ {
+  "name": "Cryptome",
+  "url": "https://cryptome.org/",
+  "cat": "Archives",
+  "sub": "Data Leaks",
+  "sub2": ""
+ },
+ {
+  "name": "Databases.Today",
+  "url": "https://databases.today/",
+  "cat": "Archives",
+  "sub": "Data Leaks",
+  "sub2": ""
+ },
+ {
+  "name": "WikiLeaks",
+  "url": "https://wikileaks.org/",
+  "cat": "Archives",
+  "sub": "Data Leaks",
+  "sub2": ""
+ },
+ {
+  "name": "Labeled Faces in the Wild DB",
+  "url": "https://vis-www.cs.umass.edu/lfw/",
+  "cat": "Archives",
+  "sub": "Public Datasets",
+  "sub2": ""
+ },
+ {
+  "name": "Stanford Large Network Dataset Collection",
+  "url": "https://snap.stanford.edu/data/#amazon",
+  "cat": "Archives",
+  "sub": "Public Datasets",
+  "sub2": ""
+ },
+ {
+  "name": "UCI Spambase Data Set",
+  "url": "https://archive.ics.uci.edu/dataset/94/spambase",
+  "cat": "Archives",
+  "sub": "Public Datasets",
+  "sub2": ""
+ },
+ {
+  "name": "Visual Genome",
+  "url": "https://visualgenome.org/",
+  "cat": "Archives",
+  "sub": "Public Datasets",
+  "sub2": ""
+ },
+ {
+  "name": "TV Closed Caption Search",
+  "url": "https://archive.org/details/tv",
+  "cat": "Archives",
+  "sub": "Other Media",
+  "sub2": ""
+ },
+ {
+  "name": "Bing Translate",
+  "url": "https://translator.bing.com/",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "Cambridge Dictionary",
+  "url": "https://dictionary.cambridge.org/",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "DeepL Translator",
+  "url": "https://www.deepl.com/en/translator",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "Free Translation",
+  "url": "https://translation2.paralink.com/",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "Google Input Tools",
+  "url": "https://www.google.com/inputtools/",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "Google Translate",
+  "url": "https://translate.google.com/",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "Slang Dictionary & Translator",
+  "url": "https://www.noslang.com/",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "Slangit - The Slang Dictionary",
+  "url": "https://slang.net/",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "Urban Dictionary",
+  "url": "https://www.urbandictionary.com/",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "Wiktionary",
+  "url": "https://en.wiktionary.org/",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "Word Reference",
+  "url": "https://www.wordreference.com/",
+  "cat": "Language Translation",
+  "sub": "Text",
+  "sub2": ""
+ },
+ {
+  "name": "Online OCR (SodaPDF)",
+  "url": "https://www.sodapdf.com/pdf-tools/ocr-pdf/",
+  "cat": "Language Translation",
+  "sub": "Pictures",
+  "sub2": ""
+ },
+ {
+  "name": "Online OCR (onlineocr.net)",
+  "url": "https://www.onlineocr.net/",
+  "cat": "Language Translation",
+  "sub": "Pictures",
+  "sub2": ""
+ },
+ {
+  "name": "WhatTheFont",
+  "url": "https://www.myfonts.com/pages/whatthefont/",
+  "cat": "Language Translation",
+  "sub": "Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Genymotion (T)",
+  "url": "https://www.genymotion.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Emulation Tools"
+ },
+ {
+  "name": "BlueStacks 2 (T)",
+  "url": "https://www.bluestacks.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Emulation Tools"
+ },
+ {
+  "name": "Nox App Player",
+  "url": "https://www.bignox.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Emulation Tools"
+ },
+ {
+  "name": "Apk Online",
+  "url": "https://apk.online/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Emulation Tools"
+ },
+ {
+  "name": "Facebook (T)",
+  "url": "https://www.facebook.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Social Networking"
+ },
+ {
+  "name": "LinkedIn (T)",
+  "url": "https://www.linkedin.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Social Networking"
+ },
+ {
+  "name": "Twitter (T)",
+  "url": "https://www.twitter.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Social Networking"
+ },
+ {
+  "name": "Pinterest (T)",
+  "url": "https://www.pinterest.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Social Networking"
+ },
+ {
+  "name": "Signal Private Messenger (T)",
+  "url": "https://signal.org/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Instant Messaging"
+ },
+ {
+  "name": "Riot.im - Communicate, your way (T)",
+  "url": "https://riot.im/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Instant Messaging"
+ },
+ {
+  "name": "Telegram (T)",
+  "url": "https://telegram.org/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Instant Messaging"
+ },
+ {
+  "name": "Snapchat (T)",
+  "url": "https://www.snapchat.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Instant Messaging"
+ },
+ {
+  "name": "WhatsApp Messenger (T)",
+  "url": "https://www.whatsapp.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Instant Messaging"
+ },
+ {
+  "name": "Kik (T)",
+  "url": "https://www.kik.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Instant Messaging"
+ },
+ {
+  "name": "Yik Yak (T)",
+  "url": "https://www.yikyak.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Instant Messaging"
+ },
+ {
+  "name": "LINE (T)",
+  "url": "https://line.me/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Instant Messaging"
+ },
+ {
+  "name": "Instagram (T)",
+  "url": "https://www.instagram.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Pictures"
+ },
+ {
+  "name": "Flickr (T)",
+  "url": "https://www.flickr.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Pictures"
+ },
+ {
+  "name": "Periscope (T)",
+  "url": "https://www.periscope.tv/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Streaming Video"
+ },
+ {
+  "name": "Meerkat (T)",
+  "url": "https://meerkatapp.co/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Streaming Video"
+ },
+ {
+  "name": "Vine (T)",
+  "url": "https://vine.co/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps / Streaming Video"
+ },
+ {
+  "name": "Truecaller (T)",
+  "url": "https://www.truecaller.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Android",
+  "sub2": "Apps"
+ },
+ {
+  "name": "APKLeaks",
+  "url": "https://github.com/dwisiswant0/apkleaks",
+  "cat": "Mobile OSINT",
+  "sub": "App Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "APKtool",
+  "url": "https://apktool.org/",
+  "cat": "Mobile OSINT",
+  "sub": "App Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "JADX",
+  "url": "https://github.com/skylot/jadx",
+  "cat": "Mobile OSINT",
+  "sub": "App Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "MobSF",
+  "url": "https://github.com/MobSF/Mobile-Security-Framework-MobSF",
+  "cat": "Mobile OSINT",
+  "sub": "App Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Autopsy",
+  "url": "https://www.autopsy.com/",
+  "cat": "Mobile OSINT",
+  "sub": "Device Forensics",
+  "sub2": ""
+ },
+ {
+  "name": "Frida",
+  "url": "https://frida.re/",
+  "cat": "Mobile OSINT",
+  "sub": "Device Forensics",
+  "sub2": ""
+ },
+ {
+  "name": "Charles Proxy",
+  "url": "https://www.charlesproxy.com/",
+  "cat": "Mobile OSINT",
+  "sub": "iOS",
+  "sub2": ""
+ },
+ {
+  "name": "Lynxio OSINT",
+  "url": "https://lynxio.io/",
+  "cat": "Mobile OSINT",
+  "sub": "iOS",
+  "sub2": ""
+ },
+ {
+  "name": "OSINT Researcher",
+  "url": "https://apps.apple.com/us/app/osint-researcher/id6747302251",
+  "cat": "Mobile OSINT",
+  "sub": "iOS",
+  "sub2": ""
+ },
+ {
+  "name": "Reddit Deep Web",
+  "url": "https://www.reddit.com/r/deepweb/",
+  "cat": "Dark Web",
+  "sub": "General Info",
+  "sub2": ""
+ },
+ {
+  "name": "Reddit Onions",
+  "url": "https://www.reddit.com/r/onions/",
+  "cat": "Dark Web",
+  "sub": "General Info",
+  "sub2": ""
+ },
+ {
+  "name": "Reddit Darknet",
+  "url": "https://www.reddit.com/r/darknet/",
+  "cat": "Dark Web",
+  "sub": "General Info",
+  "sub2": ""
+ },
+ {
+  "name": "Tor Download (T)",
+  "url": "https://www.torproject.org/download/",
+  "cat": "Dark Web",
+  "sub": "Clients",
+  "sub2": ""
+ },
+ {
+  "name": "Freenet Project (T)",
+  "url": "https://www.hyphanet.org/",
+  "cat": "Dark Web",
+  "sub": "Clients",
+  "sub2": ""
+ },
+ {
+  "name": "I2P Anonymous Network (T)",
+  "url": "https://i2p.net/",
+  "cat": "Dark Web",
+  "sub": "Clients",
+  "sub2": ""
+ },
+ {
+  "name": "OnionScan",
+  "url": "https://github.com/s-rah/onionscan",
+  "cat": "Dark Web",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "TorBot",
+  "url": "https://github.com/DedSecInside/TorBot",
+  "cat": "Dark Web",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Tor Scan",
+  "url": "https://www.torscan.io/",
+  "cat": "Dark Web",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Onioff",
+  "url": "https://github.com/k4m4/onioff",
+  "cat": "Dark Web",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Hunchly Hidden Services Report",
+  "url": "https://darkweb.hunch.ly/",
+  "cat": "Dark Web",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "docker-onion-nmap (T)",
+  "url": "https://github.com/milesrichardson/docker-onion-nmap",
+  "cat": "Dark Web",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Onion Investigator",
+  "url": "https://oint.ctrlbox.com/",
+  "cat": "Dark Web",
+  "sub": "Discovery",
+  "sub2": ""
+ },
+ {
+  "name": "Onion Cab",
+  "url": "https://onion.cab/",
+  "cat": "Dark Web",
+  "sub": "TOR Search",
+  "sub2": ""
+ },
+ {
+  "name": "Ahmia",
+  "url": "https://ahmia.fi/",
+  "cat": "Dark Web",
+  "sub": "TOR Search",
+  "sub2": ""
+ },
+ {
+  "name": "Hidden Wiki",
+  "url": "https://thehiddenwiki.org/",
+  "cat": "Dark Web",
+  "sub": "TOR Directories",
+  "sub2": ""
+ },
+ {
+  "name": "Web O Proxy",
+  "url": "https://weboproxy.com/",
+  "cat": "Dark Web",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "IACA Dark Web Investigation Support",
+  "url": "https://iaca-darkweb-tools.com/",
+  "cat": "Dark Web",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "DeepFake-Detect",
+  "url": "https://github.com/dessa-oss/DeepFake-Detection",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Deepfake Detection",
+  "sub2": ""
+ },
+ {
+  "name": "DeepFake-Image-Detection",
+  "url": "https://github.com/rmkemker/DeepFake-Image-Detection",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Deepfake Detection",
+  "sub2": ""
+ },
+ {
+  "name": "DeepSafe",
+  "url": "https://github.com/siddharthksah/DeepSafe",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Deepfake Detection",
+  "sub2": ""
+ },
+ {
+  "name": "DeepfakeBench",
+  "url": "https://github.com/SCLBD/DeepfakeBench",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Deepfake Detection",
+  "sub2": ""
+ },
+ {
+  "name": "DeepfakeDetector",
+  "url": "https://github.com/TRahulsingh/DeepfakeDetector",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Deepfake Detection",
+  "sub2": ""
+ },
+ {
+  "name": "FaceForensics++",
+  "url": "https://www.faceforensics.com/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Deepfake Detection",
+  "sub2": ""
+ },
+ {
+  "name": "InVID-WeVerify Verification Plugin",
+  "url": "https://www.invid-project.eu/tools-and-services/invid-verification-plugin/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Deepfake Detection",
+  "sub2": ""
+ },
+ {
+  "name": "TruthScan Deepfake Detector",
+  "url": "https://truthscan.com/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Deepfake Detection",
+  "sub2": ""
+ },
+ {
+  "name": "Duke Reporters' Lab",
+  "url": "https://reporterslab.org/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Fact-checking Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Hoaxy",
+  "url": "https://hoaxy.osome.iu.edu/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Fact-checking Tools",
+  "sub2": ""
+ },
+ {
+  "name": "PolitiFact",
+  "url": "https://www.politifact.com/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Fact-checking Tools",
+  "sub2": ""
+ },
+ {
+  "name": "SciCheck",
+  "url": "https://factcheck.org/scicheck/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Fact-checking Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Snopes",
+  "url": "https://www.snopes.com/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Fact-checking Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Stop Fake Tools",
+  "url": "http://www.stopfake.org/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Fact-checking Tools",
+  "sub2": ""
+ },
+ {
+  "name": "ImgOps",
+  "url": "https://imgops.com/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Reverse Media Search",
+  "sub2": ""
+ },
+ {
+  "name": "TinEye Reverse Image Search",
+  "url": "https://tineye.com/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Reverse Media Search",
+  "sub2": ""
+ },
+ {
+  "name": "FotoForensics",
+  "url": "https://fotoforensics.com/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Source Verification",
+  "sub2": ""
+ },
+ {
+  "name": "Verification Handbook",
+  "url": "https://verificationhandbook.com/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Source Verification",
+  "sub2": ""
+ },
+ {
+  "name": "Verification Junkie",
+  "url": "https://verificationjunkie.com/",
+  "cat": "Disinformation & Media Verification",
+  "sub": "Source Verification",
+  "sub2": ""
+ },
+ {
+  "name": "Bitcoin Who's Who",
+  "url": "https://www.bitcoinwhoswho.com/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Bitcoin",
+  "sub2": ""
+ },
+ {
+  "name": "BitRef",
+  "url": "https://bitref.com/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Bitcoin",
+  "sub2": ""
+ },
+ {
+  "name": "Blockonomics",
+  "url": "https://www.blockonomics.co/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Bitcoin",
+  "sub2": ""
+ },
+ {
+  "name": "Blockr.io",
+  "url": "https://blockr.io/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Bitcoin",
+  "sub2": ""
+ },
+ {
+  "name": "Blocktrail",
+  "url": "https://www.blocktrail.com/BTC",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Bitcoin",
+  "sub2": ""
+ },
+ {
+  "name": "Orbit (T)",
+  "url": "https://github.com/s0md3v/Orbit",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Bitcoin",
+  "sub2": ""
+ },
+ {
+  "name": "Wallet Explorer",
+  "url": "https://www.walletexplorer.com/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Bitcoin",
+  "sub2": ""
+ },
+ {
+  "name": "Bitcoin Abuse Database",
+  "url": "https://bitcoinabuse.com/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Chain Analysis Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Blockchair",
+  "url": "https://blockchair.com/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Chain Analysis Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Blockscan",
+  "url": "https://blockscan.com/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Chain Analysis Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Etherscan",
+  "url": "https://etherscan.io/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Chain Analysis Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "OXT.me",
+  "url": "https://oxt.me/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Chain Analysis Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "DefiLlama",
+  "url": "https://defillama.com/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "DeFi & DEX Tracing",
+  "sub2": ""
+ },
+ {
+  "name": "Dune Analytics",
+  "url": "https://dune.com/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "DeFi & DEX Tracing",
+  "sub2": ""
+ },
+ {
+  "name": "Arkham Intelligence",
+  "url": "https://intel.arkm.com/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Mixer Tracking",
+  "sub2": ""
+ },
+ {
+  "name": "Breadcrumbs.app",
+  "url": "https://www.breadcrumbs.app/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Mixer Tracking",
+  "sub2": ""
+ },
+ {
+  "name": "MetaSleuth",
+  "url": "https://metasleuth.io/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Mixer Tracking",
+  "sub2": ""
+ },
+ {
+  "name": "MistTrack",
+  "url": "https://misttrack.io/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Mixer Tracking",
+  "sub2": ""
+ },
+ {
+  "name": "Monero Blocks",
+  "url": "https://localmonero.co/blocks/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Monero",
+  "sub2": ""
+ },
+ {
+  "name": "XMRChain.net",
+  "url": "https://xmrchain.net/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Monero",
+  "sub2": ""
+ },
+ {
+  "name": "Bitquery Explorer",
+  "url": "https://explorer.bitquery.io/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Multi-Chain Explorers",
+  "sub2": ""
+ },
+ {
+  "name": "Etherscan NFT Tracker",
+  "url": "https://etherscan.io/nft",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "NFT Provenance",
+  "sub2": ""
+ },
+ {
+  "name": "OpenSea",
+  "url": "https://opensea.io/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "NFT Provenance",
+  "sub2": ""
+ },
+ {
+  "name": "XMRChain.net (Monero)",
+  "url": "https://xmrchain.net/",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Privacy Coin Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Zcash Block Explorer",
+  "url": "https://blockchair.com/zcash",
+  "cat": "Blockchain & Cryptocurrency",
+  "sub": "Privacy Coin Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Craigslist",
+  "url": "https://charlotte.craigslist.org/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Kijiji - Canada Classifieds",
+  "url": "https://www.kijiji.ca:443/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Quikr - India Classifieds",
+  "url": "https://www.quikr.com/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "eBay",
+  "url": "https://www.ebay.com/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "OfferUp",
+  "url": "https://offerup.com/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Goofbid",
+  "url": "https://www.goofbid.com/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "SearchAllJunk",
+  "url": "https://www.searchalljunk.com/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "TotalCraigSearch",
+  "url": "https://www.totalcraigsearch.com/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Search Tempest",
+  "url": "https://www.searchtempest.com/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "francais-a-londres.org - French Classifieds",
+  "url": "https://francaisalondres.com/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Kleinanzeigen.de",
+  "url": "https://www.kleinanzeigen.de/",
+  "cat": "Classifieds",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "ClearImage Barcode Reader",
+  "url": "https://online-barcode-reader.inliteresearch.com/",
+  "cat": "Encoding / Decoding",
+  "sub": "Barcodes / QR",
+  "sub2": ""
+ },
+ {
+  "name": "JS Beautifier",
+  "url": "https://beautifier.io/",
+  "cat": "Encoding / Decoding",
+  "sub": "Javascript",
+  "sub2": ""
+ },
+ {
+  "name": "JS NICE",
+  "url": "https://jsnice.org/",
+  "cat": "Encoding / Decoding",
+  "sub": "Javascript",
+  "sub2": ""
+ },
+ {
+  "name": "Firebug (T)",
+  "url": "https://getfirebug.com/downloads/",
+  "cat": "Encoding / Decoding",
+  "sub": "Javascript",
+  "sub2": ""
+ },
+ {
+  "name": "SpiderMonkey (T)",
+  "url": "https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey",
+  "cat": "Encoding / Decoding",
+  "sub": "Javascript",
+  "sub2": ""
+ },
+ {
+  "name": "Kahu Revelo (T)",
+  "url": "https://www.kahusecurity.com/tools/",
+  "cat": "Encoding / Decoding",
+  "sub": "Javascript",
+  "sub2": ""
+ },
+ {
+  "name": "JavaScript Deobfuscator (T)",
+  "url": "https://addons.mozilla.org/en-US/firefox/addon/javascript-deobfuscator/",
+  "cat": "Encoding / Decoding",
+  "sub": "Javascript",
+  "sub2": ""
+ },
+ {
+  "name": "DDecode - PHP Decoder",
+  "url": "https://ddecode.com/phpdecoder/",
+  "cat": "Encoding / Decoding",
+  "sub": "PHP",
+  "sub2": ""
+ },
+ {
+  "name": "XORSearch & XORStrings (T)",
+  "url": "https://blog.didierstevens.com/programs/xorsearch/",
+  "cat": "Encoding / Decoding",
+  "sub": "XOR",
+  "sub2": "Unix"
+ },
+ {
+  "name": "xortool (T)",
+  "url": "https://github.com/hellman/xortool",
+  "cat": "Encoding / Decoding",
+  "sub": "XOR",
+  "sub2": "Unix"
+ },
+ {
+  "name": "unxor (T)",
+  "url": "https://github.com/tomchop/unxor",
+  "cat": "Encoding / Decoding",
+  "sub": "XOR",
+  "sub2": "Unix"
+ },
+ {
+  "name": "Kahu Converter Utilities (T)",
+  "url": "https://www.kahusecurity.com/tools/",
+  "cat": "Encoding / Decoding",
+  "sub": "XOR",
+  "sub2": "Windows"
+ },
+ {
+  "name": "iheartxor.py (T)",
+  "url": "https://hooked-on-mnemonics.blogspot.com/p/iheartxor.html",
+  "cat": "Encoding / Decoding",
+  "sub": "XOR",
+  "sub2": "Python"
+ },
+ {
+  "name": "XORBruteForcer.py (T)",
+  "url": "https://github.com/jesparza/scripts/blob/master/xorBruteForcer.py",
+  "cat": "Encoding / Decoding",
+  "sub": "XOR",
+  "sub2": "Python"
+ },
+ {
+  "name": "NoMoreXOR.py (T)",
+  "url": "https://github.com/hiddenillusion/NoMoreXOR",
+  "cat": "Encoding / Decoding",
+  "sub": "XOR",
+  "sub2": "Python"
+ },
+ {
+  "name": "Balbuzard (T)",
+  "url": "https://github.com/decalage2/balbuzard",
+  "cat": "Encoding / Decoding",
+  "sub": "XOR",
+  "sub2": "Python"
+ },
+ {
+  "name": "CyberChef",
+  "url": "https://gchq.github.io/CyberChef/",
+  "cat": "Encoding / Decoding",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Functions Online",
+  "url": "https://www.functions-online.com/",
+  "cat": "Encoding / Decoding",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Vector (T)",
+  "url": "https://github.com/thesaderror/vector",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "DataSploit (T)",
+  "url": "https://github.com/datasploit/datasploit/",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "Omnibus (T)",
+  "url": "https://github.com/InQuest/omnibus",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "Photon (T)",
+  "url": "https://github.com/s0md3v/Photon",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "ReconDog (T)",
+  "url": "https://github.com/s0md3v/ReconDog",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "IFTTT",
+  "url": "https://ifttt.com/",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "Slash",
+  "url": "https://github.com/redc86/slash",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "Stringify",
+  "url": "https://www.stringify.com/",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "OSRFramework (T)",
+  "url": "https://github.com/i3visio/osrframework",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "Inquisitor (T)",
+  "url": "https://github.com/penafieljlm/inquisitor",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "AutoOSINT (T)",
+  "url": "https://github.com/bharshbarger/AutOSINT",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "IntRec-Pack (T)",
+  "url": "https://github.com/NullArray/IntRec-Pack",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "OSINT-SPY (T)",
+  "url": "https://github.com/SharadKumar97/OSINT-SPY",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "Microsoft Flow",
+  "url": "https://flow.microsoft.com/en-us/",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "PhoneInfoga (T)",
+  "url": "https://github.com/sundowndev/PhoneInfoga",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "IntelligenceX",
+  "url": "https://intelx.io/",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "Scrummage (T)",
+  "url": "https://github.com/matamorphosis/Scrummage",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "Analyst Research Tools",
+  "url": "https://analystresearchtools.com",
+  "cat": "Tools",
+  "sub": "OSINT Automation",
+  "sub2": ""
+ },
+ {
+  "name": "MIDINS TITAN",
+  "url": "https://github.com/Med0-n/Midins_Titan-Osint_Tool",
+  "cat": "Tools",
+  "sub": "Graph Visualization",
+  "sub2": ""
+ },
+ {
+  "name": "Low Hanging Fruit (T)",
+  "url": "https://github.com/blindfuzzy/LHF",
+  "cat": "Tools",
+  "sub": "Pentesting Recon",
+  "sub2": ""
+ },
+ {
+  "name": "VMware Workstation Player (T)",
+  "url": "https://www.vmware.com/products/player/playerpro-evaluation.html",
+  "cat": "Tools",
+  "sub": "Virtual Machines",
+  "sub2": ""
+ },
+ {
+  "name": "VirtualBox (T)",
+  "url": "https://www.virtualbox.org/",
+  "cat": "Tools",
+  "sub": "Virtual Machines",
+  "sub2": ""
+ },
+ {
+  "name": "Buscador OS (T)",
+  "url": "https://inteltechniques.com/buscador/index.html",
+  "cat": "Tools",
+  "sub": "Virtual Machines",
+  "sub2": ""
+ },
+ {
+  "name": "Kali Linux OS (T)",
+  "url": "https://www.kali.org/",
+  "cat": "Tools",
+  "sub": "Virtual Machines",
+  "sub2": ""
+ },
+ {
+  "name": "ParrotSec OS (T)",
+  "url": "https://www.parrotsec.org/",
+  "cat": "Tools",
+  "sub": "Virtual Machines",
+  "sub2": ""
+ },
+ {
+  "name": "Microsoft Edge Development OS VMs (T)",
+  "url": "https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/",
+  "cat": "Tools",
+  "sub": "Virtual Machines",
+  "sub2": ""
+ },
+ {
+  "name": "Subgraph OS (T)",
+  "url": "https://subgraph.com/index.en.html",
+  "cat": "Tools",
+  "sub": "Virtual Machines",
+  "sub2": ""
+ },
+ {
+  "name": "Tails Live OS (T)",
+  "url": "https://tails.boum.org/",
+  "cat": "Tools",
+  "sub": "Virtual Machines",
+  "sub2": ""
+ },
+ {
+  "name": "Whonix (T)",
+  "url": "https://www.whonix.org/wiki/Main_Page",
+  "cat": "Tools",
+  "sub": "Virtual Machines",
+  "sub2": ""
+ },
+ {
+  "name": "CeWL (T)",
+  "url": "https://github.com/digininja/CeWL",
+  "cat": "Tools",
+  "sub": "Wordlist",
+  "sub2": ""
+ },
+ {
+  "name": "Cupp (T)",
+  "url": "https://github.com/Mebus/cupp",
+  "cat": "Tools",
+  "sub": "Wordlist",
+  "sub2": ""
+ },
+ {
+  "name": "OWASP D4N155 (T)",
+  "url": "https://github.com/OWASP/D4N155",
+  "cat": "Tools",
+  "sub": "Wordlist",
+  "sub2": ""
+ },
+ {
+  "name": "W Generator",
+  "url": "https://app.wgen.io/",
+  "cat": "Tools",
+  "sub": "Wordlist",
+  "sub2": ""
+ },
+ {
+  "name": "Paterva / Maltego (T)",
+  "url": "https://www.maltego.com/",
+  "cat": "Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Overview",
+  "url": "https://www.overviewdocs.com/",
+  "cat": "Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "AI or Not",
+  "url": "https://www.aiornot.com/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Copyleaks",
+  "url": "https://copyleaks.com/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Decopy AI Image Detector",
+  "url": "https://decopy.ai/ai-image-detector/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "DeepAI AI Image Detector",
+  "url": "https://deepai.org/ai-image-detector",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "DeepSeek",
+  "url": "https://www.deepseek.com/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "DocMind AI",
+  "url": "https://github.com/BjornMelin/docmind-ai-llm",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "DuckDuckGo AI Chat",
+  "url": "https://duckduckgo.com/aichat",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "GPTZero",
+  "url": "https://gptzero.me/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Grammarly AI Detector",
+  "url": "https://www.grammarly.com/ai-detector",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Hive AI Generated Content Detection",
+  "url": "https://hivemoderation.com/ai-generated-content-detection",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Hugging Face AI Detector",
+  "url": "https://huggingface.co/spaces/umm-maybe/AI_Detector",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Illuminarty",
+  "url": "https://app.illuminarty.ai/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Microsoft Copilot",
+  "url": "https://copilot.microsoft.com/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Ollama",
+  "url": "https://ollama.com/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "OSINT Analyser",
+  "url": "https://github.com/joestanding/osint-analyser",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "TrueMedia",
+  "url": "https://www.truemedia.org/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "WasItAI",
+  "url": "https://wasitai.com/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "World Monitor",
+  "url": "https://www.worldmonitor.app/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "You.com",
+  "url": "https://you.com/",
+  "cat": "AI Tools",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Decalage Malware Search",
+  "url": "https://decalage.info/en/mwsearch",
+  "cat": "Malicious File Analysis",
+  "sub": "Search",
+  "sub2": ""
+ },
+ {
+  "name": "VirusShare.com",
+  "url": "https://virusshare.com/",
+  "cat": "Malicious File Analysis",
+  "sub": "Search",
+  "sub2": ""
+ },
+ {
+  "name": "#totalhash",
+  "url": "https://totalhash.cymru.com/",
+  "cat": "Malicious File Analysis",
+  "sub": "Search",
+  "sub2": ""
+ },
+ {
+  "name": "VX Vault",
+  "url": "https://vxvault.net/ViriList.php",
+  "cat": "Malicious File Analysis",
+  "sub": "Search",
+  "sub2": ""
+ },
+ {
+  "name": "ID Ransomware",
+  "url": "https://id-ransomware.malwarehunterteam.com/",
+  "cat": "Malicious File Analysis",
+  "sub": "Search",
+  "sub2": ""
+ },
+ {
+  "name": "National Software Reference Library",
+  "url": "https://nsrl.hashsets.com/national_software_reference_library1_search.php",
+  "cat": "Malicious File Analysis",
+  "sub": "Search",
+  "sub2": ""
+ },
+ {
+  "name": "TYLabs QuickSand Framework",
+  "url": "https://scan.tylabs.com/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": "Office Files"
+ },
+ {
+  "name": "JoeSandbox Document Analyzer",
+  "url": "https://www.joesandbox.com/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": "Office Files"
+ },
+ {
+  "name": "Akana Android Malware",
+  "url": "https://akana.mobiseclab.org/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": "Android"
+ },
+ {
+  "name": "Joe APK Analyzer",
+  "url": "https://www.apk-analyzer.net/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": "Android"
+ },
+ {
+  "name": "VirusTotal",
+  "url": "https://www.virustotal.com/gui/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "OPSWAT Meta Defender",
+  "url": "https://metadefender.opswat.com/#!/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Hybrid Analysis",
+  "url": "https://hybrid-analysis.com/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Malware Config",
+  "url": "https://malwareconfig.com/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "MetaDefender",
+  "url": "https://metadefender.opswat.com/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Ether",
+  "url": "https://ether.gtisc.gatech.edu/web_unpack/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Jotti's Malware Scanner",
+  "url": "https://virusscan.jotti.org/en-US/scan-file",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Valkyrie File Analysis",
+  "url": "https://consumer.valkyrie.comodo.com/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "detux Linux Sandbox",
+  "url": "https://detux.org/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Joe File Analyzer",
+  "url": "https://www.file-analyzer.net/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Pikker.ee Cuckoo Sandbox",
+  "url": "https://sandbox.pikker.ee/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Koodous",
+  "url": "https://koodous.com",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Any Run",
+  "url": "https://app.any.run/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Uncover It",
+  "url": "https://www.uncoverit.org/",
+  "cat": "Malicious File Analysis",
+  "sub": "Hosted Automated Analysis",
+  "sub2": ""
+ },
+ {
+  "name": "Office Mal Scanner (T)",
+  "url": "https://www.reconstructer.org/",
+  "cat": "Malicious File Analysis",
+  "sub": "Office Files",
+  "sub2": ""
+ },
+ {
+  "name": "OffVis (T)",
+  "url": "https://download.microsoft.com/download/1/2/7/127ba59a-4fe1-4acd-ba47-513ceef85a85/OffVis.zip",
+  "cat": "Malicious File Analysis",
+  "sub": "Office Files",
+  "sub2": ""
+ },
+ {
+  "name": "PDF Tools (T)",
+  "url": "https://blog.didierstevens.com/programs/pdf-tools/",
+  "cat": "Malicious File Analysis",
+  "sub": "PDFs",
+  "sub2": ""
+ },
+ {
+  "name": "Origami Framework (T)",
+  "url": "https://code.google.com/archive/p/origami-pdf/",
+  "cat": "Malicious File Analysis",
+  "sub": "PDFs",
+  "sub2": ""
+ },
+ {
+  "name": "Malware-Traffic-Analysis.net",
+  "url": "https://www.malware-traffic-analysis.net/index.html",
+  "cat": "Malicious File Analysis",
+  "sub": "PCAPs",
+  "sub2": ""
+ },
+ {
+  "name": "Ghidra (T)",
+  "url": "https://github.com/NationalSecurityAgency/ghidra",
+  "cat": "Malicious File Analysis",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Malware Analysis Tools",
+  "url": "https://malwareanalysis.tools/",
+  "cat": "Malicious File Analysis",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "virustotal",
+  "url": "https://www.virustotal.com/gui/home/upload",
+  "cat": "Malicious File Analysis",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Vulert: Updated Open Source Vulnerability Database",
+  "url": "https://vulert.com/vuln-db",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Advisories",
+  "sub2": ""
+ },
+ {
+  "name": "SecurityFocus",
+  "url": "https://www.securityfocus.com/bid",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Advisories",
+  "sub2": ""
+ },
+ {
+  "name": "NVD - NIST",
+  "url": "https://nvd.nist.gov/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Advisories",
+  "sub2": ""
+ },
+ {
+  "name": "OSV Vulnerability Library",
+  "url": "https://osv.dev/list",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Advisories",
+  "sub2": ""
+ },
+ {
+  "name": "CVE Details",
+  "url": "https://www.cvedetails.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Advisories",
+  "sub2": ""
+ },
+ {
+  "name": "CVE - MITRE",
+  "url": "https://www.cve.org/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Advisories",
+  "sub2": ""
+ },
+ {
+  "name": "OWASP",
+  "url": "https://www.owasp.org/index.php/Main_Page",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Advisories",
+  "sub2": ""
+ },
+ {
+  "name": "Secunia",
+  "url": "https://secuniaresearch.flexerasoftware.com/community/research/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Advisories",
+  "sub2": ""
+ },
+ {
+  "name": "Australian Cyber Security Centre",
+  "url": "https://www.cyber.gov.au/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Advisories",
+  "sub2": ""
+ },
+ {
+  "name": "Canadian Centre for Cyber Security",
+  "url": "https://www.cyber.gc.ca/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Advisories",
+  "sub2": ""
+ },
+ {
+  "name": "ImmuniWeb",
+  "url": "https://www.immuniweb.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Attack Surface / Security Testing",
+  "sub2": ""
+ },
+ {
+  "name": "Default Passwords DB",
+  "url": "https://cirt.net/passwords/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Default Passwords",
+  "sub2": ""
+ },
+ {
+  "name": "Default passwords list",
+  "url": "https://default-password.info/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Default Passwords",
+  "sub2": ""
+ },
+ {
+  "name": "Default Password Lookup Utility",
+  "url": "https://fortypoundhead.com/tools_dpw.asp",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Default Passwords",
+  "sub2": ""
+ },
+ {
+  "name": "Phenoelit Default Password List",
+  "url": "https://phenoelit.org/dpl/dpl.html",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Default Passwords",
+  "sub2": ""
+ },
+ {
+  "name": "Default Router Passwords",
+  "url": "https://www.routerpasswords.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Default Passwords",
+  "sub2": ""
+ },
+ {
+  "name": "Open Sez Me Default Passwords",
+  "url": "https://open-sez.me/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Default Passwords",
+  "sub2": ""
+ },
+ {
+  "name": "Hashes.org",
+  "url": "https://hashes.org/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Default Passwords",
+  "sub2": ""
+ },
+ {
+  "name": "Exploit DB",
+  "url": "https://www.exploit-db.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Exploits",
+  "sub2": ""
+ },
+ {
+  "name": "Packet Storm",
+  "url": "https://packetstormsecurity.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Exploits",
+  "sub2": ""
+ },
+ {
+  "name": "Jager",
+  "url": "https://github.com/sroberts/jager",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "IOC Tools",
+  "sub2": ""
+ },
+ {
+  "name": "IOC Parser",
+  "url": "https://github.com/armbues/ioc_parser",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "IOC Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Cacador",
+  "url": "https://github.com/sroberts/cacador",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "IOC Tools",
+  "sub2": ""
+ },
+ {
+  "name": "ThreatPinch Lookup",
+  "url": "https://github.com/cloudtracer/ThreatPinchLookup",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "IOC Tools",
+  "sub2": ""
+ },
+ {
+  "name": "Mimir",
+  "url": "https://github.com/NullArray/Mimir",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "IOC Tools",
+  "sub2": ""
+ },
+ {
+  "name": "iocextract (T)",
+  "url": "https://github.com/InQuest/iocextract",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "IOC Tools",
+  "sub2": ""
+ },
+ {
+  "name": "ThreatIngestor (T)",
+  "url": "https://github.com/InQuest/ThreatIngestor",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "IOC Tools",
+  "sub2": ""
+ },
+ {
+  "name": "SecAI.ai",
+  "url": "https://secai.ai/research",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Phishing",
+  "sub2": ""
+ },
+ {
+  "name": "https://openphish.com/feed.txt",
+  "url": "https://openphish.com/feed.txt",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Phishing",
+  "sub2": ""
+ },
+ {
+  "name": "PhishTank",
+  "url": "https://www.phishtank.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Phishing",
+  "sub2": ""
+ },
+ {
+  "name": "PhishStats",
+  "url": "https://phishstats.info/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Phishing",
+  "sub2": ""
+ },
+ {
+  "name": "Global Terrorism Database",
+  "url": "https://www.start.umd.edu/research-projects/global-terrorism-database-gtd",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Terrorism & Extremism",
+  "sub2": "Academic Research"
+ },
+ {
+  "name": "START Consortium for the Study of Terrorism and Responses to Terrorism",
+  "url": "https://www.start.umd.edu/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Terrorism & Extremism",
+  "sub2": "Academic Research"
+ },
+ {
+  "name": "CSIS Warfare, Irregular Threats, and Terrorism Program",
+  "url": "https://www.csis.org/programs/warfare-irregular-threats-and-terrorism-program",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Terrorism & Extremism",
+  "sub2": "Research Centers"
+ },
+ {
+  "name": "Institute for Strategic Dialogue",
+  "url": "https://www.isdglobal.org/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Terrorism & Extremism",
+  "sub2": "Research Centers"
+ },
+ {
+  "name": "RAND Terrorism Research",
+  "url": "https://www.rand.org/topics/terrorism.html",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Terrorism & Extremism",
+  "sub2": "Research Centers"
+ },
+ {
+  "name": "UN Security Council Consolidated List",
+  "url": "https://main.un.org/securitycouncil/en/content/un-sc-consolidated-list",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Terrorism & Extremism",
+  "sub2": "Sanctions & Watchlists"
+ },
+ {
+  "name": "Terrorist Finance Tracking Program",
+  "url": "https://home.treasury.gov/policy-issues/terrorism-and-illicit-finance/terrorist-finance-tracking-program-tftp",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Terrorism & Extremism",
+  "sub2": "Terrorist Financing"
+ },
+ {
+  "name": "IBM X-Force Exchange",
+  "url": "https://exchange.xforce.ibmcloud.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Malware Information Sharing Platform",
+  "url": "https://www.misp-project.org/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Malware Patrol",
+  "url": "https://www.malwarepatrol.net/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "AlienVault OTX",
+  "url": "https://otx.alienvault.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Maltiverse",
+  "url": "https://maltiverse.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Malpedia",
+  "url": "https://malpedia.caad.fkie.fraunhofer.de/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Project Honey Pot",
+  "url": "https://www.projecthoneypot.org/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Cymon Open Threat Intelligence",
+  "url": "https://cymon.io/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "mlsecproject / combine",
+  "url": "https://github.com/mlsecproject/combine",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "hostintel - keithjjones Github",
+  "url": "https://github.com/keithjjones/hostintel",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "massive-octo-spice - csirtgadgets Github",
+  "url": "https://github.com/csirtgadgets/massive-octo-spice",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Scam Database",
+  "url": "https://www.scamdb.net/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Bot Scout",
+  "url": "https://botscout.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "APTnotes",
+  "url": "https://github.com/aptnotes/data",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "HoneyDB",
+  "url": "https://honeydb.io/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Pulsedive",
+  "url": "https://pulsedive.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Mr.Looquer IOC Feed - 1st Dual Stack Threat Feed",
+  "url": "https://iocfeed.mrlooquer.com/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "REScure Cyber Threat Intelligence Project",
+  "url": "https://rescure.me/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "Threat Feeds & Platforms",
+  "sub2": ""
+ },
+ {
+  "name": "Malware Exploit TTP Database",
+  "url": "https://www.pwnmalw.re/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "TTPs",
+  "sub2": ""
+ },
+ {
+  "name": "Mitre TTPs",
+  "url": "https://attack.mitre.org/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "TTPs",
+  "sub2": ""
+ },
+ {
+  "name": "MITRE ATT&CK",
+  "url": "https://attack.mitre.org/",
+  "cat": "Cyber Threat Intelligence",
+  "sub": "TTPs",
+  "sub2": ""
+ },
+ {
+  "name": "Fake Name Generator",
+  "url": "https://www.fakenamegenerator.com/",
+  "cat": "OpSec",
+  "sub": "Persona Creation",
+  "sub2": ""
+ },
+ {
+  "name": "Fake Identity Generator",
+  "url": "https://backgroundchecks.org/justdeleteme/fake-identity-generator/",
+  "cat": "OpSec",
+  "sub": "Persona Creation",
+  "sub2": ""
+ },
+ {
+  "name": "This Person Does Not Exist",
+  "url": "https://thispersondoesnotexist.com/",
+  "cat": "OpSec",
+  "sub": "Persona Creation",
+  "sub2": ""
+ },
+ {
+  "name": "Random User Generator",
+  "url": "https://randomuser.me/",
+  "cat": "OpSec",
+  "sub": "Persona Creation",
+  "sub2": ""
+ },
+ {
+  "name": "Faker.js",
+  "url": "https://cdn.rawgit.com/Marak/faker.js/master/examples/browser/index.html",
+  "cat": "OpSec",
+  "sub": "Persona Creation",
+  "sub2": ""
+ },
+ {
+  "name": "Freenet Project (T)",
+  "url": "https://freenetproject.org/pages/download.html",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "TOR"
+ },
+ {
+  "name": "I2P Anonymous Network (T)",
+  "url": "https://geti2p.net/en/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "TOR"
+ },
+ {
+  "name": "VPN Comparisons - That One Privacy Site",
+  "url": "https://thatoneprivacysite.net/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "Anonymous VPNs"
+ },
+ {
+  "name": "UserAgentString.com",
+  "url": "https://www.useragentstring.com/pages/useragentstring.php",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "Spoof User-Agent"
+ },
+ {
+  "name": "WhatIsMyBrowser.com",
+  "url": "https://www.whatismybrowser.com/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "Spoof User-Agent"
+ },
+ {
+  "name": "User Agent String Decoder",
+  "url": "https://tools.tracemyip.org/user-agent-string-decoder/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "Spoof User-Agent"
+ },
+ {
+  "name": "IP / DNS Leak Detection",
+  "url": "https://ipleak.net/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "VPN Tests"
+ },
+ {
+  "name": "JonDonym",
+  "url": "https://ip-check.info/?lang=en",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "VPN Tests"
+ },
+ {
+  "name": "DNS leak test",
+  "url": "https://www.dnsleaktest.com/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "VPN Tests"
+ },
+ {
+  "name": "DNS Leak Tests",
+  "url": "https://dnsleak.com/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "VPN Tests"
+ },
+ {
+  "name": "IPv6 Leak Tests",
+  "url": "https://ipv6leak.com/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "VPN Tests"
+ },
+ {
+  "name": "Email Leak Tests",
+  "url": "https://emailipleak.com/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "VPN Tests"
+ },
+ {
+  "name": "Perfect Privacy",
+  "url": "https://www.perfect-privacy.com/check-ip/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "VPN Tests"
+ },
+ {
+  "name": "WebRTC Leak Test",
+  "url": "https://www.perfect-privacy.com/webrtc-leaktest/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "VPN Tests"
+ },
+ {
+  "name": "LetMeCheck.it",
+  "url": "https://letmecheck.it/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "VPN Tests"
+ },
+ {
+  "name": "Trace My IP",
+  "url": "https://www.tracemyip.org/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "VPN Tests"
+ },
+ {
+  "name": "Browser Statistics",
+  "url": "https://www.w3schools.com/browsers/default.asp",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "Browser Tests"
+ },
+ {
+  "name": "WhatsMyBrowser.org",
+  "url": "https://www.whatsmybrowser.org/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "Browser Tests"
+ },
+ {
+  "name": "What browser am I using.co",
+  "url": "https://www.whatbrowseramiusing.co/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "Browser Tests"
+ },
+ {
+  "name": "What Browser?",
+  "url": "https://whatbrowser.org/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "Browser Tests"
+ },
+ {
+  "name": "IP2Proxy",
+  "url": "https://www.ip2proxy.com/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": "Proxy Tests"
+ },
+ {
+  "name": "NoScript (T)",
+  "url": "https://noscript.net/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "Firefox-debloat",
+  "url": "https://github.com/amq/firefox-debloat",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "Browser Leaks",
+  "url": "https://browserleaks.com/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "Self-Destructing Cookies (T)",
+  "url": "https://addons.mozilla.org/en-US/firefox/addon/self-destructing-cookies/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "BrowserSpy.dk",
+  "url": "https://browserspy.dk/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "LocaBrowser.com",
+  "url": "https://www.locabrowser.com/",
+  "cat": "OpSec",
+  "sub": "Anonymous Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "Privacy Guides",
+  "url": "https://www.privacyguides.org/en/",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "Just Delete Me",
+  "url": "https://backgroundchecks.org/justdeleteme/",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "OptOut Credit Prescreen",
+  "url": "https://www.optoutprescreen.com/?rf=t",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "Credit Freeze",
+  "url": "https://inteltechniques.com/blog/2018/09/28/complete-credit-freeze-tutorial-update/",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "Fake US Identities",
+  "url": "https://xdd2.org/",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "Social Media Fingerprint",
+  "url": "https://robinlinus.github.io/socialmedia-leak/",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "Privacy Tools",
+  "url": "https://www.privacytools.io/",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "Panopticlick",
+  "url": "https://panopticlick.eff.org/",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "Intel Techniques - Hiding from the Internet",
+  "url": "https://inteltechniques.com/data/workbook.pdf",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "The Many Hats Club - Privacy Resources",
+  "url": "https://themanyhats.club/centralised-place-for-privacy-resources/",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "The Hitchhiker’s Guide to Online Anonymity",
+  "url": "https://anonymousplanet.org/guide/",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "Awesome Opt-Out Guide 2026",
+  "url": "https://github.com/thumpersecure/opt-out-manual-2026",
+  "cat": "OpSec",
+  "sub": "Privacy / Clean Up",
+  "sub2": ""
+ },
+ {
+  "name": "Anonymouth - Document Anonymization (T)",
+  "url": "https://github.com/psal/anonymouth",
+  "cat": "OpSec",
+  "sub": "Metadata / Style",
+  "sub2": ""
+ },
+ {
+  "name": "MAT2 (T)",
+  "url": "https://0xacab.org/jvoisin/mat2",
+  "cat": "OpSec",
+  "sub": "Metadata / Style",
+  "sub2": ""
+ },
+ {
+  "name": "Forensic OSINT (T)",
+  "url": "https://www.forensicosint.com/",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Web Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "Fiddler (T)",
+  "url": "https://www.telerik.com/download/fiddler",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Web Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "Burp Suite (T)",
+  "url": "https://portswigger.net/burp/download.html",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Web Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "Page2Images (T)",
+  "url": "https://www.page2images.com/URL-Live-Website-Screenshot-Generator",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Web Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "Web Page Saver",
+  "url": "https://www.magnetforensics.com/resources/web-page-saver/",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Web Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "Snapper (T)",
+  "url": "https://github.com/dxa4481/Snapper",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Web Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "Full Page Screen Capture Chrome Extension (T)",
+  "url": "https://github.com/mrcoles/full-page-screen-capture-chrome-extension",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Web Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "EZR OSINT Sidebar (T)",
+  "url": "https://chromewebstore.google.com/detail/ezr-osint-sidebar/joagbbgciboooipadijeaoidjjigdmof",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Web Browsing",
+  "sub2": ""
+ },
+ {
+  "name": "FRAPS (T)",
+  "url": "https://fraps.com/",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Screen Capture",
+  "sub2": ""
+ },
+ {
+  "name": "ShareX (T)",
+  "url": "https://getsharex.com/",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Screen Capture",
+  "sub2": ""
+ },
+ {
+  "name": "Greenshot (T)",
+  "url": "https://getgreenshot.org/",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Screen Capture",
+  "sub2": ""
+ },
+ {
+  "name": "Google Street View - Hyperlapse",
+  "url": "https://github.com/TeehanLax/Hyperlapse.js",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Map Locations",
+  "sub2": ""
+ },
+ {
+  "name": "ZeeMaps",
+  "url": "https://www.zeemaps.com/",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "Map Locations",
+  "sub2": ""
+ },
+ {
+  "name": "Timeline JS3",
+  "url": "https://timeline.knightlab.com/",
+  "cat": "Documentation / Evidence Capture",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "GeoGuesser",
+  "url": "https://www.geoguessr.com/",
+  "cat": "Training",
+  "sub": "Games",
+  "sub2": ""
+ },
+ {
+  "name": "Verif!cation Quiz Bot",
+  "url": "https://x.com/quiztime",
+  "cat": "Training",
+  "sub": "Games",
+  "sub2": ""
+ },
+ {
+  "name": "Forensic OSINT KB Guides",
+  "url": "https://www.forensicosint.com/osint-guide",
+  "cat": "Training",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Open Source Intelligence Techniques",
+  "url": "https://inteltechniques.com/",
+  "cat": "Training",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Plessas",
+  "url": "https://plessas.net/online-training",
+  "cat": "Training",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "The OSINTion",
+  "url": "https://www.theosintion.com/courses",
+  "cat": "Training",
+  "sub": "",
+  "sub2": ""
+ },
+ {
+  "name": "Smart Questions",
+  "url": "https://www.catb.org/esr/faqs/smart-questions.html",
+  "cat": "Training",
+  "sub": "",
+  "sub2": ""
+ }
+]

@@ -1,0 +1,2 @@
+# A patch is data: its single-space context lines must remain intact.
+*.patch -whitespace

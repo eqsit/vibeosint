@@ -11,6 +11,7 @@ yarn-error.log*
 # Environment and secrets
 .env
 .env.*
+!.env.example
 *.key
 *.pem
 
@@ -21,3 +22,30 @@ yarn-error.log*
 # OS artifacts
 .DS_Store
 Thumbs.db
+
+# Web panel runtime and operator-only material
+.venv/
+__pycache__/
+*.py[cod]
+*.session
+*.session-*
+*.sqlite*
+*.db
+*.db-*
+.omnikey
+auth.json
+.panel-auth.json
+panel/data/
+panel/tg_accounts/
+panel/.hermes-home/
+panel/.runtime/
+panel/workspace/.agent-work/
+panel/workspace/.tg-runtime/
+panel/workspace/reports/
+backups/
+uploads/
+logs/
+test-results/
+*.tar
+*.tar.gz
+*.zip

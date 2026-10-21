@@ -1,0 +1,231 @@
+diff --git a/plugins/web/keyless_mcp.py b/plugins/web/keyless_mcp.py
+index a29d9261b3..3ffa4c4b36 100644
+--- a/plugins/web/keyless_mcp.py
++++ b/plugins/web/keyless_mcp.py
+@@ -297,9 +297,24 @@ def firecrawl_extract_keyless(urls: list[str]) -> list[dict[str, Any]]:
+ 
+     def _fetch(url: str) -> dict[str, Any]:
+         payload = _extract_scrape_payload(client.scrape(url=url, formats=["markdown"])) or {}
+-        metadata = payload.get("metadata") or {}
+-        title = metadata.get("title") if isinstance(metadata, dict) else None
+-        return _page(url, title or "", payload.get("markdown") or payload.get("html") or "")
++        metadata = payload.get("metadata")
++        metadata = metadata if isinstance(metadata, dict) else {}
++        title = metadata.get("title") or ""
++        final_url = metadata.get("url") or metadata.get("sourceURL") or payload.get("url") or url
++        status = metadata.get("statusCode")
++        try:
++            status = int(status)
++        except (TypeError, ValueError):
++            status = None
++        if status is not None and status >= 400:
++            entry = _page_error(final_url, f"Source returned HTTP {status}; content unavailable (possible access challenge)")
++            entry["title"] = title
++        else:
++            entry = _page(final_url, title, payload.get("markdown") or payload.get("html") or "", source_url=url)
++        entry["metadata"] = {"sourceURL": url, "title": title}
++        if status is not None:
++            entry["metadata"]["statusCode"] = status
++        return entry
+ 
+     return _per_url(urls, _fetch, "firecrawl")
+ 
+diff --git a/tools/web_tools_extract.py b/tools/web_tools_extract.py
+index 5070f00ec7..17abd11bb0 100644
+--- a/tools/web_tools_extract.py
++++ b/tools/web_tools_extract.py
+@@ -147,38 +147,61 @@ def _extract_timeout_seconds() -> float:
+ 
+ 
+ async def _dispatch_extract(provider, fetch_urls: list[str], format: Optional[str]) -> list[dict]:
+-    """Call ``provider.extract`` (async or sync-in-thread), with one-shot keyless rescue.
++    """Fetch URLs independently under one wall-clock budget; never discard completed pages.
+ 
+-    Rescue fires on a raised exception — including a dispatch timeout — or when the WHOLE batch
+-    failed (backend outage, not per-page problems). Rescued batches are never cached.
++    A backend's batch API may keep partial results private until its last URL finishes, so
++    one bounded request per URL is the unit of dispatch. There are at most five active
++    requests (the tool's input limit). Rescue remains whole-batch and never caches results.
+     """
+     import inspect
+     from tools.web_result_cache import extract_cache_put
++    if not fetch_urls:
++        return []
+     timeout = _extract_timeout_seconds()
++    loop = asyncio.get_running_loop()
++    deadline = loop.time() + timeout if timeout > 0 else None
++    semaphore = asyncio.Semaphore(5)
++
++    async def fetch_one(url):
++        async with semaphore:
++            try:
++                if inspect.iscoroutinefunction(provider.extract):
++                    entries = await provider.extract([url], format=format)
++                else:
++                    entries = await asyncio.to_thread(provider.extract, [url], format=format)
++            except Exception as exc:
++                return _result_entry(url, str(exc))
++            if not entries:
++                return _result_entry(url, _NO_RESULT_ERROR)
++            # Prefer explicit source attribution over position when a backend returns extra rows.
++            return next((r for r in entries if r.get("url") == url or
++                         (isinstance(r.get("metadata"), dict) and r["metadata"].get("sourceURL") == url)), entries[0])
++
++    tasks = [asyncio.create_task(fetch_one(url)) for url in fetch_urls]
+     try:
+-        if inspect.iscoroutinefunction(provider.extract):
+-            coro = provider.extract(fetch_urls, format=format)
+-        else:  # sync extract() runs in a thread so network I/O never blocks the loop
+-            coro = asyncio.to_thread(provider.extract, fetch_urls, format=format)
+-        if timeout > 0:
+-            results = await asyncio.wait_for(coro, timeout=timeout)
+-        else:
+-            results = await coro
+-    except TimeoutError:  # hanging backend — bounded, never a stalled tool call
+-        logger.warning("web_extract provider '%s' timed out after %.0fs for %d URL(s)",
+-                       provider.name, timeout, len(fetch_urls))
+-        failed = [_result_entry(u, f"Extract timed out after {timeout:.0f}s via {provider.name}")
+-                  for u in fetch_urls]
+-        if not _rescue_eligible(provider):
+-            return failed
+-        return await asyncio.to_thread(_rescue_extract, provider.name, fetch_urls, failed)
+-    except Exception as exc:
+-        if not _rescue_eligible(provider):
+-            raise
+-        failed = [_result_entry(u, str(exc)) for u in fetch_urls]
+-        return await asyncio.to_thread(_rescue_extract, provider.name, fetch_urls, failed)
+-    if results and all(r.get("error") for r in results) and _rescue_eligible(provider):
+-        return await asyncio.to_thread(_rescue_extract, provider.name, fetch_urls, results)
++        done, pending = await asyncio.wait(tasks, timeout=timeout if timeout > 0 else None)
++        results = [task.result() if task in done else
++                   _result_entry(url, f"Extract timed out after {timeout:g}s via {provider.name}")
++                   for url, task in zip(fetch_urls, tasks)]
++        if pending:
++            logger.warning("web_extract provider '%s' timed out after %gs for %d URL(s); kept %d completed",
++                           provider.name, timeout, len(pending), len(done))
++    finally:
++        for task in tasks:
++            if not task.done():
++                task.cancel()
++    if not pending and results and all(r.get("error") for r in results) and _rescue_eligible(provider):
++        remaining = deadline - loop.time() if deadline is not None else None
++        if remaining is None:
++            return await asyncio.to_thread(_rescue_extract, provider.name, fetch_urls, results)
++        if remaining > 0:
++            try:
++                return await asyncio.wait_for(
++                    asyncio.to_thread(_rescue_extract, provider.name, fetch_urls, results), timeout=remaining)
++            except TimeoutError:
++                # Do not replace the primary diagnostic with a generic rescue timeout.
++                return [{**r, "error": f"{r.get('error', '')} (keyless rescue timed out within {timeout:g}s dispatch budget)"}
++                        for r in results]
+ 
+     # Cache each successful fetch under the REQUESTED url it reports as its own — never by list
+     # position: providers omit failed URLs or return successes out of request order, and a positional
+diff --git a/tools/web_tools_rescue.py b/tools/web_tools_rescue.py
+index 071f0535ef..1336a7f150 100644
+--- a/tools/web_tools_rescue.py
++++ b/tools/web_tools_rescue.py
+@@ -149,10 +149,18 @@ def _rescue_extract(provider_name: str, urls: list, results: list) -> list:
+     if rescued and all(r.get("error", "") for r in rescued):
+         return results  # rescue also failed everywhere: keep original errors
+     for r in rescued:
+-        meta = None if r.get("error") else r.setdefault("metadata", {})
+-        if isinstance(meta, dict):
+-            meta["rescued_from"] = provider_name
+-            meta["backend_error"] = (original_error or "")[:300]
++        if r.get("error"):
++            continue
++        if not isinstance(r.get("metadata"), dict):
++            r["metadata"] = {}
++        r["metadata"].update(
++            rescued_from=provider_name,
++            backend_error=(
++                f"Configured backend '{provider_name}' failed this call "
++                f"({(original_error or 'unknown error')[:300]}); result served by the keyless free tier. "
++                f"The next call will use '{provider_name}' again."
++            ),
++        )
+     if parity and len(rescued) == len(rescue_idx):
+         replacements = dict(zip(rescue_idx, rescued))
+         return [replacements.get(i, r) for i, r in enumerate(results)]
+diff --git a/tools/web_tools_truncate.py b/tools/web_tools_truncate.py
+index d3596ba659..c75175e79e 100644
+--- a/tools/web_tools_truncate.py
++++ b/tools/web_tools_truncate.py
+@@ -182,12 +182,19 @@ def _truncate_results(results: list[dict], char_limit: int, debug_call_data: dic
+ 
+ 
+ def _trim_results(results: list[dict]) -> list[dict]:
+-    """Keep only url/title/content/error per entry (+ blocked_by_policy when present)."""
+-    return [
+-        {
++    """Keep document fields and allowlisted provenance that the model needs to judge evidence."""
++    provenance_keys = ("sourceURL", "statusCode", "served_by", "rescued_from", "fallback_from", "backend_error")
++    trimmed = []
++    for r in results:
++        entry = {
+             "url": r.get("url", ""), "title": r.get("title", ""), "content": r.get("content", ""),
+             "error": r.get("error"),
+             **({"blocked_by_policy": r["blocked_by_policy"]} if "blocked_by_policy" in r else {}),
+         }
+-        for r in results
+-    ]
++        meta = r.get("metadata")
++        if isinstance(meta, dict):
++            provenance = {k: meta[k] for k in provenance_keys if k in meta}
++            if provenance:
++                entry["metadata"] = provenance
++        trimmed.append(entry)
++    return trimmed
+diff --git a/tests/tools/test_web_keyless_rescue.py b/tests/tools/test_web_keyless_rescue.py
+index 8186a19a22..86a630456c 100644
+--- a/tests/tools/test_web_keyless_rescue.py
++++ b/tests/tools/test_web_keyless_rescue.py
+@@ -262,16 +262,18 @@ class TestExtractRescue:
+         class _Partial(_KeyedBoomProvider):
+             def extract(self, urls, **kwargs):
+                 return [
+-                    {"url": urls[0], "title": "A", "content": "fine",
+-                     "raw_content": "fine", "metadata": {}},
+-                    {"url": urls[1], "title": "", "content": "", "error": "404"},
++                    {"url": url, "title": "A", "content": "fine",
++                     "raw_content": "fine", "metadata": {}} if url == "https://a" else
++                    {"url": url, "title": "", "content": "", "error": "404"}
++                    for url in urls
+                 ]
+ 
+         with patch.object(keyless_mcp, "extract_with_failover") as ring:
+             results = await self._dispatch(
+                 monkeypatch, _Partial(), ["https://a", "https://b"]
+             )
+-        assert results[1].get("error")
++        assert results[0]["content"] == "fine"
++        assert "404" in results[1]["error"]
+         ring.assert_not_called()
+ 
+     @pytest.mark.asyncio
+diff --git a/tests/tools/test_web_tools_tavily.py b/tests/tools/test_web_tools_tavily.py
+index 4de6c94b8f..fa7cfcab33 100644
+--- a/tests/tools/test_web_tools_tavily.py
++++ b/tests/tools/test_web_tools_tavily.py
+@@ -161,7 +161,8 @@ class TestWebExtractCacheAttribution:
+             async def extract(self, urls, format=None):
+                 return [
+                     {"url": "https://unrequested.example/page", "raw_content": "foreign page"},
+-                    {"url": urls[1], "raw_content": "second page", "title": "Second"},
++                    *[{"url": url, "raw_content": "second page", "title": "Second"}
++                      for url in urls if url == "https://example.com/second"],
+                 ]
+ 
+         urls = ["https://example.com/first", "https://example.com/second"]
+@@ -184,7 +185,8 @@ class TestWebExtractCacheAttribution:
+ 
+             async def extract(self, urls, format=None):
+                 return [{"url": "https://www.example.com/moved", "raw_content": "moved page", "title": "Moved",
+-                         "metadata": {"sourceURL": urls[1]}}]
++                         "metadata": {"sourceURL": url}}
++                        for url in urls if url == "https://example.com/old"]
+ 
+         urls = ["https://example.com/failed", "https://example.com/old"]
+         with patch("tools.web_result_cache.extract_cache_put") as cache_put:

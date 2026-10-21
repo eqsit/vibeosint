@@ -1,0 +1,35 @@
+name: Panel checks
+on:
+  push:
+    paths:
+      - 'panel/**'
+      - '.github/workflows/panel-checks.yml'
+  pull_request:
+    paths:
+      - 'panel/**'
+      - '.github/workflows/panel-checks.yml'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install isolated panel dependencies
+        run: |
+          python -m venv panel/.venv
+          panel/.venv/bin/python -m pip install -r panel/requirements.txt
+          npm ci --ignore-scripts --prefix panel/server
+      - name: Offline regressions
+        run: ./panel/scripts/run-tests.sh
+      - name: Local UI auth and MCP discovery smoke
+        run: panel/.venv/bin/python panel/scripts/smoke_local.py
+      - name: Dependency consistency
+        run: panel/.venv/bin/python -m pip check

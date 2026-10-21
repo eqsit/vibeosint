@@ -1,0 +1,25 @@
+# TEMPLATE ONLY: merge with your project Hermes configuration using its CLI.
+# Replace absolute paths. Do not copy a live config or place secrets here.
+web:
+  search_backend: serper
+  extract_backend: firecrawl
+plugins:
+  enabled:
+    - web-serper
+terminal:
+  backend: docker
+  docker_image: vibeosint-sandbox:local
+  docker_persist_across_processes: true
+  docker_mount_cwd_to_workspace: true
+mcp_servers:
+  osint:
+    command: /ABSOLUTE/PATH/TO/panel/.venv/bin/python
+    args:
+      - /ABSOLUTE/PATH/TO/panel/scripts/run_mcp.py
+    timeout: 180
+    connect_timeout: 60
+    sampling:
+      enabled: false
+# run_mcp.py loads the checkout's ignored .env explicitly: stdio MCP normally
+# filters inherited environment variables. Never paste operator secrets here.
+# Configure the LLM provider/model separately; catalog aliases are not credentials.

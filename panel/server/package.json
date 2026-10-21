@@ -1,0 +1,10 @@
+{
+  "name": "vibeosint-server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.mjs",
+  "dependencies": {
+    "express": "^4.21.2",
+    "undici": "^8.10.2"
+  }
+}
